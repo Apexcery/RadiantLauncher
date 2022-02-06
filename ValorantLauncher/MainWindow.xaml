@@ -6,8 +6,54 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ValorantLauncher"
     mc:Ignorable="d"
-    Title="MainWindow" Height="450" Width="800">
+    Title="MainWindow"
+    Width="1280"  Height="720"
+    WindowStyle="None"
+    AllowsTransparency="True"
+    WindowStartupLocation="CenterScreen"
+    Background="{StaticResource Background}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="11*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="11*" />
+        </Grid.RowDefinitions>
 
+        <!-- Top Bar -->
+        <Grid
+            Grid.Column="1"
+            Grid.Row="0">
+            
+        </Grid>
+
+        <!-- Navigation Bar -->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="1">
+            <StackPanel
+                Orientation="Vertical">
+                <RadioButton
+                    Style="{StaticResource NavigationPanelButton}"
+                    IsChecked="True"
+                    GroupName="NavigationPanel"
+                    Tag="Home">
+                </RadioButton>
+                <RadioButton
+                    Style="{StaticResource NavigationPanelButton}"
+                    GroupName="NavigationPanel"
+                    Tag="ShoppingCart">
+                </RadioButton>
+            </StackPanel>
+        </Grid>
+
+        <!-- Main Content -->
+        <Grid
+            Grid.Column="1"
+            Grid.Row="1">
+            
+        </Grid>
     </Grid>
 </Window>

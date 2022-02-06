@@ -5,6 +5,17 @@
     xmlns:local="clr-namespace:ValorantLauncher"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- Values -->
+                <ResourceDictionary Source="Resources/Values/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Values/Dimensions.xaml" />
+                
+                <!-- Styles -->
+                <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
