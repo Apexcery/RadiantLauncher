@@ -16,9 +16,6 @@
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
     Background="{StaticResource Background}">
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100px" />

@@ -33,6 +33,7 @@
                             FontFamily="{StaticResource RobotoSlabBold}"
                             FontWeight="Bold"
                             FontSize="{StaticResource LoginFormTextSize}"
+                            Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             materialDesign:HintAssist.FontFamily="{StaticResource RobotoSlabBold}"
                             materialDesign:HintAssist.Hint="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TextBox}}}"/>
                     </Border>

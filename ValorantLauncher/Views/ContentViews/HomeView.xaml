@@ -6,9 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:ValorantLauncher.Views.ContentViews"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
-    Background="{StaticResource BackgroundLight}">
+    Background="{StaticResource BackgroundLight}"
+    d:DataContext="{d:DesignInstance Type=viewModels:HomeViewModel}">
+    <UserControl.Resources>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -21,6 +27,8 @@
             Background="{StaticResource ValorantWhite}">
 
             <Grid
+                d:Visibility="Visible"
+                Visibility="{Binding SignedIn, Converter={StaticResource BooleanToVisibilityConverter}}"
                 HorizontalAlignment="Right"
                 Width="250px">
 
@@ -36,13 +44,15 @@
                         FontFamily="{StaticResource RobotoSlabBold}"
                         FontSize="{StaticResource LoginFormTitleTextSize}"
                         FontWeight="Bold"
-                        Margin="0, 25"/>
+                        Margin="0, 50"/>
 
                     <TextBox
                         Tag="Username"
+                        Text="{Binding UsernameText}"
                         Style="{StaticResource LoginFormTextBox}" />
                     <TextBox
                         Tag="Password"
+                        Text="{Binding PasswordText}"
                         Style="{StaticResource LoginFormTextBox}" />
 
                     <Button
@@ -50,10 +60,11 @@
                         Content="Sign In"
                         Width="150"
                         Height="50"
+                        Command="{Binding LoginCommand}"
                         Background="{StaticResource ValorantRed}"
                         BorderBrush="Transparent"
                         BorderThickness="0"
-                        materialDesign:ButtonAssist.CornerRadius="5"/>
+                        materialDesign:ButtonAssist.CornerRadius="5" />
                 </StackPanel>
             </Grid>
         </Grid>

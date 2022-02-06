@@ -19,23 +19,20 @@ namespace ValorantLauncher.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        private HomeViewModel HomeVM { get; } = new();
+        
         public RelayCommand<object> HomeViewCommand { get; }
-
-        private StoreViewModel StoreVM { get; } = new();
         public RelayCommand<object> StoreViewCommand { get; }
 
-        public MainViewModel()
+        public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel)
         {
             this.MinimizeCommand = new RelayCommand<IMinimizable>(this.MinimizeApplication);
             this.MaximizeCommand = new RelayCommand<IMaximizable>(this.MaximizeApplication);
             this.CloseCommand = new RelayCommand<ICloseable>(this.CloseApplication);
 
-            CurrentView = HomeVM;
+            CurrentView = homeViewModel;
 
-            HomeViewCommand = ChangeView(HomeVM);
-            StoreViewCommand = ChangeView(StoreVM);
+            HomeViewCommand = ChangeView(homeViewModel);
+            StoreViewCommand = ChangeView(storeViewModel);
         }
 
         private RelayCommand<object> ChangeView(object vm)

@@ -2,13 +2,16 @@
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using ValorantLauncher.Interfaces;
+using ValorantLauncher.ViewModels;
 
 namespace ValorantLauncher
 {
     public partial class MainWindow : Window, IMinimizable, IMaximizable, ICloseable
     {
-        public MainWindow()
+        public MainWindow(MainViewModel mainViewModel)
         {
+            this.DataContext = mainViewModel;
+
             InitializeComponent();
         }
 
