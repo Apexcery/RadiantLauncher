@@ -19,4 +19,11 @@
     <SolidColorBrush x:Key="MinimizeButtonBackground" Color="#2ecc71" />
     <SolidColorBrush x:Key="MinimizeButtonBackgroundHover" Color="#239b56" />
 
+    <!-- Valorant Colors -->
+    <SolidColorBrush x:Key="ValorantWhite" Color="#F9F9F9" />
+    <SolidColorBrush x:Key="TextBoxBackgroundValorant" Color="#EBEBEB" />
+    <SolidColorBrush x:Key="TextBoxBackgroundValorantDim" Color="#E7E7E7" />
+    <SolidColorBrush x:Key="ValorantRed" Color="#FD4556" />
+    <SolidColorBrush x:Key="ValorantRedDark" Color="#BD3944" />
+
 </ResourceDictionary>

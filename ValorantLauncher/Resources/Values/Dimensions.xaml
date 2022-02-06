@@ -5,4 +5,7 @@
 
     <system:Double x:Key="NavigationPanelButtonIconSize">40</system:Double>
 
+    <system:Double x:Key="LoginFormTextSize">16</system:Double>
+    <system:Double x:Key="LoginFormTitleTextSize">28</system:Double>
+
 </ResourceDictionary>

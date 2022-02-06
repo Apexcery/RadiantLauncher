@@ -5,9 +5,57 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:ValorantLauncher.Views.ContentViews"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
-    d:DesignWidth="1280" d:DesignHeight="720">
+    d:DesignWidth="1280" d:DesignHeight="720"
+    Background="{StaticResource BackgroundLight}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
         
+        <!-- Login Form -->
+        <Grid
+            Grid.Column="1"
+            Background="{StaticResource ValorantWhite}">
+
+            <Grid
+                HorizontalAlignment="Right"
+                Width="250px">
+
+                <StackPanel
+                    Orientation="Vertical"
+                    Margin="5"
+                    Width="240px"
+                    HorizontalAlignment="Center">
+                    
+                    <TextBlock
+                        Text="Sign In"
+                        HorizontalAlignment="Center"
+                        FontFamily="{StaticResource RobotoSlabBold}"
+                        FontSize="{StaticResource LoginFormTitleTextSize}"
+                        FontWeight="Bold"
+                        Margin="0, 25"/>
+
+                    <TextBox
+                        Tag="Username"
+                        Style="{StaticResource LoginFormTextBox}" />
+                    <TextBox
+                        Tag="Password"
+                        Style="{StaticResource LoginFormTextBox}" />
+
+                    <Button
+                        Margin="0, 15, 0, 0"
+                        Content="Sign In"
+                        Width="150"
+                        Height="50"
+                        Background="{StaticResource ValorantRed}"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        materialDesign:ButtonAssist.CornerRadius="5"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
     <None Remove="Resources\Images\ValorantLogo.png" />
   </ItemGroup>
 
@@ -16,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\ValorantLogo.png" />
   </ItemGroup>
 

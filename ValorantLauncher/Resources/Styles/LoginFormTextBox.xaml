@@ -1,0 +1,57 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Style
+        x:Key="LoginFormTextBox"
+        TargetType="TextBox">
+
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border
+                        Name="Border"
+                        Width="200"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        Margin="0, 5"
+                        CornerRadius="5"
+                        Background="{StaticResource TextBoxBackgroundValorant}"
+                        BorderThickness="2"
+                        BorderBrush="Transparent">
+                        <TextBox
+                            Name="TextBox"
+                            Margin="5, 0"
+                            Background="Transparent"
+                            Width="190"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            FontFamily="{StaticResource RobotoSlabBold}"
+                            FontWeight="Bold"
+                            FontSize="{StaticResource LoginFormTextSize}"
+                            materialDesign:HintAssist.FontFamily="{StaticResource RobotoSlabBold}"
+                            materialDesign:HintAssist.Hint="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TextBox}}}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True" SourceName="TextBox">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

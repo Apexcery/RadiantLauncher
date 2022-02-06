@@ -19,12 +19,15 @@
                 <!-- Values -->
                 <ResourceDictionary Source="Resources/Values/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Values/Dimensions.xaml" />
+                <ResourceDictionary Source="Resources/Values/Fonts.xaml" />
                 
                 <!-- Styles -->
                 <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
                 <ResourceDictionary Source="Resources/Styles/SystemButton.xaml" />
+                <ResourceDictionary Source="Resources/Styles/LoginFormTextBox.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
+
 
             <!-- View Models -->
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
