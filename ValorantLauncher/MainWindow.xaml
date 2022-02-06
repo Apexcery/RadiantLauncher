@@ -19,8 +19,18 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
-            <RowDefinition Height="11*" />
+            <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
+
+        <!-- Logo -->
+        <Grid
+            Grid.Column="0"
+            Grid.Row="0">
+            <Image
+                Width="100"
+                Height="75"
+                Source="{StaticResource ValorantDrawingImage}" />
+        </Grid>
 
         <!-- Top Bar -->
         <Grid

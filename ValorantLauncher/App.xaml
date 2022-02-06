@@ -14,7 +14,9 @@
                 
                 <!-- Styles -->
                 <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
-
+                
+                <!-- SVG's -->
+                <ResourceDictionary Source="Resources/Images/ValorantLogo.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
