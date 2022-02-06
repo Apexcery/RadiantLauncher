@@ -5,21 +5,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ValorantLauncher"
+    xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
     mc:Ignorable="d"
     Title="MainWindow"
     Width="1280"  Height="720"
+    MinWidth="1280" MinHeight="720"
+    MaxWidth="1920" MaxHeight="1080"
     WindowStyle="None"
+    ResizeMode="CanResizeWithGrip"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
     Background="{StaticResource Background}">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="11*" />
+            <ColumnDefinition Width="100px" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="11*" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Logo -->
@@ -30,6 +37,8 @@
             <Image
                 Width="75"
                 Height="50"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Source="Resources/Images/ValorantLogo.png" />
         </Grid>
 
@@ -75,17 +84,20 @@
             Grid.Row="1"
             Background="{StaticResource BackgroundDark}">
             <StackPanel
-                Orientation="Vertical">
+                Orientation="Vertical"
+                Margin="0, 10">
                 <RadioButton
                     Style="{StaticResource NavigationPanelButton}"
                     IsChecked="True"
                     GroupName="NavigationPanel"
-                    Tag="Home">
+                    Tag="Home"
+                    ToolTip="Home">
                 </RadioButton>
                 <RadioButton
                     Style="{StaticResource NavigationPanelButton}"
                     GroupName="NavigationPanel"
-                    Tag="ShoppingCart">
+                    Tag="ShoppingCart"
+                    ToolTip="Store">
                 </RadioButton>
             </StackPanel>
         </Grid>
