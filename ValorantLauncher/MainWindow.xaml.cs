@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
 using ValorantLauncher.Interfaces;
 
 namespace ValorantLauncher
@@ -34,6 +36,24 @@ namespace ValorantLauncher
         public new void Close()
         {
             Application.Current.Shutdown();
+        }
+
+        private void TopBar_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (DialogHost.IsDialogOpen("MainDialogHost"))
+            {
+                DialogHost.Close("MainDialogHost");
+            }
+
+            // this prevents win7 aerosnap
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
+            this.UpdateLayout();
+
+            DragMove();
+
+            // restore resize grips
+            this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
+            this.UpdateLayout();
         }
     }
 }

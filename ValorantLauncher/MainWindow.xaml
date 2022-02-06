@@ -58,23 +58,41 @@
                     Style="{StaticResource SystemButton}"
                     Background="{StaticResource MinimizeButtonBackground}"
                     BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
-                    ToolTip="Minimize"
                     Command="{Binding MinimizeCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                    <Button.ToolTip>
+                        <ToolTip
+                            Content="Minimize"
+                            Placement="Bottom"
+                            HorizontalOffset="-15" />
+                    </Button.ToolTip>
+                </Button>
                 <Button
                     Style="{StaticResource SystemButton}"
                     Background="{StaticResource MaximizeButtonBackground}"
                     BorderBrush="{StaticResource MaximizeButtonBackgroundHover}"
-                    ToolTip="Maximize"
                     Command="{Binding MaximizeCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                    <Button.ToolTip>
+                        <ToolTip
+                            Content="Maximize"
+                            Placement="Bottom"
+                            HorizontalOffset="-15" />
+                    </Button.ToolTip>
+                </Button>
                 <Button
                     Style="{StaticResource SystemButton}"
                     Background="{StaticResource CloseButtonBackground}"
                     BorderBrush="{StaticResource CloseButtonBackgroundHover}"
-                    ToolTip="Close"
                     Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                    <Button.ToolTip>
+                        <ToolTip
+                            Content="Close"
+                            Placement="Bottom"
+                            HorizontalOffset="-10" />
+                    </Button.ToolTip>
+                </Button>
             </StackPanel>
         </Grid>
 
@@ -90,23 +108,37 @@
                     Style="{StaticResource NavigationPanelButton}"
                     IsChecked="True"
                     GroupName="NavigationPanel"
-                    Tag="Home"
-                    ToolTip="Home">
+                    Command="{Binding HomeViewCommand, Mode=OneWay}"
+                    Tag="Home">
+                    <RadioButton.ToolTip>
+                        <ToolTip
+                            Content="Home"
+                            Placement="Right"
+                            VerticalOffset="25"
+                            HorizontalOffset="-10" />
+                    </RadioButton.ToolTip>
                 </RadioButton>
                 <RadioButton
                     Style="{StaticResource NavigationPanelButton}"
                     GroupName="NavigationPanel"
-                    Tag="ShoppingCart"
-                    ToolTip="Store">
+                    Command="{Binding StoreViewCommand, Mode=OneWay}"
+                    Tag="ShoppingCart">
+                    <RadioButton.ToolTip>
+                        <ToolTip
+                            Content="Store"
+                            Placement="Right"
+                            VerticalOffset="25"
+                            HorizontalOffset="-10" />
+                    </RadioButton.ToolTip>
                 </RadioButton>
             </StackPanel>
         </Grid>
 
         <!-- Main Content -->
-        <Grid
+        <ContentControl
             Grid.Column="1"
-            Grid.Row="1">
-            
-        </Grid>
+            Grid.Row="1"
+            Background="Transparent"
+            Content="{Binding CurrentView}" />
     </Grid>
 </Window>
