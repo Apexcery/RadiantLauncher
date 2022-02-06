@@ -19,30 +19,61 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
-            <RowDefinition Height="9*" />
+            <RowDefinition Height="11*" />
         </Grid.RowDefinitions>
 
         <!-- Logo -->
         <Grid
             Grid.Column="0"
-            Grid.Row="0">
+            Grid.Row="0"
+            Background="{StaticResource BackgroundDark}">
             <Image
-                Width="100"
-                Height="75"
-                Source="{StaticResource ValorantDrawingImage}" />
+                Width="75"
+                Height="50"
+                Source="Resources/Images/ValorantLogo.png" />
         </Grid>
 
         <!-- Top Bar -->
         <Grid
             Grid.Column="1"
-            Grid.Row="0">
-            
+            Grid.Row="0"
+            Background="{StaticResource BackgroundDark}">
+
+            <!-- Window Buttons -->
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                Margin="10, 0">
+
+                <Button
+                    Style="{StaticResource SystemButton}"
+                    Background="{StaticResource MinimizeButtonBackground}"
+                    BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
+                    ToolTip="Minimize"
+                    Command="{Binding MinimizeCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                <Button
+                    Style="{StaticResource SystemButton}"
+                    Background="{StaticResource MaximizeButtonBackground}"
+                    BorderBrush="{StaticResource MaximizeButtonBackgroundHover}"
+                    ToolTip="Maximize"
+                    Command="{Binding MaximizeCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                <Button
+                    Style="{StaticResource SystemButton}"
+                    Background="{StaticResource CloseButtonBackground}"
+                    BorderBrush="{StaticResource CloseButtonBackgroundHover}"
+                    ToolTip="Close"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+            </StackPanel>
         </Grid>
 
         <!-- Navigation Bar -->
         <Grid
             Grid.Column="0"
-            Grid.Row="1">
+            Grid.Row="1"
+            Background="{StaticResource BackgroundDark}">
             <StackPanel
                 Orientation="Vertical">
                 <RadioButton
