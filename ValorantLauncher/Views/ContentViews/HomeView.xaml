@@ -22,6 +22,21 @@
             <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
         
+        <!-- Left Panel -->
+        <Grid Grid.Column="0">
+            <Grid ClipToBounds="True">
+                <Image
+                    Stretch="UniformToFill"
+                    HorizontalAlignment="Center"
+                    Source="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3d9bf296c46d42d2/5ece177408ac190a51c69e59/Beta_Key_Art_VALORANT_Lightbox.jpg">
+                    <Image.Effect>
+                        <BlurEffect Radius="20" RenderingBias="Performance" />
+                    </Image.Effect>
+                </Image>
+            </Grid>
+        </Grid>
+
+        <!-- Right Panel -->
         <Grid
             Grid.Column="1"
             Background="{StaticResource ValorantWhite}">
@@ -104,7 +119,7 @@
                     Content="Play"
                     Width="150"
                     Height="50"
-                    Command=""
+                    Command="{Binding PlayCommand}"
                     Background="{StaticResource ValorantRed}"
                     BorderBrush="Transparent"
                     BorderThickness="0"

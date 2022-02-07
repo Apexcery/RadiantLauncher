@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using ValorantLauncher.Interfaces;
@@ -22,6 +24,16 @@ namespace ValorantLauncher
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<StoreView>();
             services.AddSingleton<StoreViewModel>();
+
+            services.AddHttpClient("AuthClient").ConfigureHttpClient(client =>
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
+                client.Timeout = TimeSpan.FromSeconds(5);
+            }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
+            {
+                CookieContainer = new CookieContainer(),
+                UseCookies = true
+            });
 
             services.AddSingleton<IAuthService, AuthService>();
             services.AddSingleton<UserData>();

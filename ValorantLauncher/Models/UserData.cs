@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 using ValorantLauncher.Models.Enums;
@@ -7,21 +7,23 @@ namespace ValorantLauncher.Models
 {
     public class UserData
     {
+        public HttpClientHandler ClientHandler;
+
         public TokenDataObject TokenData { get; set; } = new();
         public RiotUserDataObject RiotUserData { get; set; } = new();
         public RiotRegionEnum RiotRegion { get; set; }
         public RiotUrlObject RiotUrl { get; set; } = new();
 
-        public HttpClient Client { get; set; } = new HttpClient
+        public UserData()
         {
-            DefaultRequestHeaders =
+            ClientHandler = new HttpClientHandler
             {
-                {
-                    "User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)"
-                }
-            },
-            Timeout = TimeSpan.FromSeconds(30)
-        };
+                UseCookies = true,
+                CookieContainer = new CookieContainer()
+            };
+        }
+
+        public HttpClient Client { get; set; }
 
         public class RiotUrlObject
         {
@@ -118,16 +120,7 @@ namespace ValorantLauncher.Models
             this.TokenData = new();
             this.RiotUserData = new();
             this.RiotUrl = new();
-            this.Client = new HttpClient
-            {
-                DefaultRequestHeaders =
-                {
-                    {
-                        "User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)"
-                    }
-                },
-                Timeout = TimeSpan.FromSeconds(30)
-            };
+            this.ClientHandler.CookieContainer = new CookieContainer();
 
             return this;
         }

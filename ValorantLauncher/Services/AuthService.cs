@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -19,28 +20,13 @@ namespace ValorantLauncher.Services
     {
         private readonly UserData _userData;
 
-        private readonly Dictionary<string, Uri> _apiUris = new()
-        {
-            {
-                "AuthUri", new Uri("https://auth.riotgames.com/api/v1/authorization")
-            },
-            {
-                "EntitlementUri", new Uri("https://entitlements.auth.riotgames.com/api/token/v1")
-            },
-            {
-                "UserInfoUri", new Uri("https://auth.riotgames.com/userinfo")
-            },
-            {
-                "UserRegionUri", new Uri("https://riot-geo.pas.si.riotgames.com/pas/v1/product/valorant")
-            },
-            {
-                "ClientVersionUri", new Uri("https://valorant-api.com/v1/version")
-            }
-        };
+        private readonly Dictionary<string, Uri> _apiUris;
 
-        public AuthService(UserData userData)
+        public AuthService(UserData userData, IHttpClientFactory httpClientFactory)
         {
             _userData = userData;
+            _userData.Client = httpClientFactory.CreateClient("AuthClient");
+            _apiUris = ApiURIs.URIs;
         }
 
         public async Task<bool> Login(string username, string password)
@@ -55,6 +41,11 @@ namespace ValorantLauncher.Services
 
             var authInitCookieData = new AuthInitCookieData();
             var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"));
+
+            if (initResponse.Headers.Contains("Set-Cookie"))
+            {
+                AddClientCookies(initResponse.Headers.GetValues("Set-Cookie"));
+            }
 
             AuthResponse authResponse = null;
             
@@ -71,6 +62,12 @@ namespace ValorantLauncher.Services
                 };
 
                 var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"));
+                
+                if (response.Headers.Contains("Set-Cookie"))
+                {
+                    AddClientCookies(response.Headers.GetValues("Set-Cookie"));
+                }
+
                 authResponse = await response.Content.ReadAsJsonAsync<AuthResponse>();
             }
 
@@ -93,7 +90,6 @@ namespace ValorantLauncher.Services
 
             var regex = new Regex(Regex.Escape("#"));
             var newUri = regex.Replace(authResponse.Response.Parameters.Uri, "?", 1);
-
             var responseUri = new Uri(newUri);
             var paramaters = responseUri.DecodeQueryParameters();
             var accessToken = paramaters["access_token"];
@@ -133,6 +129,14 @@ namespace ValorantLauncher.Services
             return true;
         }
 
+        private void AddClientCookies(IEnumerable<string> cookieHeaders)
+        {
+            foreach (var cookie in cookieHeaders)
+            {
+                _userData.ClientHandler.CookieContainer.SetCookies(_apiUris["AuthUri"], cookie);
+            }
+        }
+
         private async Task AddClientHeaders()
         {
             var response = await _userData.Client.GetAsync(_apiUris["ClientVersionUri"]);
@@ -154,6 +158,10 @@ namespace ValorantLauncher.Services
                     id_token = _userData.TokenData.IdToken
                 };
                 var response = await _userData.Client.PutAsync(_apiUris["UserRegionUri"], new StringContent(JsonConvert.SerializeObject(token)));
+                if (response.Headers.Contains("Set-Cookie"))
+                {
+                    AddClientCookies(response.Headers.GetValues("Set-Cookie"));
+                }
                 if (!response.IsSuccessStatusCode)
                     return null;
 
@@ -199,6 +207,10 @@ namespace ValorantLauncher.Services
         private async Task<UserData.RiotUserDataObject> GetUserData()
         {
             var response = await _userData.Client.GetAsync(_apiUris["UserInfoUri"]);
+            if (response.Headers.Contains("Set-Cookie"))
+            {
+                AddClientCookies(response.Headers.GetValues("Set-Cookie"));
+            }
             if (!response.IsSuccessStatusCode)
                 return null;
 
@@ -208,6 +220,12 @@ namespace ValorantLauncher.Services
         private async Task<string> GetEntitlementToken()
         {
             var response = await _userData.Client.PostAsync(_apiUris["EntitlementUri"], new StringContent("", Encoding.UTF8, "application/json"));
+
+            if (response.Headers.Contains("Set-Cookie"))
+            {
+                AddClientCookies(response.Headers.GetValues("Set-Cookie"));
+            }
+
             if (!response.IsSuccessStatusCode)
                 return null;
             var token = JsonConvert.DeserializeObject<EntitlementResponse>(await response.Content.ReadAsStringAsync())?.EntitlementsToken;

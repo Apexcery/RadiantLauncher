@@ -1,9 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
+using ValorantLauncher.Models.Client;
 using ValorantLauncher.Utils;
-using ValorantLauncher.Views.ContentViews;
 
 namespace ValorantLauncher.ViewModels
 {
@@ -11,10 +16,10 @@ namespace ValorantLauncher.ViewModels
     {
         private readonly IAuthService _authService;
         private UserData _userData;
-        private readonly HomeView _view;
 
         public RelayCommand<object> LoginCommand { get; }
         public RelayCommand<object> LogoutCommand { get; }
+        public RelayCommand<object> PlayCommand { get; }
 
         private bool _logInFormVisible = true;
         public bool LogInFormVisible
@@ -74,20 +79,73 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
-        public HomeViewModel(IAuthService authService, UserData userData, HomeView view)
+        public HomeViewModel(IAuthService authService, UserData userData)
         {
             _authService = authService;
             _userData = userData;
-            _view = view;
 
             LoginCommand = new RelayCommand<object>(async o => await Login(o));
             LogoutCommand = new RelayCommand<object>(async o => await Logout(o));
+            PlayCommand = new RelayCommand<object>(async _ => await Play());
+        }
+
+        private async Task Play()
+        {
+            var clientPath = "";
+            var riotClientExists = CheckForRiotClient(out clientPath);
+            if (!riotClientExists)
+            {
+                MessageBox.Show("Riot Client not detected, is VALORANT installed?");
+                return;
+            }
+
+            await AuthenticateRiotClient();
+
+            var riotClient = new ProcessStartInfo(clientPath, " --launch-product=valorant --launch-patchline=live");
+            Process.Start(riotClient);
+
+            Application.Current.Shutdown();
+        }
+
+        private async Task AuthenticateRiotClient()
+        {
+            var riotGamesSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
+            var riotClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
+
+            var clientGameSettings = new ClientGameModel(_userData);
+            var clientPrivateSettings = new ClientPrivateModel(_userData);
+
+            using (TextWriter writer = File.CreateText(riotGamesSettingsPath))
+            {
+                clientGameSettings.CreateFile().Save(writer, false);
+            }
+            using (TextWriter writer = File.CreateText(riotClientSettingsPath))
+            {
+                clientPrivateSettings.CreateFile().Save(writer, false);
+            }
+        }
+
+        private bool CheckForRiotClient(out string clientPath)
+        {
+            var defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Riot Games");
+            var defaultFileName = "RiotClientInstalls.json";
+
+            if (!File.Exists(Path.Combine(defaultPath, defaultFileName)))
+            {
+                clientPath = "";
+                return false;
+            }
+
+            var config = JsonConvert.DeserializeObject<RiotClientInstalls>(File.ReadAllText(Path.Combine(defaultPath, defaultFileName)));
+            
+            clientPath = config.RcDefault;
+
+            return true;
         }
 
         private async Task Logout(object obj)
         {
             var passwordBox = (PasswordBox)obj;
-            //TODO: Clear UserData object.
             _userData = _userData.Clear();
             GameNameText = "";
             PlayFormVisible = false;
