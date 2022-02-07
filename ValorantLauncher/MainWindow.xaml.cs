@@ -41,7 +41,7 @@ namespace ValorantLauncher
             Application.Current.Shutdown();
         }
 
-        private void TopBar_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void SystemBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (DialogHost.IsDialogOpen("MainDialogHost"))
             {

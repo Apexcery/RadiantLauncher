@@ -8,7 +8,6 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
     xmlns:utils="clr-namespace:ValorantLauncher.Utils"
-    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
     Background="{StaticResource BackgroundLight}"
@@ -49,13 +48,14 @@
                         Margin="0, 50"/>
 
                     <TextBox
+                        x:Name="TxtUsername"
                         Tag="Username"
                         Text="{Binding UsernameText}"
                         Style="{StaticResource LoginFormTextBox}"
                         materialDesign:HintAssist.Hint="Username"
                         materialDesign:HintAssist.FontFamily="{StaticResource RobotoSlabBold}" />
                     <PasswordBox
-                        Name="PasswordBox"
+                        x:Name="TxtPassword"
                         Tag="Password"
                         PasswordChar="*"
                         Style="{StaticResource LoginFormPasswordBox}"
@@ -68,7 +68,8 @@
                         Width="150"
                         Height="50"
                         Command="{Binding LoginCommand}"
-                        CommandParameter="{Binding ElementName=PasswordBox}"
+                        CommandParameter="{Binding ElementName=TxtPassword}"
+                        IsDefault="True"
                         Background="{StaticResource ValorantRed}"
                         BorderBrush="Transparent"
                         BorderThickness="0"
@@ -128,7 +129,7 @@
                     Width="150"
                     Height="35"
                     Command="{Binding LogoutCommand}"
-                    CommandParameter="{Binding ElementName=PasswordBox}"
+                    CommandParameter="{Binding ElementName=TxtPassword}"
                     Background="{StaticResource ValorantRed}"
                     BorderBrush="Transparent"
                     BorderThickness="0"

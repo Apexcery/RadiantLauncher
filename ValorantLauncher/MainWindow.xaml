@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:ValorantLauncher"
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d"
     Title="MainWindow"
     Width="1280"  Height="720"
@@ -16,126 +17,141 @@
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
     Background="{StaticResource Background}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100px" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50px" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <materialDesign:DialogHost
+        Identifier="MainDialogHost"
+        DialogTheme="Dark">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!-- Logo -->
-        <Grid
-            Grid.Column="0"
-            Grid.Row="0"
-            Background="{StaticResource BackgroundDark}">
-            <Image
-                Width="75"
-                Height="50"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Source="Resources/Images/ValorantLogo.png" />
+            <!-- Left Section -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100px" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- App Logo -->
+                <Grid
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Background="{StaticResource BackgroundDark}">
+                    <Image
+                        Width="75"
+                        Height="75"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="Resources/Images/ValorantLogo.png" />
+                </Grid>
+
+                <!-- Navigation Bar -->
+                <Grid
+                    Grid.Row="1"
+                    Background="{StaticResource BackgroundDark}">
+                    <StackPanel
+                        Orientation="Vertical"
+                        Margin="0, 10">
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            IsChecked="True"
+                            GroupName="NavigationPanel"
+                            Command="{Binding HomeViewCommand, Mode=OneWay}"
+                            Tag="Home">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Home"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            GroupName="NavigationPanel"
+                            Command="{Binding StoreViewCommand, Mode=OneWay}"
+                            Tag="ShoppingCart">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Store"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <!-- Right Section -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50px" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Top Bar -->
+                <Grid
+                    x:Name="SystemBar"
+                    Grid.Row="0"
+                    Background="{StaticResource BackgroundDark}"
+                    MouseDown="SystemBar_OnMouseDown">
+
+                    <!-- Window Buttons -->
+                    <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10, 0">
+
+                        <Button
+                            Style="{StaticResource SystemButton}"
+                            Background="{StaticResource MinimizeButtonBackground}"
+                            BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
+                            Command="{Binding MinimizeCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Button.ToolTip>
+                                <ToolTip
+                                Content="Minimize"
+                                Placement="Bottom"
+                                HorizontalOffset="-15" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button
+                            Style="{StaticResource SystemButton}"
+                            Background="{StaticResource MaximizeButtonBackground}"
+                            BorderBrush="{StaticResource MaximizeButtonBackgroundHover}"
+                            Command="{Binding MaximizeCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Button.ToolTip>
+                                <ToolTip
+                                Content="Maximize"
+                                Placement="Bottom"
+                                HorizontalOffset="-15" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button
+                            Style="{StaticResource SystemButton}"
+                            Background="{StaticResource CloseButtonBackground}"
+                            BorderBrush="{StaticResource CloseButtonBackgroundHover}"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Button.ToolTip>
+                                <ToolTip
+                                    Content="Close"
+                                    Placement="Bottom"
+                                    HorizontalOffset="-10" />
+                            </Button.ToolTip>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Main Content -->
+                <ContentControl
+                    Grid.Row="1"
+                    Background="Transparent"
+                    Content="{Binding CurrentView}" />
+            </Grid>
         </Grid>
-
-        <!-- Top Bar -->
-        <Grid
-            Grid.Column="1"
-            Grid.Row="0"
-            Background="{StaticResource BackgroundDark}">
-
-            <!-- Window Buttons -->
-            <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                Margin="10, 0">
-
-                <Button
-                    Style="{StaticResource SystemButton}"
-                    Background="{StaticResource MinimizeButtonBackground}"
-                    BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
-                    Command="{Binding MinimizeCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-                    <Button.ToolTip>
-                        <ToolTip
-                            Content="Minimize"
-                            Placement="Bottom"
-                            HorizontalOffset="-15" />
-                    </Button.ToolTip>
-                </Button>
-                <Button
-                    Style="{StaticResource SystemButton}"
-                    Background="{StaticResource MaximizeButtonBackground}"
-                    BorderBrush="{StaticResource MaximizeButtonBackgroundHover}"
-                    Command="{Binding MaximizeCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-                    <Button.ToolTip>
-                        <ToolTip
-                            Content="Maximize"
-                            Placement="Bottom"
-                            HorizontalOffset="-15" />
-                    </Button.ToolTip>
-                </Button>
-                <Button
-                    Style="{StaticResource SystemButton}"
-                    Background="{StaticResource CloseButtonBackground}"
-                    BorderBrush="{StaticResource CloseButtonBackgroundHover}"
-                    Command="{Binding CloseCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-                    <Button.ToolTip>
-                        <ToolTip
-                            Content="Close"
-                            Placement="Bottom"
-                            HorizontalOffset="-10" />
-                    </Button.ToolTip>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <!-- Navigation Bar -->
-        <Grid
-            Grid.Column="0"
-            Grid.Row="1"
-            Background="{StaticResource BackgroundDark}">
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10">
-                <RadioButton
-                    Style="{StaticResource NavigationPanelButton}"
-                    IsChecked="True"
-                    GroupName="NavigationPanel"
-                    Command="{Binding HomeViewCommand, Mode=OneWay}"
-                    Tag="Home">
-                    <RadioButton.ToolTip>
-                        <ToolTip
-                            Content="Home"
-                            Placement="Right"
-                            VerticalOffset="25"
-                            HorizontalOffset="-10" />
-                    </RadioButton.ToolTip>
-                </RadioButton>
-                <RadioButton
-                    Style="{StaticResource NavigationPanelButton}"
-                    GroupName="NavigationPanel"
-                    Command="{Binding StoreViewCommand, Mode=OneWay}"
-                    Tag="ShoppingCart">
-                    <RadioButton.ToolTip>
-                        <ToolTip
-                            Content="Store"
-                            Placement="Right"
-                            VerticalOffset="25"
-                            HorizontalOffset="-10" />
-                    </RadioButton.ToolTip>
-                </RadioButton>
-            </StackPanel>
-        </Grid>
-
-        <!-- Main Content -->
-        <ContentControl
-            Grid.Column="1"
-            Grid.Row="1"
-            Background="Transparent"
-            Content="{Binding CurrentView}" />
-    </Grid>
+    </materialDesign:DialogHost>
 </Window>

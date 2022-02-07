@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using ValorantLauncher.Utils;
-using ValorantLauncher.ViewModels;
+﻿using System.Windows.Controls;
 
 namespace ValorantLauncher.Views.ContentViews
 {
