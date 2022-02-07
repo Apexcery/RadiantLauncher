@@ -112,5 +112,24 @@ namespace ValorantLauncher.Models
                 public long CreatedAt { get; set; }
             }
         }
+
+        public UserData Clear()
+        {
+            this.TokenData = new();
+            this.RiotUserData = new();
+            this.RiotUrl = new();
+            this.Client = new HttpClient
+            {
+                DefaultRequestHeaders =
+                {
+                    {
+                        "User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)"
+                    }
+                },
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+
+            return this;
+        }
     }
 }

@@ -7,5 +7,6 @@
 
     <system:Double x:Key="LoginFormTextSize">16</system:Double>
     <system:Double x:Key="LoginFormTitleTextSize">28</system:Double>
+    <system:Double x:Key="PlayFormTitleTextSize">18</system:Double>
 
 </ResourceDictionary>

@@ -1,27 +1,54 @@
-﻿using ValorantLauncher.Interfaces;
+﻿using System.Threading.Tasks;
+using System.Windows.Controls;
+using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
 using ValorantLauncher.Utils;
+using ValorantLauncher.Views.ContentViews;
 
 namespace ValorantLauncher.ViewModels
 {
     public class HomeViewModel : Observable
     {
         private readonly IAuthService _authService;
-        private readonly UserData _userData;
+        private UserData _userData;
+        private readonly HomeView _view;
 
         public RelayCommand<object> LoginCommand { get; }
+        public RelayCommand<object> LogoutCommand { get; }
 
-        private bool _signedIn = false;
-        public bool SignedIn
+        private bool _logInFormVisible = true;
+        public bool LogInFormVisible
         {
-            get => _signedIn;
+            get => _logInFormVisible;
             set
             {
-                _signedIn = value;
+                _logInFormVisible = value;
                 OnPropertyChanged();
             }
         }
 
+        private bool _playFormVisible = false;
+        public bool PlayFormVisible
+        {
+            get => _playFormVisible;
+            set
+            {
+                _playFormVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _loadingVisible = false;
+        public bool LoadingVisible
+        {
+            get => _loadingVisible;
+            set
+            {
+                _loadingVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        
         private string _username = "";
         public string UsernameText
         {
@@ -35,32 +62,58 @@ namespace ValorantLauncher.ViewModels
                 }
             }
         }
-
-        private string _password = "";
-        public string PasswordText
+        
+        private string _gameName = "";
+        public string GameNameText
         {
-            get => _password;
+            get => _gameName;
             set
             {
-                if (!string.Equals(_password, value))
-                {
-                    _password = value;
-                    OnPropertyChanged();
-                }
+                _gameName = value;
+                OnPropertyChanged();
             }
         }
 
-        public HomeViewModel(IAuthService authService, UserData userData)
+        public HomeViewModel(IAuthService authService, UserData userData, HomeView view)
         {
             _authService = authService;
             _userData = userData;
+            _view = view;
 
-            LoginCommand = new RelayCommand<object>(Login);
+            LoginCommand = new RelayCommand<object>(async o => await Login(o));
+            LogoutCommand = new RelayCommand<object>(async o => await Logout(o));
         }
 
-        private void Login(object _)
+        private async Task Logout(object obj)
         {
-            _authService.Login(UsernameText, PasswordText);
+            var passwordBox = (PasswordBox)obj;
+            //TODO: Clear UserData object.
+            _userData = _userData.Clear();
+            GameNameText = "";
+            PlayFormVisible = false;
+            UsernameText = "";
+            passwordBox.Clear();
+            passwordBox.SecurePassword.Clear();
+            PasswordBoxHelper.SetPassword(passwordBox, "");
+            LogInFormVisible = true;
+        }
+
+        private async Task Login(object obj)
+        {
+            var passwordBox = (PasswordBox)obj;
+            LoadingVisible = true;
+            LogInFormVisible = false;
+            var logInSuccess = await _authService.Login(UsernameText, passwordBox.Password);
+            if (logInSuccess)
+            {
+                GameNameText = _userData.RiotUserData.AccountInfo.GameName;
+                PlayFormVisible = true;
+            }
+            else
+            {
+                LogInFormVisible = true;
+            }
+            LoadingVisible = false;
         }
     }
 }

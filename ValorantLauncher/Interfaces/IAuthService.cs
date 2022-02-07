@@ -1,7 +1,9 @@
-﻿namespace ValorantLauncher.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace ValorantLauncher.Interfaces
 {
     public interface IAuthService
     {
-        void Login(string username, string password);
+        Task<bool> Login(string username, string password);
     }
 }

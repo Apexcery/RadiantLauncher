@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows;
 using Newtonsoft.Json;
-using RestSharp;
 using ValorantLauncher.Extensions;
 using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
@@ -46,12 +43,12 @@ namespace ValorantLauncher.Services
             _userData = userData;
         }
 
-        public async void Login(string username, string password)
+        public async Task<bool> Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Invalid username or password"); //TODO: Better error popup.
-                return;
+                return false;
             }
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls11;
@@ -59,21 +56,28 @@ namespace ValorantLauncher.Services
             var authInitCookieData = new AuthInitCookieData();
             var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"));
 
-            var authData = new AuthData
-            {
-                Type = "auth",
-                Username = username,
-                Password = password,
-                Remember = "true"
-            };
+            AuthResponse authResponse = null;
+            
+            authResponse = await initResponse.Content.ReadAsJsonAsync<AuthResponse>();
 
-            var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"));
-            var authResponse = await response.Content.ReadAsJsonAsync<AuthResponse>();
+            if (authResponse.Type == "auth")
+            {
+                var authData = new AuthData
+                {
+                    Type = "auth",
+                    Username = username,
+                    Password = password,
+                    Remember = "true"
+                };
+
+                var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"));
+                authResponse = await response.Content.ReadAsJsonAsync<AuthResponse>();
+            }
 
             if (!string.IsNullOrEmpty(authResponse.Error))
             {
                 MessageBox.Show("Failed to log in."); //TODO: Better error popup.
-                return;
+                return false;
             }
 
             if (authResponse.Type.Equals("multifactor"))
@@ -84,7 +88,7 @@ namespace ValorantLauncher.Services
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
             {
                 MessageBox.Show("Failed to log in."); //TODO: Better error popup.
-                return;
+                return false;
             }
 
             var regex = new Regex(Regex.Escape("#"));
@@ -97,7 +101,7 @@ namespace ValorantLauncher.Services
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(idToken))
             {
                 MessageBox.Show("Failed to log in."); //TODO: Better error popup.
-                return;
+                return false;
             }
 
             _userData.TokenData.AccessToken = accessToken;
@@ -109,7 +113,7 @@ namespace ValorantLauncher.Services
             if (string.IsNullOrEmpty(entitlementToken))
             {
                 MessageBox.Show("Failed to log in."); //TODO: Better error popup.
-                return;
+                return false;
             }
             _userData.TokenData.EntitlementToken = entitlementToken;
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-Entitlements-JWT", entitlementToken);
@@ -120,11 +124,13 @@ namespace ValorantLauncher.Services
             if (region == null)
             {
                 MessageBox.Show("Failed to log in."); //TODO: Better error popup.
-                return;
+                return false;
             }
             _userData.RiotRegion = region.Value;
 
             await AddClientHeaders();
+
+            return true;
         }
 
         private async Task AddClientHeaders()

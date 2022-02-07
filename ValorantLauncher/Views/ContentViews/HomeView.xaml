@@ -7,12 +7,14 @@
     xmlns:local="clr-namespace:ValorantLauncher.Views.ContentViews"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
+    xmlns:utils="clr-namespace:ValorantLauncher.Utils"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
     Background="{StaticResource BackgroundLight}"
     d:DataContext="{d:DesignInstance Type=viewModels:HomeViewModel}">
     <UserControl.Resources>
-        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
     </UserControl.Resources>
 
     <Grid>
@@ -21,15 +23,15 @@
             <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
         
-        <!-- Login Form -->
         <Grid
             Grid.Column="1"
             Background="{StaticResource ValorantWhite}">
 
+            <!-- Login Form -->
             <Grid
                 d:Visibility="Visible"
-                Visibility="{Binding SignedIn, Converter={StaticResource BooleanToVisibilityConverter}}"
-                HorizontalAlignment="Right"
+                Visibility="{Binding LogInFormVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Center"
                 Width="250px">
 
                 <StackPanel
@@ -49,11 +51,16 @@
                     <TextBox
                         Tag="Username"
                         Text="{Binding UsernameText}"
-                        Style="{StaticResource LoginFormTextBox}" />
-                    <TextBox
+                        Style="{StaticResource LoginFormTextBox}"
+                        materialDesign:HintAssist.Hint="Username"
+                        materialDesign:HintAssist.FontFamily="{StaticResource RobotoSlabBold}" />
+                    <PasswordBox
+                        Name="PasswordBox"
                         Tag="Password"
-                        Text="{Binding PasswordText}"
-                        Style="{StaticResource LoginFormTextBox}" />
+                        PasswordChar="*"
+                        Style="{StaticResource LoginFormPasswordBox}"
+                        materialDesign:HintAssist.Hint="Password"
+                        materialDesign:HintAssist.FontFamily="{StaticResource RobotoSlabBold}" />
 
                     <Button
                         Margin="0, 15, 0, 0"
@@ -61,11 +68,73 @@
                         Width="150"
                         Height="50"
                         Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=PasswordBox}"
                         Background="{StaticResource ValorantRed}"
                         BorderBrush="Transparent"
                         BorderThickness="0"
                         materialDesign:ButtonAssist.CornerRadius="5" />
                 </StackPanel>
+            </Grid>
+
+            <!-- Loading Spinner -->
+            <Grid
+                d:Visibility="Hidden"
+                Visibility="{Binding LoadingVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Center"
+                Width="250px">
+                
+                <ProgressBar
+                    Style="{DynamicResource MaterialDesignCircularProgressBar}"
+                    Width="50"
+                    Height="50"
+                    IsIndeterminate="True"
+                    Foreground="{StaticResource ValorantRed}" />
+            </Grid>
+
+            <!-- Play Button Form -->
+            <Grid
+                d:Visibility="Hidden"
+                Visibility="{Binding PlayFormVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Center"
+                Width="250px">
+
+                <Button
+                    Margin="0, 0, 0, 150"
+                    Content="Play"
+                    Width="150"
+                    Height="50"
+                    Command=""
+                    Background="{StaticResource ValorantRed}"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    materialDesign:ButtonAssist.CornerRadius="5" />
+
+                <TextBlock
+                    Text="Signed in as: "
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    FontFamily="{StaticResource RobotoSlabBold}"
+                    FontSize="{StaticResource PlayFormTitleTextSize}"
+                    FontWeight="Medium"
+                    Margin="0, 55"
+                    MaxWidth="240">
+                    <Run
+                        Text="{Binding GameNameText}" />
+                </TextBlock>
+
+                <Button
+                    Margin="0, 0, 0, 15"
+                    Content="Sign Out"
+                    Width="150"
+                    Height="35"
+                    Command="{Binding LogoutCommand}"
+                    CommandParameter="{Binding ElementName=PasswordBox}"
+                    Background="{StaticResource ValorantRed}"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    VerticalAlignment="Bottom"
+                    materialDesign:ButtonAssist.CornerRadius="5" />
+
             </Grid>
         </Grid>
     </Grid>
