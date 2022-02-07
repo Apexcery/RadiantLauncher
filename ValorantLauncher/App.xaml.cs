@@ -35,8 +35,20 @@ namespace ValorantLauncher
                 UseCookies = true
             });
 
-            services.AddSingleton<IAuthService, AuthService>();
+            services.AddHttpClient("StoreClient").ConfigureHttpClient(client =>
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
+                client.Timeout = TimeSpan.FromSeconds(5);
+            }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
+            {
+                CookieContainer = new CookieContainer(),
+                UseCookies = true
+            });
+
             services.AddSingleton<UserData>();
+
+            services.AddSingleton<IAuthService, AuthService>();
+            services.AddSingleton<IStoreService, StoreService>();
 
             var serviceProvider = services.BuildServiceProvider();
             var mainWindow = serviceProvider.GetRequiredService<MainWindow>();
