@@ -58,7 +58,7 @@
                             IsChecked="True"
                             GroupName="NavigationPanel"
                             Command="{Binding HomeViewCommand, Mode=OneWay}"
-                            Tag="Home">
+                            Tag="Play">
                             <RadioButton.ToolTip>
                                 <ToolTip
                                     Content="Home"
