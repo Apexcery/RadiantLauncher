@@ -8,6 +8,7 @@ namespace ValorantLauncher.Models.Store
         public FeaturedBundle FeaturedBundle { get; set; }
         [JsonProperty("SkinsPanelLayout")]
         public RotatingStore RotatingStore { get; set; }
+        [JsonProperty("BonusStore")]
         public NightMarket NightMarket { get; set; }
     }
 
@@ -23,6 +24,7 @@ namespace ValorantLauncher.Models.Store
         public string ID { get; set; }
         public string DataAssetID { get; set; }
         public string CurrencyID { get; set; }
+        [JsonProperty("Items")]
         public List<BundleItem> BundleItems { get; set; }
         public int DurationRemainingInSeconds { get; set; }
         public bool WholesaleOnly { get; set; }

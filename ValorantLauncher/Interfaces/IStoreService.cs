@@ -7,5 +7,10 @@ namespace ValorantLauncher.Interfaces
     {
         Task<PlayerStore> GetPlayerStore();
         Task<StoreOffers> GetStoreOffers();
+
+        Task<SkinInformation> GetSkinInformation(string itemId);
+        Task<int> GetSkinPrice(string itemId);
+
+        Task<BundleInformation> GetBundleInformation(string bundleId);
     }
 }

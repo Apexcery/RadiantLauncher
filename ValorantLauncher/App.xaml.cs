@@ -18,6 +18,9 @@ namespace ValorantLauncher
             base.OnStartup(e);
 
             var services = new ServiceCollection();
+
+            services.AddSingleton<UserData>();
+
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<HomeView>();
@@ -28,7 +31,7 @@ namespace ValorantLauncher
             services.AddHttpClient("AuthClient").ConfigureHttpClient(client =>
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
-                client.Timeout = TimeSpan.FromSeconds(5);
+                client.Timeout = TimeSpan.FromSeconds(10);
             }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
             {
                 CookieContainer = new CookieContainer(),
@@ -38,14 +41,12 @@ namespace ValorantLauncher
             services.AddHttpClient("StoreClient").ConfigureHttpClient(client =>
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
-                client.Timeout = TimeSpan.FromSeconds(5);
+                client.Timeout = TimeSpan.FromSeconds(10);
             }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
             {
                 CookieContainer = new CookieContainer(),
                 UseCookies = true
             });
-
-            services.AddSingleton<UserData>();
 
             services.AddSingleton<IAuthService, AuthService>();
             services.AddSingleton<IStoreService, StoreService>();

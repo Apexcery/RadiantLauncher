@@ -67,7 +67,7 @@ namespace ValorantLauncher.Models
             public bool AccountVerified { get; set; }
 
             [JsonProperty("ppid")]
-            public object? Ppid { get; set; }
+            public object Ppid { get; set; }
 
             [JsonProperty("player_locale")]
             public string PlayerLocale { get; set; }

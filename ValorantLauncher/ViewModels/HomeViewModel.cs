@@ -85,7 +85,7 @@ namespace ValorantLauncher.ViewModels
             _userData = userData;
 
             LoginCommand = new RelayCommand<object>(async o => await Login(o));
-            LogoutCommand = new RelayCommand<object>(async o => await Logout(o));
+            LogoutCommand = new RelayCommand<object>(Logout);
             PlayCommand = new RelayCommand<object>(async _ => await Play());
         }
 
@@ -115,11 +115,12 @@ namespace ValorantLauncher.ViewModels
             var clientGameSettings = new ClientGameModel(_userData);
             var clientPrivateSettings = new ClientPrivateModel(_userData);
 
-            using (TextWriter writer = File.CreateText(riotGamesSettingsPath))
+            await using (TextWriter writer = File.CreateText(riotGamesSettingsPath))
             {
                 clientGameSettings.CreateFile().Save(writer, false);
             }
-            using (TextWriter writer = File.CreateText(riotClientSettingsPath))
+
+            await using (TextWriter writer = File.CreateText(riotClientSettingsPath))
             {
                 clientPrivateSettings.CreateFile().Save(writer, false);
             }
@@ -143,7 +144,7 @@ namespace ValorantLauncher.ViewModels
             return true;
         }
 
-        private async Task Logout(object obj)
+        private void Logout(object obj)
         {
             var passwordBox = (PasswordBox)obj;
             _userData = _userData.Clear();

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using ValorantLauncher.ViewModels;
 
@@ -14,9 +13,10 @@ namespace ValorantLauncher.Views.ContentViews
             this.Loaded += OnLoaded;
         }
 
-        private async void OnLoaded(object? sender, EventArgs e)
+        private async void OnLoaded(object sender, EventArgs e)
         {
-            await ((StoreViewModel)DataContext).GetStoreData();
+            if (ItemsControl.Items.Count <= 0)
+                await ((StoreViewModel)DataContext).GetStoreData();
         }
     }
 }

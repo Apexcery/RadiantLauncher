@@ -26,6 +26,18 @@ namespace ValorantLauncher.Models
             {
                 "ClientVersionUri",
                 new Uri("https://valorant-api.com/v1/version")
+            },
+            {
+                "SkinUri",
+                new Uri("https://assist.rumblemike.com/Skins")
+            },
+            {
+                "OfferUri",
+                new Uri("https://assist.rumblemike.com/Offers")
+            },
+            {
+                "BundleUri",
+                new Uri("https://assist.rumblemike.com/Bundle")
             }
         };
     }

@@ -6,7 +6,7 @@ using ValorantLauncher.ViewModels;
 
 namespace ValorantLauncher
 {
-    public partial class MainWindow : Window, IMinimizable, IMaximizable, ICloseable
+    public partial class MainWindow : Window, IMinimizable, ICloseable
     {
         public MainWindow(MainViewModel mainViewModel)
         {
@@ -20,22 +20,6 @@ namespace ValorantLauncher
             this.WindowState = WindowState.Minimized;
         }
 
-        public void Maximize()
-        {
-            if (this.WindowState == WindowState.Maximized)
-            {
-                this.MaxHeight = 1080;
-                this.MaxWidth = 1920;
-                this.WindowState = WindowState.Normal;
-            }
-            else
-            {
-                this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-                this.MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
-                this.WindowState = WindowState.Maximized;
-            }
-        }
-
         public new void Close()
         {
             Application.Current.Shutdown();
@@ -47,16 +31,8 @@ namespace ValorantLauncher
             {
                 DialogHost.Close("MainDialogHost");
             }
-
-            // this prevents win7 aerosnap
-            this.ResizeMode = System.Windows.ResizeMode.NoResize;
-            this.UpdateLayout();
-
+            
             DragMove();
-
-            // restore resize grips
-            this.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
-            this.UpdateLayout();
         }
     }
 }

@@ -5,10 +5,10 @@ namespace ValorantLauncher.Models.Auth
     public class AuthResponse
     {
         public string Type { get; set; }
-        public string? Error { get; set; }
-        public ResponseObject? Response { get; set; }
+        public string Error { get; set; }
+        public ResponseObject Response { get; set; }
         public string Country { get; set; }
-        public MultifactorObject? Multifactor { get; set; }
+        public MultifactorObject Multifactor { get; set; }
         public string SecurityProfile { get; set; }
 
         public class ParametersObject

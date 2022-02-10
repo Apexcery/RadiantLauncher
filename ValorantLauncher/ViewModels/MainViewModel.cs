@@ -6,7 +6,6 @@ namespace ValorantLauncher.ViewModels
     public class MainViewModel : Observable
     {
         public RelayCommand<IMinimizable> MinimizeCommand { get; }
-        public RelayCommand<IMaximizable> MaximizeCommand { get; }
         public RelayCommand<ICloseable> CloseCommand { get; }
 
         private object _currentView;
@@ -26,7 +25,6 @@ namespace ValorantLauncher.ViewModels
         public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel)
         {
             this.MinimizeCommand = new RelayCommand<IMinimizable>(this.MinimizeApplication);
-            this.MaximizeCommand = new RelayCommand<IMaximizable>(this.MaximizeApplication);
             this.CloseCommand = new RelayCommand<ICloseable>(this.CloseApplication);
 
             CurrentView = homeViewModel;
@@ -44,12 +42,6 @@ namespace ValorantLauncher.ViewModels
         {
             if (window != null)
                 window.Minimize();
-        }
-
-        private void MaximizeApplication(IMaximizable window)
-        {
-            if (window != null)
-                window.Maximize();
         }
 
         private void CloseApplication(ICloseable window)

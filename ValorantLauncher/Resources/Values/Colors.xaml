@@ -14,8 +14,6 @@
     <!-- System Button Colors -->
     <SolidColorBrush x:Key="CloseButtonBackground" Color="#e74c3c" />
     <SolidColorBrush x:Key="CloseButtonBackgroundHover" Color="#b03a2e" />
-    <SolidColorBrush x:Key="MaximizeButtonBackground" Color="#f1c40f" />
-    <SolidColorBrush x:Key="MaximizeButtonBackgroundHover" Color="#b7950b" />
     <SolidColorBrush x:Key="MinimizeButtonBackground" Color="#2ecc71" />
     <SolidColorBrush x:Key="MinimizeButtonBackgroundHover" Color="#239b56" />
 
@@ -25,5 +23,8 @@
     <SolidColorBrush x:Key="TextBoxBackgroundValorantDim" Color="#E7E7E7" />
     <SolidColorBrush x:Key="ValorantRed" Color="#FD4556" />
     <SolidColorBrush x:Key="ValorantRedDark" Color="#BD3944" />
+
+    <Color x:Key="ValorantRedColor">#FD4556</Color>
+    <Color x:Key="ValorantRedDarkColor">#9f0110</Color>
 
 </ResourceDictionary>

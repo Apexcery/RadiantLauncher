@@ -13,7 +13,7 @@
     MinWidth="1280" MinHeight="720"
     MaxWidth="1920" MaxHeight="1080"
     WindowStyle="None"
-    ResizeMode="CanResizeWithGrip"
+    ResizeMode="NoResize"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
     Background="{StaticResource Background}">
@@ -113,19 +113,6 @@
                             <Button.ToolTip>
                                 <ToolTip
                                 Content="Minimize"
-                                Placement="Bottom"
-                                HorizontalOffset="-15" />
-                            </Button.ToolTip>
-                        </Button>
-                        <Button
-                            Style="{StaticResource SystemButton}"
-                            Background="{StaticResource MaximizeButtonBackground}"
-                            BorderBrush="{StaticResource MaximizeButtonBackgroundHover}"
-                            Command="{Binding MaximizeCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-                            <Button.ToolTip>
-                                <ToolTip
-                                Content="Maximize"
                                 Placement="Bottom"
                                 HorizontalOffset="-15" />
                             </Button.ToolTip>

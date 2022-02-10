@@ -28,7 +28,7 @@
                 <Image
                     Stretch="UniformToFill"
                     HorizontalAlignment="Center"
-                    Source="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3d9bf296c46d42d2/5ece177408ac190a51c69e59/Beta_Key_Art_VALORANT_Lightbox.jpg">
+                    Source="{StaticResource HomeBackgroundImage}">
                     <Image.Effect>
                         <BlurEffect Radius="20" RenderingBias="Performance" />
                     </Image.Effect>

@@ -9,4 +9,7 @@
     <system:Double x:Key="LoginFormTitleTextSize">28</system:Double>
     <system:Double x:Key="PlayFormTitleTextSize">18</system:Double>
 
+    <system:Double x:Key="RotatingStoreItemCostSize">16</system:Double>
+    <system:Double x:Key="RotatingStoreItemNameSize">20</system:Double>
+
 </ResourceDictionary>

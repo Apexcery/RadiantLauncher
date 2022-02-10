@@ -23,7 +23,7 @@ namespace ValorantLauncher.Services
         {
             if (_userData.RiotUserData?.Sub == null || _userData.RiotUrl?.PdUrl == null)
             {
-                MessageBox.Show("Login to your account before trying to view your store.");
+                MessageBox.Show("Login to your account before trying to view your store."); //TODO: Better error handling.
                 return null;
             }
 
@@ -43,7 +43,7 @@ namespace ValorantLauncher.Services
         {
             if (_userData.RiotUrl?.PdUrl == null)
             {
-                MessageBox.Show("Login to your account before trying to view your store.");
+                MessageBox.Show("Login to your account before trying to view your store."); //TODO: Better error handling.
                 return null;
             }
 
@@ -59,6 +59,48 @@ namespace ValorantLauncher.Services
 
             var storeOffers = await response.Content.ReadAsJsonAsync<StoreOffers>();
             return storeOffers;
+        }
+
+        public async Task<SkinInformation> GetSkinInformation(string itemId)
+        {
+            var baseAddress = ApiURIs.URIs["SkinUri"].OriginalString;
+            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show($"Could not retrieve skin data for ID: {itemId}"); //TODO: Better error handling.
+                return null;
+            }
+
+            var skinInfo = await response.Content.ReadAsJsonAsync<SkinInformation>();
+            return skinInfo;
+        }
+
+        public async Task<int> GetSkinPrice(string itemId)
+        {
+            var baseAddress = ApiURIs.URIs["OfferUri"].OriginalString;
+            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show($"Could not retrieve skin price for ID: {itemId}"); //TODO: Better error handling.
+                return 99999;
+            }
+
+            var price = await response.Content.ReadAsJsonAsync<SkinCost>();
+            return price.Cost.ValorantPointCost;
+        }
+
+        public async Task<BundleInformation> GetBundleInformation(string bundleId)
+        {
+            var baseAddress = ApiURIs.URIs["BundleUri"].OriginalString;
+            var response = await _userData.Client.GetAsync($"{baseAddress}/{bundleId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show($"Could not retrieve bundle data for ID: {bundleId}"); //TODO: Better error handling.
+                return null;
+            }
+
+            var bundleInfo = await response.Content.ReadAsJsonAsync<BundleInformation>();
+            return bundleInfo;
         }
     }
 }
