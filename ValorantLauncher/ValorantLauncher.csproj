@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf" />
     <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
+    <None Remove="Resources\Images\NightMarketIcon.png" />
+    <None Remove="Resources\Images\NightMarketIcon.webp" />
     <None Remove="Resources\Images\ValorantLogo.png" />
   </ItemGroup>
 
@@ -24,7 +26,12 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
-    <Resource Include="Resources\Images\ValorantLogo.png" />
+    <Resource Include="Resources\Images\NightMarketIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\ValorantLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

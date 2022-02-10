@@ -51,6 +51,17 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
+        private bool _isNightMarketAvailable;
+        public bool IsNightMarketAvailable
+        {
+            get => _isNightMarketAvailable;
+            set
+            {
+                _isNightMarketAvailable = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<RotatingStoreItem> _rotatingStoreItems = new();
         public ObservableCollection<RotatingStoreItem> RotatingStoreItems
         {
@@ -86,7 +97,6 @@ namespace ValorantLauncher.ViewModels
             }
 
             var playerStore = await _storeService.GetPlayerStore();
-            var storeOffers = await _storeService.GetStoreOffers();
 
             await PopulateStoreView(playerStore);
         }
@@ -117,6 +127,8 @@ namespace ValorantLauncher.ViewModels
 
             BundleName = bundleInfo.BundleDisplayName;
             BundleCost = $"{bundlePrice:n0}";
+
+            IsNightMarketAvailable = playerStore.NightMarket?.NightMarketOffers?.Count > 0;
         }
     }
 }

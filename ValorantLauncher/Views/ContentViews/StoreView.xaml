@@ -6,9 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:ValorantLauncher.Views.ContentViews"
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
     d:DataContext="{d:DesignInstance viewModels:StoreViewModel}">
+    <UserControl.Resources>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*" />
@@ -18,12 +22,17 @@
         <!-- Featured Bundle -->
         <Grid
             Grid.Row="0">
+
+            <!-- Bundle Image -->
             <Image
                 Source="{Binding BundleImageSource}"
                 Stretch="UniformToFill"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
+
+            <!-- Bundle Name -->
             <StackPanel
+                Orientation="Vertical"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 Margin="25">
@@ -39,6 +48,28 @@
                     FontFamily="{StaticResource RobotoSlabBold}"
                     FontWeight="Bold" />
             </StackPanel>
+
+            <!-- Night Market Button -->
+            <Button
+                Visibility="{Binding IsNightMarketAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                ToolTip="Night Market"
+                BorderThickness="0"
+                Margin="25"
+                Padding="10"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                Width="60"
+                Height="60"
+                Background="{StaticResource ValorantRed}">
+                <Image
+                    Source="../../Resources/Images/NightMarketIcon.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Stretch="Uniform" />
+            </Button>
+
+            <!-- Bundle Price -->
             <StackPanel
                 Orientation="Horizontal"
                 VerticalAlignment="Bottom"
