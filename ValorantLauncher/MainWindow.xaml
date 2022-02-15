@@ -19,7 +19,8 @@
     Background="{StaticResource Background}">
     <materialDesign:DialogHost
         Identifier="MainDialogHost"
-        DialogTheme="Dark">
+        DialogTheme="Dark"
+        CloseOnClickAway="True">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100px" />

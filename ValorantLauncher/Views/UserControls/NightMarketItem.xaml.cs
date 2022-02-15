@@ -2,24 +2,24 @@
 using System.Linq;
 using System.Net.Cache;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using ValorantLauncher.Interfaces;
-using ValorantLauncher.Utils;
 
 namespace ValorantLauncher.Views.UserControls
 {
-    public partial class RotatingStoreItem : ObservableUserControl
+    public partial class NightMarketItem : UserControl
     {
         private readonly IStoreService _storeService;
         private readonly string _itemId;
 
-        public RotatingStoreItem(IStoreService storeService, string itemId)
+        public NightMarketItem(IStoreService storeService, string itemId)
         {
             _storeService = storeService;
             _itemId = itemId;
 
             InitializeComponent();
-            
+
             Loaded += OnLoaded;
         }
 
@@ -32,7 +32,7 @@ namespace ValorantLauncher.Views.UserControls
             var skinPrice = await _storeService.GetSkinPrice(_itemId);
 
             var uri = skinInfo.DisplayIcon;
-            if (string.IsNullOrEmpty(uri) && skinInfo.Chromas.Any())
+            if (skinInfo.Chromas.Any())
             {
                 uri = skinInfo.Chromas.Last().DisplayIcon;
             }

@@ -27,11 +27,22 @@ namespace ValorantLauncher
 
         private void SystemBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (DialogHost.IsDialogOpen("MainDialogHost"))
+            try
             {
-                DialogHost.Close("MainDialogHost");
+                if (DialogHost.IsDialogOpen("MainDialogHost"))
+                {
+                    DialogHost.Close("MainDialogHost");
+                }
+                if (DialogHost.IsDialogOpen("StoreDialogHost"))
+                {
+                    DialogHost.Close("StoreDialogHost");
+                }
             }
-            
+            catch
+            {
+                // ignored, if dialog host does not exist yet, an exception is thrown.
+            }
+
             DragMove();
         }
     }

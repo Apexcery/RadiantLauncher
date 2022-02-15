@@ -31,7 +31,7 @@ namespace ValorantLauncher
             services.AddHttpClient("AuthClient").ConfigureHttpClient(client =>
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
-                client.Timeout = TimeSpan.FromSeconds(10);
+                client.Timeout = TimeSpan.FromSeconds(30);
             }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
             {
                 CookieContainer = new CookieContainer(),
@@ -41,7 +41,7 @@ namespace ValorantLauncher
             services.AddHttpClient("StoreClient").ConfigureHttpClient(client =>
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
-                client.Timeout = TimeSpan.FromSeconds(10);
+                client.Timeout = TimeSpan.FromSeconds(30);
             }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
             {
                 CookieContainer = new CookieContainer(),
