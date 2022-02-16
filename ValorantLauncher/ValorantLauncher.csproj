@@ -11,6 +11,29 @@
     <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
     <None Remove="Resources\Images\NightMarketIcon.png" />
     <None Remove="Resources\Images\NightMarketIcon.webp" />
+    <None Remove="Resources\Images\Rank Images\Bronze I.png" />
+    <None Remove="Resources\Images\Rank Images\Bronze II.png" />
+    <None Remove="Resources\Images\Rank Images\Bronze III.png" />
+    <None Remove="Resources\Images\Rank Images\Diamond I.png" />
+    <None Remove="Resources\Images\Rank Images\Diamond II.png" />
+    <None Remove="Resources\Images\Rank Images\Diamond III.png" />
+    <None Remove="Resources\Images\Rank Images\Gold I.png" />
+    <None Remove="Resources\Images\Rank Images\Gold II.png" />
+    <None Remove="Resources\Images\Rank Images\Gold III.png" />
+    <None Remove="Resources\Images\Rank Images\Immortal I.png" />
+    <None Remove="Resources\Images\Rank Images\Immortal II.png" />
+    <None Remove="Resources\Images\Rank Images\Immortal III.png" />
+    <None Remove="Resources\Images\Rank Images\Iron I.png" />
+    <None Remove="Resources\Images\Rank Images\Iron II.png" />
+    <None Remove="Resources\Images\Rank Images\Iron III.png" />
+    <None Remove="Resources\Images\Rank Images\Platinum I.png" />
+    <None Remove="Resources\Images\Rank Images\Platinum II.png" />
+    <None Remove="Resources\Images\Rank Images\Platinum III.png" />
+    <None Remove="Resources\Images\Rank Images\Radiant.png" />
+    <None Remove="Resources\Images\Rank Images\Silver I.png" />
+    <None Remove="Resources\Images\Rank Images\Silver II.png" />
+    <None Remove="Resources\Images\Rank Images\Silver III.png" />
+    <None Remove="Resources\Images\Rank Images\Unranked.png" />
     <None Remove="Resources\Images\ValorantLogo.png" />
   </ItemGroup>
 
@@ -21,15 +44,88 @@
     <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
+
+    <Resource Include="Resources\Images\ValorantLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
     <Resource Include="Resources\Images\NightMarketIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\ValorantLogo.png">
+
+    <Resource Include="Resources\Images\Rank Images\Unranked.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Iron I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Iron II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Iron III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Bronze I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Bronze II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Bronze III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Silver I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Silver II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Silver III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Gold I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Gold II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Gold III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Platinum I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Platinum II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Platinum III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Diamond I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Diamond II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Diamond III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Immortal I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Immortal II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Immortal III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Radiant.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

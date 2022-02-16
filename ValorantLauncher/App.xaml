@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="Resources/Values/Dimensions.xaml" />
                 <ResourceDictionary Source="Resources/Values/Fonts.xaml" />
                 <ResourceDictionary Source="Resources/Values/Strings.xaml" />
+                <ResourceDictionary Source="Resources/Values/Images.xaml" />
                 
                 <!-- Styles -->
                 <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
@@ -35,6 +36,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:StoreViewModel}">
                 <contentViews:StoreView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CareerViewModel}">
+                <contentViews:CareerView />
             </DataTemplate>
 
         </ResourceDictionary>

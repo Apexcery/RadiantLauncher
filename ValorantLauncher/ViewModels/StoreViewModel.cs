@@ -121,7 +121,7 @@ namespace ValorantLauncher.ViewModels
 
         public async Task GetStoreData()
         {
-            if (_userData.RiotUserData?.Sub == null || _userData.RiotUrl?.PdUrl == null)
+            if (_userData.RiotUserData?.Puuid == null || _userData.RiotUrl?.PdUrl == null)
             {
                 MessageBox.Show("Log in to your account before trying to view the store.");
                 return;

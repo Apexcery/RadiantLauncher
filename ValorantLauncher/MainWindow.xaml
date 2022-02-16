@@ -16,7 +16,8 @@
     ResizeMode="NoResize"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
-    Background="{StaticResource Background}">
+    Background="{StaticResource Background}"
+    d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
     <materialDesign:DialogHost
         Identifier="MainDialogHost"
         DialogTheme="Dark"
@@ -44,7 +45,7 @@
                         Height="75"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Source="Resources/Images/ValorantLogo.png" />
+                        Source="{StaticResource ApplicationLogo}" />
                 </Grid>
 
                 <!-- Navigation Bar -->
@@ -59,7 +60,7 @@
                             IsChecked="True"
                             GroupName="NavigationPanel"
                             Command="{Binding HomeViewCommand, Mode=OneWay}"
-                            Tag="Play">
+                            Tag="PlayOutline">
                             <RadioButton.ToolTip>
                                 <ToolTip
                                     Content="Home"
@@ -72,10 +73,23 @@
                             Style="{StaticResource NavigationPanelButton}"
                             GroupName="NavigationPanel"
                             Command="{Binding StoreViewCommand, Mode=OneWay}"
-                            Tag="ShoppingCart">
+                            Tag="ShoppingCartOutline">
                             <RadioButton.ToolTip>
                                 <ToolTip
                                     Content="Store"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            GroupName="NavigationPanel"
+                            Command="{Binding CareerViewCommand, Mode=OneWay}"
+                            Tag="ClipboardClockOutline">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Career"
                                     Placement="Right"
                                     VerticalOffset="25"
                                     HorizontalOffset="-10" />

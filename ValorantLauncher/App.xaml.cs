@@ -27,18 +27,10 @@ namespace ValorantLauncher
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<StoreView>();
             services.AddSingleton<StoreViewModel>();
+            services.AddSingleton<CareerView>();
+            services.AddSingleton<CareerViewModel>();
 
-            services.AddHttpClient("AuthClient").ConfigureHttpClient(client =>
-            {
-                client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
-                client.Timeout = TimeSpan.FromSeconds(30);
-            }).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
-            {
-                CookieContainer = new CookieContainer(),
-                UseCookies = true
-            });
-
-            services.AddHttpClient("StoreClient").ConfigureHttpClient(client =>
+            services.AddHttpClient("ValClient").ConfigureHttpClient(client =>
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "RiotClient/43.0.1.4195386.4190634 rso-auth (Windows;10;;Professional, x64)");
                 client.Timeout = TimeSpan.FromSeconds(30);
@@ -50,6 +42,7 @@ namespace ValorantLauncher
 
             services.AddSingleton<IAuthService, AuthService>();
             services.AddSingleton<IStoreService, StoreService>();
+            services.AddSingleton<ICareerService, CareerService>();
 
             var serviceProvider = services.BuildServiceProvider();
             var mainWindow = serviceProvider.GetRequiredService<MainWindow>();

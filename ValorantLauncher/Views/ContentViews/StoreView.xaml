@@ -68,7 +68,7 @@
                     Background="{StaticResource ValorantRed}"
                     Command="{Binding ShowNightMarketCommand}">
                     <Image
-                        Source="../../Resources/Images/NightMarketIcon.png"
+                        Source="{StaticResource NightMarketIcon}"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Stretch="Uniform" />

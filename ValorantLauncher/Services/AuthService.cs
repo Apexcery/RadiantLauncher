@@ -25,7 +25,7 @@ namespace ValorantLauncher.Services
         public AuthService(UserData userData, IHttpClientFactory httpClientFactory)
         {
             _userData = userData;
-            _userData.Client = httpClientFactory.CreateClient("AuthClient");
+            _userData.Client = httpClientFactory.CreateClient("ValClient");
             _apiUris = ApiURIs.URIs;
         }
 

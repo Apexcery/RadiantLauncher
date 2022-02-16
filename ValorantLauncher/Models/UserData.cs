@@ -46,7 +46,7 @@ namespace ValorantLauncher.Models
             public string Country { get; set; }
 
             [JsonProperty("sub")]
-            public string Sub { get; set; }
+            public string Puuid { get; set; }
 
             [JsonProperty("email_verified")]
             public bool EmailVerified { get; set; }

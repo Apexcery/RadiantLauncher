@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using ValorantLauncher.Extensions;
@@ -14,21 +12,21 @@ namespace ValorantLauncher.Services
     {
         private readonly UserData _userData;
 
-        public StoreService(UserData userData, IHttpClientFactory httpClientFactory)
+        public StoreService(UserData userData)
         {
             _userData = userData;
         }
 
         public async Task<PlayerStore> GetPlayerStore()
         {
-            if (_userData.RiotUserData?.Sub == null || _userData.RiotUrl?.PdUrl == null)
+            if (_userData.RiotUserData?.Puuid == null || _userData.RiotUrl?.PdUrl == null)
             {
                 MessageBox.Show("Login to your account before trying to view your store."); //TODO: Better error handling.
                 return null;
             }
 
             var baseAddress = _userData.RiotUrl.PdUrl;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/store/v2/storefront/{_userData.RiotUserData.Sub}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/store/v2/storefront/{_userData.RiotUserData.Puuid}");
             if (!response.IsSuccessStatusCode)
             {
                 MessageBox.Show("Failed to get player's store."); //TODO: Better error messages.

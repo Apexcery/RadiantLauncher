@@ -21,8 +21,9 @@ namespace ValorantLauncher.ViewModels
         
         public RelayCommand<object> HomeViewCommand { get; }
         public RelayCommand<object> StoreViewCommand { get; }
+        public RelayCommand<object> CareerViewCommand { get; }
 
-        public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel)
+        public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel)
         {
             this.MinimizeCommand = new RelayCommand<IMinimizable>(this.MinimizeApplication);
             this.CloseCommand = new RelayCommand<ICloseable>(this.CloseApplication);
@@ -31,6 +32,7 @@ namespace ValorantLauncher.ViewModels
 
             HomeViewCommand = ChangeView(homeViewModel);
             StoreViewCommand = ChangeView(storeViewModel);
+            CareerViewCommand = ChangeView(careerViewModel);
         }
 
         private RelayCommand<object> ChangeView(object vm)
