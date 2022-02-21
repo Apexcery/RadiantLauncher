@@ -6,13 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:ValorantLauncher.Views.ContentViews"
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
+    xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     mc:Ignorable="d"
     d:DesignWidth="1280" d:DesignHeight="720"
     Background="{StaticResource BackgroundLight}"
     d:DataContext="{d:DesignInstance Type=viewModels:CareerViewModel}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="1" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -20,29 +21,34 @@
         <!-- Rank History -->
         <Grid
             Grid.Row="0">
-            
-            <!-- Current Rank Image -->
-            <Grid
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Margin="15">
-                <Image
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="150"
-                    Height="150"
-                    Source="{Binding RankImageSource, FallbackValue={StaticResource UnrankedImage}}"
-                    ToolTip="{Binding RankImageTooltip, FallbackValue='Unranked'}"/>
-            </Grid>
-            
-            <!-- Current Rank Graph -->
-            
 
             <!-- Previous Ranks -->
             <StackPanel
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Margin="15">
+                Orientation="Vertical"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="10">
+                <TextBlock
+                    Text="Act Ranks"
+                    TextDecorations="Underline"
+                    HorizontalAlignment="Center"
+                    Margin="0, 5, 0, 20"
+                    Foreground="{StaticResource Text}"
+                    FontSize="{StaticResource LoginFormTextSize}"/>
+                <ItemsControl
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding RankHistoryName, UpdateSourceTrigger=Explicit}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid
+                                Columns="5"
+                                Rows="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
                 <ItemsControl
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
@@ -57,6 +63,81 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
+                <ItemsControl
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding RankHistoryRank, UpdateSourceTrigger=Explicit}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid
+                                Columns="5"
+                                Rows="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </StackPanel>
+            
+            <!-- Current Rank Graph -->
+            <StackPanel
+                Orientation="Vertical"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                MinWidth="500"
+                Margin="10">
+                <TextBlock
+                    Text="Rank Rating"
+                    TextDecorations="Underline"
+                    HorizontalAlignment="Center"
+                    Margin="0, 5, 0, 20"
+                    Foreground="{StaticResource Text}"
+                    FontSize="{StaticResource LoginFormTextSize}"/>
+                <liveCharts:CartesianChart
+                    MinHeight="125"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    MinWidth="450"
+                    LegendLocation="Bottom"
+                    DataTooltip="{x:Null}">
+                    <liveCharts:CartesianChart.ChartLegend>
+                        <liveCharts:DefaultLegend MaxHeight="2" MinHeight="2" Height="2" />
+                    </liveCharts:CartesianChart.ChartLegend>
+                    <liveCharts:CartesianChart.Series>
+                        <liveCharts:LineSeries
+                            Title="RR"
+                            Values="{Binding RankChartValues}"
+                            Stroke="{StaticResource ValorantWhite}"
+                            Fill="{StaticResource ValorantRedDark}"
+                            DataLabels="True"
+                            PointGeometrySize="10"
+                            PointForeground="{StaticResource ValorantRed}"
+                            Foreground="{StaticResource Text}"/>
+                    </liveCharts:CartesianChart.Series>
+                    <liveCharts:CartesianChart.AxisX>
+                        <liveCharts:Axis
+                            IsEnabled="True"
+                            ShowLabels="True"
+                            Labels="{Binding RankChartLabels}"
+                            FontSize="14"
+                            Foreground="{StaticResource Text}">
+                            <liveCharts:Axis.Separator>
+                                <liveCharts:Separator StrokeThickness="0" Step="1" />
+                            </liveCharts:Axis.Separator>
+                        </liveCharts:Axis>
+                    </liveCharts:CartesianChart.AxisX>
+                    <liveCharts:CartesianChart.AxisY>
+                        <liveCharts:Axis
+                            MinValue="0"
+                            MaxValue="100"
+                            ShowLabels="False"
+                            IsEnabled="True">
+                            <liveCharts:Axis.Separator>
+                                <liveCharts:Separator StrokeThickness="1" />
+                            </liveCharts:Axis.Separator>
+                        </liveCharts:Axis>
+                    </liveCharts:CartesianChart.AxisY>
+                </liveCharts:CartesianChart>
             </StackPanel>
         </Grid>
 
@@ -67,6 +148,15 @@
         <Grid
             Grid.Row="2">
             
+            <TextBlock
+                Text="Match History"
+                Margin="15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Foreground="{StaticResource Text}"
+                FontSize="{StaticResource PlayFormTitleTextSize}"
+                TextDecorations="Underline" />
+
             <ScrollViewer
                 VerticalScrollBarVisibility="Auto">
                 <ItemsControl

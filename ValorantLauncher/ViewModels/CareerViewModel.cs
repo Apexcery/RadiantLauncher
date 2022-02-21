@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using LiveCharts;
 using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models.Store.Career;
+using ValorantLauncher.Models.Career;
 using ValorantLauncher.Utils;
 
 namespace ValorantLauncher.ViewModels
@@ -16,27 +17,6 @@ namespace ValorantLauncher.ViewModels
     {
         private readonly ICareerService _careerService;
 
-        private ImageSource _rankImageSource = Application.Current.TryFindResource("UnrankedImage") as ImageSource; //Set the unranked image as the default.
-        public ImageSource RankImageSource
-        {
-            get => _rankImageSource;
-            set
-            {
-                _rankImageSource = value;
-                OnPropertyChanged();
-            }
-        }
-        private ToolTip _rankImageTooltip;
-        public ToolTip RankImageTooltip
-        {
-            get => _rankImageTooltip;
-            set
-            {
-                _rankImageTooltip = value;
-                OnPropertyChanged();
-            }
-        }
-
         private ObservableCollection<Image> _rankHistoryItems = new();
         public ObservableCollection<Image> RankHistoryItems
         {
@@ -44,6 +24,26 @@ namespace ValorantLauncher.ViewModels
             set
             {
                 _rankHistoryItems = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<TextBlock> _rankHistoryName = new();
+        public ObservableCollection<TextBlock> RankHistoryName
+        {
+            get => _rankHistoryName;
+            set
+            {
+                _rankHistoryName = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<TextBlock> _rankHistoryRank = new();
+        public ObservableCollection<TextBlock> RankHistoryRank
+        {
+            get => _rankHistoryRank;
+            set
+            {
+                _rankHistoryRank = value;
                 OnPropertyChanged();
             }
         }
@@ -59,7 +59,7 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
-        private readonly Dictionary<int, string> TierToRank = new Dictionary<int, string>
+        private readonly Dictionary<int, string> _rankIds = new()
         {
             { 0,"Unranked" },
             { 3,"Iron 1" },
@@ -85,79 +85,43 @@ namespace ValorantLauncher.ViewModels
             { 23,"Immortal 3" },
             { 24,"Radiant" }
         };
-        internal class SeasonInfo
+        private readonly Dictionary<string, string> _seasonIds = new()
         {
-            internal string SeasonID { get; set; }
-            internal string SeasonName { get; set; }
-        }
-        internal List<SeasonInfo> Seasons = new()
-        {
-            new SeasonInfo
-            {
-                SeasonID = "0df5adb9-4dcb-6899-1306-3e9860661dd3",
-                SeasonName = "Closed Beta"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "3f61c772-4560-cd3f-5d3f-a7ab5abda6b3",
-                SeasonName = "Episode 1 Act 1"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "0530b9c4-4980-f2ee-df5d-09864cd00542",
-                SeasonName = "Episode 1 Act 2"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "46ea6166-4573-1128-9cea-60a15640059b",
-                SeasonName = "Episode 1 Act 3"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "97b6e739-44cc-ffa7-49ad-398ba502ceb0",
-                SeasonName = "Episode 2 Act 1"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "ab57ef51-4e59-da91-cc8d-51a5a2b9b8ff",
-                SeasonName = "Episode 2 Act 2"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "52e9749a-429b-7060-99fe-4595426a0cf7",
-                SeasonName = "Episode 2 Act 3"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "2a27e5d2-4d30-c9e2-b15a-93b8909a442c",
-                SeasonName = "Episode 3 Act 1"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "4cb622e1-4244-6da3-7276-8daaf1c01be2",
-                SeasonName = "Episode 3 Act 2"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "a16955a5-4ad0-f761-5e9e-389df1c892fb",
-                SeasonName = "Episode 3 Act 3"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "573f53ac-41a5-3a7d-d9ce-d6a6298e5704",
-                SeasonName = "Episode 4 Act 1"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "d929bc38-4ab6-7da4-94f0-ee84f8ac141e",
-                SeasonName = "Episode 4 Act 2"
-            },
-            new SeasonInfo
-            {
-                SeasonID = "3e47230a-463c-a301-eb7d-67bb60357d4f",
-                SeasonName = "Episode 4 Act 3"
-            },
+            { "0df5adb9-4dcb-6899-1306-3e9860661dd3", "Closed Beta" },
+            { "3f61c772-4560-cd3f-5d3f-a7ab5abda6b3", "Episode 1 Act 1" },
+            { "0530b9c4-4980-f2ee-df5d-09864cd00542", "Episode 1 Act 2" },
+            { "46ea6166-4573-1128-9cea-60a15640059b", "Episode 1 Act 3" },
+            { "97b6e739-44cc-ffa7-49ad-398ba502ceb0", "Episode 2 Act 1" },
+            { "ab57ef51-4e59-da91-cc8d-51a5a2b9b8ff", "Episode 2 Act 2" },
+            { "52e9749a-429b-7060-99fe-4595426a0cf7", "Episode 2 Act 3" },
+            { "2a27e5d2-4d30-c9e2-b15a-93b8909a442c", "Episode 3 Act 1" },
+            { "4cb622e1-4244-6da3-7276-8daaf1c01be2", "Episode 3 Act 2" },
+            { "a16955a5-4ad0-f761-5e9e-389df1c892fb", "Episode 3 Act 3" },
+            { "573f53ac-41a5-3a7d-d9ce-d6a6298e5704", "Episode 4 Act 1" },
+            { "d929bc38-4ab6-7da4-94f0-ee84f8ac141e", "Episode 4 Act 2" },
+            { "3e47230a-463c-a301-eb7d-67bb60357d4f", "Episode 4 Act 3" }
         };
+
+        private ChartValues<double> _rankChartValues = new();
+        public ChartValues<double> RankChartValues
+        {
+            get => _rankChartValues;
+            set
+            {
+                _rankChartValues = value;
+                OnPropertyChanged();
+            }
+        }
+        private ChartValues<string> _rankChartLabels = new();
+        public ChartValues<string> RankChartLabels
+        {
+            get => _rankChartLabels;
+            set
+            {
+                _rankChartLabels = value;
+                OnPropertyChanged();
+            }
+        }
 
         public CareerViewModel(ICareerService careerService)
         {
@@ -166,35 +130,43 @@ namespace ValorantLauncher.ViewModels
 
         public async Task GetRankData()
         {
+            if (RankHistoryItems.Any())
+                return;
+
+            //Initial Graph Values
+            for (var i = 0; i < 5; i++)
+            {
+                RankChartValues.Add(50);
+                RankChartLabels.Add($"Game {i + 1}");
+            }
+
             var rankInfo = await _careerService.GetPlayerRankInfo();
+            var playerRankUpdates = await _careerService.GetPlayerRankUpdates();
 
             if (rankInfo == null)
                 return;
 
-            await SetRankHistoryIcons(rankInfo);
+            SetRankHistoryIcons(rankInfo);
+            PopulateGraph(playerRankUpdates);
         }
 
-        private async Task SetRankHistoryIcons(PlayerRankInfo rankInfo)
+        private void PopulateGraph(PlayerRankUpdates playerRankUpdates)
         {
-            var currentSeason = Seasons.First(x => x.SeasonID.Equals(rankInfo.LatestCompetitiveUpdate.SeasonID));
-
-            var currentSeasonRank = TierToRank[rankInfo.LatestCompetitiveUpdate.TierAfterUpdate];
-            var currentSeasonName = currentSeason.SeasonName;
-
-            var resourceName = $"{currentSeasonRank.Replace(" ", "")}Image";
-            RankImageSource = Application.Current.TryFindResource(resourceName) as ImageSource;
-            RankImageTooltip = new ToolTip
+            RankChartValues.Clear();
+            RankChartLabels.Clear();
+            for (var i = 0; i < 5; i++)
             {
-                Content = new TextBlock
-                {
-                    Text = $"{currentSeasonName}\n{currentSeasonRank}",
-                    TextAlignment = TextAlignment.Center
-                },
-                Placement = PlacementMode.Bottom,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
+                var rankUpdate = playerRankUpdates.Matches[i];
+                RankChartValues.Add(rankUpdate.RankedRatingAfterUpdate);
+                RankChartLabels.Add($"Game {i + 1}");
+            }
+        }
 
-            var previousActRanks = new Dictionary<string, int>
+        private void SetRankHistoryIcons(PlayerRankInfo rankInfo)
+        {
+            var currentSeasonName = _seasonIds[rankInfo.LatestCompetitiveUpdate.SeasonID];
+
+            var previousActTiers = new Dictionary<string, int>
             {
                 { "Episode 3 Act 2", rankInfo.QueueData.Competitive?.SeasonalInfoBySeasonID?.Episode3Act2?.CompetitiveTier ?? 0 },
                 { "Episode 3 Act 3", rankInfo.QueueData.Competitive?.SeasonalInfoBySeasonID?.Episode3Act3?.CompetitiveTier ?? 0 },
@@ -203,29 +175,41 @@ namespace ValorantLauncher.ViewModels
                 { "Episode 4 Act 3", rankInfo.QueueData.Competitive?.SeasonalInfoBySeasonID?.Episode4Act3?.CompetitiveTier ?? 0 }
             };
 
-            foreach (var (actName, actRank) in previousActRanks)
+            foreach (var (actName, actTier) in previousActTiers)
             {
-                var rankName = TierToRank[actRank];
+                var rankName = _rankIds[actTier];
                 var rankResourceName = $"{rankName.Replace(" ", "")}Image";
 
                 var rankImage = new Image
                 {
                     Source = Application.Current.TryFindResource(rankResourceName) as ImageSource,
-                    Width = 50,
-                    Height = 50,
-                    ToolTip = new ToolTip
-                    {
-                        Content = new TextBlock
-                        {
-                            Text = $"{actName}\n{rankName}",
-                            TextAlignment = TextAlignment.Center
-                        },
-                        Placement = PlacementMode.Bottom,
-                        HorizontalAlignment = HorizontalAlignment.Center
-                    },
+                    Width = actName.Equals(currentSeasonName) ? 75 : 50,
+                    Height = actName.Equals(currentSeasonName) ? 75 : 50
+                };
+
+                var rankHistoryName = new TextBlock
+                {
+                    Text = $"{(actName.Equals(currentSeasonName) ? "[Current Act]" : actName)}",
+                    Foreground = (SolidColorBrush)Application.Current.TryFindResource("Text"),
+                    FontSize = (double)Application.Current.TryFindResource("LoginFormTextSize"),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center,
+                    Margin = new Thickness(10, 0, 10, 10)
+                };
+
+                var rankHistoryRank = new TextBlock
+                {
+                    Text = $"{rankName}",
+                    Foreground = (SolidColorBrush)Application.Current.TryFindResource("Text"),
+                    FontSize = (double)Application.Current.TryFindResource("LoginFormTextSize"),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    TextAlignment = TextAlignment.Center,
+                    Margin = new Thickness(10, 5, 10, 5)
                 };
 
                 RankHistoryItems.Add(rankImage);
+                RankHistoryName.Add(rankHistoryName);
+                RankHistoryRank.Add(rankHistoryRank);
             }
         }
     }
