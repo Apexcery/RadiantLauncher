@@ -1,0 +1,201 @@
+﻿<utils:ObservableUserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ValorantLauncher.Views.UserControls"
+             xmlns:utils="clr-namespace:ValorantLauncher.Utils"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="ValorantLauncher.Views.UserControls.MatchHistoryItem"
+             mc:Ignorable="d" 
+             d:DesignWidth="1150" d:DesignHeight="100"
+             d:DataContext="{d:DesignInstance {x:Type local:MatchHistoryItem}}"
+             Margin="5"
+             MinHeight="100"
+             MaxHeight="100">
+    <utils:ObservableUserControl.Resources>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
+    </utils:ObservableUserControl.Resources>
+    <utils:ObservableUserControl.Background>
+        <StaticResource ResourceKey="Background"/>
+    </utils:ObservableUserControl.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125px" /> <!-- Image -->
+            <ColumnDefinition Width="125px" /> <!-- Match Score + Map Name -->
+            <ColumnDefinition Width="25px" /> <!-- Separator -->
+            <ColumnDefinition Width="100px" /> <!-- Rank Rating Diff -->
+            <ColumnDefinition Width="50px" /> <!-- Separator -->
+            <ColumnDefinition Width="125px" /> <!-- Match Duration -->
+            <ColumnDefinition Width="*" /> <!-- KDA Stats -->
+            <ColumnDefinition Width="125px" /> <!-- Match Result + Game Mode -->
+        </Grid.ColumnDefinitions>
+
+        <Grid
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch">
+            <Image
+                x:Name="AgentImage"
+                Source="{Binding AgentIcon, FallbackValue={StaticResource JettImage}}"
+                ToolTip="{Binding AgentIconTooltip, FallbackValue=Agent Icon}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Stretch="UniformToFill"
+                Width="90"
+                Height="90" />
+        </Grid>
+
+        <StackPanel
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Margin="0, 10">
+            <StackPanel>
+                <TextBlock
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource Text}"
+                    FontFamily="{StaticResource RobotoSlabBold}"
+                    FontWeight="Bold"
+                    FontSize="{StaticResource LoginFormTitleTextSize}"
+                    TextAlignment="Center"
+                    Margin="0, 5">
+                    <Run
+                        Text="{Binding BlueTeamScore, FallbackValue=Blue}"
+                        Foreground="{StaticResource MatchVictoryBrush}"/>
+                    <Run Text=":" />
+                    <Run
+                        Text="{Binding RedTeamScore, FallbackValue=Red}"
+                        Foreground="{StaticResource MatchDefeatBrush}" />
+                </TextBlock>
+                <TextBlock
+                    Text="{Binding MapName, FallbackValue=Map Name}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource Text}"
+                    FontFamily="{StaticResource RobotoSlabRegular}"
+                    FontSize="{StaticResource LoginFormTitleTextSize}" />
+            </StackPanel>
+        </StackPanel>
+        <Grid
+            Grid.Column="3">
+            <TextBlock
+                Text="{Binding RREarned, FallbackValue='+00 RR'}"
+                Foreground="{Binding VictoryDefeatTextColor, FallbackValue={StaticResource Text}}"
+                Visibility="{Binding IsRanked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                FontSize="{StaticResource LoginFormTitleTextSize}"
+                FontFamily="{StaticResource RobotoSlabBold}"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                TextAlignment="Center" />
+        </Grid>
+        <StackPanel
+            Grid.Column="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <TextBlock
+                Text="Duration"
+                Foreground="{StaticResource Text}"
+                FontSize="{StaticResource LoginFormTitleTextSize}"
+                FontFamily="{StaticResource RobotoSlabRegular}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                TextAlignment="Center" />
+            <TextBlock
+                Text="{Binding MatchDuration, FallbackValue='00:00'}"
+                Foreground="{StaticResource Text}"
+                FontSize="{StaticResource LoginFormTitleTextSize}"
+                FontFamily="{StaticResource RobotoSlabBold}"
+                FontWeight="Bold"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                TextAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Column="6"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch">
+            <StackPanel
+                Orientation="Vertical"
+                Margin="15, 5, 15, 10">
+
+                <TextBlock
+                    Text="K / D / A"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource Text}"
+                    FontFamily="{StaticResource RobotoSlabBold}"
+                    FontWeight="Bold"
+                    FontSize="{StaticResource LoginFormTitleTextSize}"
+                    Margin="0, 10, 0, 0" />
+                <TextBlock
+                    Text="{Binding KDA, FallbackValue=K/D/A}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource Text}"
+                    FontFamily="{StaticResource RobotoSlabRegular}"
+                    FontSize="{StaticResource LoginFormTitleTextSize}" />
+            </StackPanel>
+            <StackPanel
+                Orientation="Vertical"
+                Margin="15, 5, 15, 10">
+
+                <TextBlock
+                    Text="K/D Ratio"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource Text}"
+                    FontFamily="{StaticResource RobotoSlabBold}"
+                    FontWeight="Bold"
+                    FontSize="{StaticResource LoginFormTitleTextSize}"
+                    Margin="0, 10, 0, 0" />
+                <TextBlock
+                    Text="{Binding KDRatio, FallbackValue=K/D Ratio}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Foreground="{Binding KDRatioColor, FallbackValue={StaticResource Text}}"
+                    FontFamily="{StaticResource RobotoSlabRegular}"
+                    FontSize="{StaticResource LoginFormTitleTextSize}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Column="7"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch"
+            Margin="15, 5, 15, 10">
+            <TextBlock
+                Text="{Binding VictoryDefeatText, FallbackValue=Draw}"
+                Foreground="{Binding VictoryDefeatTextColor, FallbackValue={StaticResource Text}}"
+                FontSize="{StaticResource LoginFormTitleTextSize}"
+                FontFamily="{StaticResource RobotoSlabRegular}"
+                FontStyle="Italic"
+                VerticalAlignment="Top"
+                TextAlignment="Right" />
+            <TextBlock
+                Text="{Binding GameModeName, FallbackValue=GameMode}"
+                Foreground="{Binding VictoryDefeatTextColor, FallbackValue={StaticResource Text}}"
+                FontSize="{StaticResource LoginFormTextSize}"
+                FontFamily="{StaticResource RobotoSlabRegular}"
+                VerticalAlignment="Bottom"
+                TextAlignment="Right"
+                Margin="0, 0, 0, 5" />
+            <Grid
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Cursor="Hand"
+                IsHitTestVisible="True"
+                Background="Transparent"
+                ToolTip="{Binding MatchDateTooltip, FallbackValue='Match Date'}">
+                <materialDesign:PackIcon
+                    Kind="ClockOutline"
+                    Foreground="{StaticResource Text}"
+                    Width="24" Height="24"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</utils:ObservableUserControl>

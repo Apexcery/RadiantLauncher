@@ -1,4 +1,8 @@
-﻿namespace ValorantLauncher.Models.Career
+﻿using System;
+using Newtonsoft.Json;
+using ValorantLauncher.Utils;
+
+namespace ValorantLauncher.Models.Career
 {
     public class CompetitiveUpdate
     {
@@ -8,7 +12,8 @@
 
         public string SeasonID { get; set; }
 
-        public long MatchStartTime { get; set; }
+        [JsonConverter(typeof(MillisecondEpochConverter))]
+        public DateTime MatchStartTime { get; set; }
 
         public int TierAfterUpdate { get; set; }
 

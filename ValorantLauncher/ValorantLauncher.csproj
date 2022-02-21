@@ -9,6 +9,24 @@
   <ItemGroup>
     <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf" />
     <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
+    <None Remove="Resources\Images\Agent Images\Icons\Astra.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Breach.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Brimstone.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Chamber.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Cypher.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Jett.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\KAYO.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Killjoy.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Neon.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Omen.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Phoenix.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Raze.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Reyna.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Sage.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Skye.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Sova.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Viper.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Yoru.png" />
     <None Remove="Resources\Images\NightMarketIcon.png" />
     <None Remove="Resources\Images\NightMarketIcon.webp" />
     <None Remove="Resources\Images\Rank Images\Bronze I.png" />
@@ -51,6 +69,61 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
+
+    <Resource Include="Resources\Images\Agent Images\Icons\Astra.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Breach.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Brimstone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Chamber.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Cypher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Jett.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\KAYO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Killjoy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Neon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Omen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Phoenix.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Raze.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Reyna.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Sage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Skye.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Sova.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Viper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Yoru.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
 
     <Resource Include="Resources\Images\ValorantLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
