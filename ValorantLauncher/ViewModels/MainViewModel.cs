@@ -23,6 +23,17 @@ namespace ValorantLauncher.ViewModels
         public RelayCommand<object> StoreViewCommand { get; }
         public RelayCommand<object> CareerViewCommand { get; }
 
+        private bool _isLoggedIn;
+        public bool IsLoggedIn
+        {
+            get => _isLoggedIn;
+            set
+            {
+                _isLoggedIn = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel)
         {
             this.MinimizeCommand = new(this.MinimizeApplication);

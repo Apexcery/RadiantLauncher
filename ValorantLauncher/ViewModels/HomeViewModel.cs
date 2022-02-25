@@ -91,6 +91,8 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
+        private MainViewModel _mainViewModel;
+
         public HomeViewModel(IAuthService authService, UserData userData, AppConfig appConfig)
         {
             _authService = authService;
@@ -189,6 +191,10 @@ namespace ValorantLauncher.ViewModels
                 var appConfigAsText = JsonConvert.SerializeObject(_appConfig, Formatting.Indented);
                 await File.WriteAllTextAsync(filePath, appConfigAsText);
             }
+
+            _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
+            if (_mainViewModel != null)
+                _mainViewModel.IsLoggedIn = false;
         }
 
         public async Task LoginWithSavedData()
@@ -239,7 +245,7 @@ namespace ValorantLauncher.ViewModels
                 MessageBox.Show("Invalid Username or Password.");
                 return false;
             }
-                
+            
             LoadingVisible = true;
             LogInFormVisible = false;
 
@@ -249,6 +255,10 @@ namespace ValorantLauncher.ViewModels
                 // Change partial view
                 GameNameText = _userData.RiotUserData.AccountInfo.GameName;
                 PlayFormVisible = true;
+
+                _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
+                if (_mainViewModel != null)
+                    _mainViewModel.IsLoggedIn = true;
             }
             else
             {

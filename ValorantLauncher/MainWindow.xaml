@@ -73,7 +73,8 @@
                             Style="{StaticResource NavigationPanelButton}"
                             GroupName="NavigationPanel"
                             Command="{Binding StoreViewCommand, Mode=OneWay}"
-                            Tag="ShoppingCartOutline">
+                            Tag="ShoppingCartOutline"
+                            IsEnabled="{Binding IsLoggedIn, Mode=OneWay}">
                             <RadioButton.ToolTip>
                                 <ToolTip
                                     Content="Store"
@@ -86,7 +87,8 @@
                             Style="{StaticResource NavigationPanelButton}"
                             GroupName="NavigationPanel"
                             Command="{Binding CareerViewCommand, Mode=OneWay}"
-                            Tag="ClipboardClockOutline">
+                            Tag="ClipboardClockOutline"
+                            IsEnabled="{Binding IsLoggedIn, Mode=OneWay}">
                             <RadioButton.ToolTip>
                                 <ToolTip
                                     Content="Career"
