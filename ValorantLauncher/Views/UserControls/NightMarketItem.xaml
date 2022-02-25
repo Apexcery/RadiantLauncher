@@ -14,8 +14,8 @@
         <Border>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="{StaticResource ValorantRedColor}" Offset="0.0" />
-                    <GradientStop Color="{StaticResource ValorantRedDarkColor}" Offset="0.75" />
+                    <GradientStop Color="{DynamicResource ValorantRedColor}" Offset="0.0" />
+                    <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0.75" />
                     <GradientStop Color="Black" Offset="1.15" />
                 </LinearGradientBrush>
             </Border.Background>
@@ -54,7 +54,7 @@
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource RobotoSlabBold}"
                         FontWeight="Bold"
-                        Foreground="{StaticResource Text}"
+                        Foreground="{DynamicResource Text}"
                         FontSize="{StaticResource RotatingStoreItemCostSize}"
                         Margin="5, 0, 10, 0" />
                 </StackPanel>
@@ -71,7 +71,7 @@
                     d:Text="Very Long Gun Name"
                     VerticalAlignment="Top"
                     Margin="3, 0"
-                    Foreground="{StaticResource Text}"
+                    Foreground="{DynamicResource Text}"
                     FontFamily="{StaticResource RobotoSlabBold}"
                     FontWeight="Bold"
                     TextWrapping="WrapWithOverflow"

@@ -19,7 +19,7 @@
                         Height="25"
                         Margin="5, 0"
                         CornerRadius="5"
-                        Background="{StaticResource BackgroundDark}"
+                        Background="{DynamicResource BackgroundDark}"
                         BorderThickness="0"
                         BorderBrush="Transparent"
                         Cursor="Hand">
@@ -31,12 +31,12 @@
                             Kind="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
                             Width="20"
                             Height="20"
-                            Foreground="{StaticResource TextDim}" />
+                            Foreground="{DynamicResource TextDim}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Background}" />
-                            <Setter TargetName="Content" Property="Foreground" Value="{StaticResource Text}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Background}" />
+                            <Setter TargetName="Content" Property="Foreground" Value="{DynamicResource Text}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

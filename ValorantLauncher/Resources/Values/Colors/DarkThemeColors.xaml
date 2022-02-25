@@ -37,4 +37,8 @@
     <SolidColorBrush x:Key="MatchDefeatBrush" Color="#EF5351" />
     <SolidColorBrush x:Key="MatchDrawBrush" Color="#EEEEEE" />
 
+    <!-- Color Themes -->
+    <SolidColorBrush x:Key="DarkColorTheme" Color="#FF0E0E0E" />
+    <SolidColorBrush x:Key="LightColorTheme" Color="#A1A1A1" />
+
 </ResourceDictionary>

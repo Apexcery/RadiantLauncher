@@ -30,18 +30,18 @@
                             Width="{StaticResource NavigationPanelButtonIconSize}"
                             Height="{StaticResource NavigationPanelButtonIconSize}"
                             FontSize="{StaticResource NavigationPanelButtonIconSize}"
-                            Foreground="{StaticResource TextDim}" />
+                            Foreground="{DynamicResource TextDim}" />
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Content" Property="TextBlock.Foreground" Value="{StaticResource Text}" />
+                            <Setter TargetName="Content" Property="TextBlock.Foreground" Value="{DynamicResource Text}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Content" Property="TextBlock.Foreground" Value="{StaticResource Text}" />
+                            <Setter TargetName="Content" Property="TextBlock.Foreground" Value="{DynamicResource Text}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Content" Property="TextBlock.Foreground" Value="{StaticResource Text}" />
+                            <Setter TargetName="Content" Property="TextBlock.Foreground" Value="{DynamicResource Text}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

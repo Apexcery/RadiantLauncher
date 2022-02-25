@@ -9,7 +9,7 @@
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
     mc:Ignorable="d" 
     Width="918" Height="412"
-    Background="{StaticResource BackgroundDark}"
+    Background="{DynamicResource BackgroundDark}"
     d:DataContext="{d:DesignInstance Type=viewModels:StoreViewModel}">
     <Grid
         VerticalAlignment="Stretch"

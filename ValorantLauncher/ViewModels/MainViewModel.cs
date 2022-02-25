@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
@@ -72,6 +73,18 @@ namespace ValorantLauncher.ViewModels
                     SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
                     break;
             }
+
+            var dict = new ResourceDictionary();
+            switch (appConfig.Settings.ColorThemeType)
+            {
+                case ColorThemeType.Dark:
+                    dict.Source = new("Resources/Values/Colors/DarkThemecolors.xaml", UriKind.Relative);
+                    break;
+                case ColorThemeType.Light:
+                    dict.Source = new("Resources/Values/Colors/LightThemecolors.xaml", UriKind.Relative);
+                    break;
+            }
+            Application.Current.Resources.MergedDictionaries.Add(dict);
         }
 
         private RelayCommand<object> ChangeView(object vm)

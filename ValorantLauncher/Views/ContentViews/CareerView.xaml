@@ -9,7 +9,7 @@
     xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     mc:Ignorable="d"
     d:DesignWidth="1280" d:DesignHeight="720"
-    Background="{StaticResource Background}"
+    Background="{DynamicResource Background}"
     d:DataContext="{d:DesignInstance Type=viewModels:CareerViewModel}">
     <Grid>
         <Grid.RowDefinitions>
@@ -33,7 +33,7 @@
                     TextDecorations="Underline"
                     HorizontalAlignment="Center"
                     Margin="0, 5, 0, 20"
-                    Foreground="{StaticResource Text}"
+                    Foreground="{DynamicResource Text}"
                     FontSize="{StaticResource LoginFormTextSize}"/>
                 <ItemsControl
                     VerticalAlignment="Stretch"
@@ -91,7 +91,7 @@
                     TextDecorations="Underline"
                     HorizontalAlignment="Center"
                     Margin="0, 5, 0, 20"
-                    Foreground="{StaticResource Text}"
+                    Foreground="{DynamicResource Text}"
                     FontSize="{StaticResource LoginFormTextSize}"/>
                 <liveCharts:CartesianChart
                     MinHeight="125"
@@ -107,12 +107,12 @@
                         <liveCharts:LineSeries
                             Title="RR"
                             Values="{Binding RankChartValues}"
-                            Stroke="{StaticResource ValorantWhite}"
-                            Fill="{StaticResource ValorantRedDark}"
+                            Stroke="{DynamicResource ValorantWhite}"
+                            Fill="{DynamicResource ValorantRedDark}"
                             DataLabels="True"
                             PointGeometrySize="10"
-                            PointForeground="{StaticResource ValorantRed}"
-                            Foreground="{StaticResource Text}"/>
+                            PointForeground="{DynamicResource ValorantRed}"
+                            Foreground="{DynamicResource Text}"/>
                     </liveCharts:CartesianChart.Series>
                     <liveCharts:CartesianChart.AxisX>
                         <liveCharts:Axis
@@ -120,7 +120,7 @@
                             ShowLabels="True"
                             Labels="{Binding RankChartLabels}"
                             FontSize="14"
-                            Foreground="{StaticResource Text}">
+                            Foreground="{DynamicResource Text}">
                             <liveCharts:Axis.Separator>
                                 <liveCharts:Separator StrokeThickness="0" Step="1" />
                             </liveCharts:Axis.Separator>
@@ -142,7 +142,7 @@
         </Grid>
 
         <!-- Separator -->
-        <Grid Grid.Row="1" Background="{StaticResource ValorantRedDark}" Width="1000" />
+        <Grid Grid.Row="1" Background="{DynamicResource ValorantRedDark}" Width="1000" />
 
         <!-- Match History -->
         <Grid
@@ -158,7 +158,7 @@
                 Margin="15, 15, 15, 10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Foreground="{StaticResource Text}"
+                Foreground="{DynamicResource Text}"
                 FontSize="{StaticResource PlayFormTitleTextSize}"
                 TextDecorations="Underline" />
 

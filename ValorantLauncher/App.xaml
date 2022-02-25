@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
 
                 <!-- Values -->
-                <ResourceDictionary Source="Resources/Values/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Values/Colors/DarkThemeColors.xaml" />
                 <ResourceDictionary Source="Resources/Values/Dimensions.xaml" />
                 <ResourceDictionary Source="Resources/Values/Fonts.xaml" />
                 <ResourceDictionary Source="Resources/Values/Strings.xaml" />

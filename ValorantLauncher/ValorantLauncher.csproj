@@ -204,4 +204,10 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Resources\Values\Colors\LightThemeColors.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

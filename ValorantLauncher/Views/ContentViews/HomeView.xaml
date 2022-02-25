@@ -10,7 +10,7 @@
     xmlns:utils="clr-namespace:ValorantLauncher.Utils"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
-    Background="{StaticResource BackgroundLight}"
+    Background="{DynamicResource BackgroundLight}"
     d:DataContext="{d:DesignInstance Type=viewModels:HomeViewModel}">
     <UserControl.Resources>
         <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
@@ -28,7 +28,8 @@
                 <Image
                     Stretch="UniformToFill"
                     HorizontalAlignment="Center"
-                    Source="{StaticResource HomeBackgroundImage}">
+                    Source="{StaticResource HomeBackgroundImage}"
+                    Margin="0, -15">
                     <Image.Effect>
                         <BlurEffect Radius="20" RenderingBias="Performance" />
                     </Image.Effect>
@@ -39,7 +40,7 @@
         <!-- Right Panel -->
         <Grid
             Grid.Column="1"
-            Background="{StaticResource ValorantWhite}">
+            Background="{DynamicResource ValorantWhite}">
 
             <!-- Login Form -->
             <Grid
@@ -81,7 +82,7 @@
                     <CheckBox
                         Style="{StaticResource MaterialDesignUserForegroundCheckBox}"
                         FontFamily="{StaticResource RobotoSlabBold}"
-                        Foreground="{StaticResource BackgroundDark}"
+                        Foreground="{DynamicResource BackgroundDark}"
                         IsChecked="{Binding Path=LoginAutomatically, Mode=TwoWay, FallbackValue=False}"
                         Checked="LoginAutomatically_OnChecked"
                         FontWeight="Bold"
@@ -97,7 +98,7 @@
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=TxtPassword}"
                         IsDefault="True"
-                        Background="{StaticResource ValorantRed}"
+                        Background="{DynamicResource ValorantRed}"
                         BorderBrush="Transparent"
                         BorderThickness="0"
                         materialDesign:ButtonAssist.CornerRadius="5" />
@@ -116,7 +117,7 @@
                     Width="50"
                     Height="50"
                     IsIndeterminate="True"
-                    Foreground="{StaticResource ValorantRed}" />
+                    Foreground="{DynamicResource ValorantRed}" />
             </Grid>
 
             <!-- Play Button Form -->
@@ -132,7 +133,7 @@
                     Width="150"
                     Height="50"
                     Command="{Binding PlayCommand}"
-                    Background="{StaticResource ValorantRed}"
+                    Background="{DynamicResource ValorantRed}"
                     BorderBrush="Transparent"
                     BorderThickness="0"
                     materialDesign:ButtonAssist.CornerRadius="5" />
@@ -157,7 +158,7 @@
                     Height="35"
                     Command="{Binding LogoutCommand}"
                     CommandParameter="{Binding ElementName=TxtPassword}"
-                    Background="{StaticResource ValorantRed}"
+                    Background="{DynamicResource ValorantRed}"
                     BorderBrush="Transparent"
                     BorderThickness="0"
                     VerticalAlignment="Bottom"

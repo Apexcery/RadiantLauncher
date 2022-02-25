@@ -38,6 +38,15 @@ namespace ValorantLauncher
                 }
             }
 
+            for (var i = Application.Current.Resources.MergedDictionaries.Count - 1; i > 0 ; i--)
+            {
+                var dict = Application.Current.Resources.MergedDictionaries[i];
+                if (dict.Source.ToString().Contains("DarkThemeColors.xaml"))
+                {
+                    Application.Current.Resources.MergedDictionaries.RemoveAt(i);
+                }
+            }
+
             services.AddSingleton(appConfig);
 
             services.AddSingleton<UserData>();

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using ValorantLauncher.Utils;
 
 namespace ValorantLauncher.Models
 {
@@ -29,13 +29,22 @@ namespace ValorantLauncher.Models
 
     public class Settings
     {
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(TolerantEnumConverter))]
         public SystemButtonsType SystemButtonsType { get; set; } = SystemButtonsType.Colored;
+        
+        [JsonConverter(typeof(TolerantEnumConverter))]
+        public ColorThemeType ColorThemeType { get; set; } = ColorThemeType.Dark;
     }
 
     public enum SystemButtonsType
     {
         Colored,
         Simple
+    }
+
+    public enum ColorThemeType
+    {
+        Dark,
+        Light
     }
 }
