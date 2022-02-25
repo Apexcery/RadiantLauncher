@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using ValorantLauncher.Constants;
 using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
 using ValorantLauncher.Services;
@@ -24,12 +25,13 @@ namespace ValorantLauncher
             var appConfig = new AppConfig();
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
-            var fileName = "config.json";
-            var folderPath = Path.Combine(localAppData, applicationName);
-            var filePath = Path.Combine(localAppData, applicationName, fileName);
+            var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
 
-            if (!string.IsNullOrEmpty(applicationName))
+            if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
             {
+                var folderPath = Path.Combine(localAppData, applicationName);
+                var filePath = Path.Combine(localAppData, applicationName, configFileName);
+
                 if (Directory.Exists(folderPath) && File.Exists(filePath))
                 {
                     var existingConfig = JsonConvert.DeserializeObject<AppConfig>(File.ReadAllText(filePath));

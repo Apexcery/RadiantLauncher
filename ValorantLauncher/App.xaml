@@ -24,8 +24,11 @@
                 
                 <!-- Styles -->
                 <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
-                <ResourceDictionary Source="Resources/Styles/SystemButton.xaml" />
                 <ResourceDictionary Source="Resources/Styles/LoginFormTextBox.xaml" />
+
+                <!-- Settings Styles -->
+                <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/ColoredSystemButton.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/SimpleSystemButton.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 

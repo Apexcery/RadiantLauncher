@@ -6,11 +6,129 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:ValorantLauncher.Views.ContentViews"
     xmlns:viewModels="clr-namespace:ValorantLauncher.ViewModels"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
     Background="{StaticResource BackgroundLight}"
     d:DataContext="{d:DesignInstance Type=viewModels:SettingsViewModel}">
     <Grid>
-        
+        <TabControl
+            Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+            Background="{StaticResource BackgroundLight}"
+            TabStripPlacement="Bottom">
+            <TabItem
+                Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <materialDesign:PackIcon
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="Paintbrush"
+                        Width="50"
+                        Height="50"
+                        Foreground="{StaticResource Text}" />
+                </TabItem.Header>
+                <TabItem.ToolTip>
+                    <ToolTip
+                        Content="Appearance"
+                        Placement="Top" />
+                </TabItem.ToolTip>
+
+                <Grid
+                    Background="{StaticResource Background}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15" /> <!-- Top Padding -->
+                        <RowDefinition Height="50" /> <!-- Tab Title -->
+                        <RowDefinition Height="15" /> <!-- Inner Padding -->
+                        <RowDefinition Height="*" /> <!-- Tab Content -->
+                    </Grid.RowDefinitions>
+
+                    <Grid
+                        Grid.Row="1">
+                        <TextBlock
+                            Text="Appearance"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="{StaticResource LoginFormTitleTextSize}"
+                            FontFamily="{StaticResource RobotoSlabBold}"
+                            Foreground="{StaticResource Text}"
+                            FontWeight="Bold"
+                            TextDecorations="Underline"/>
+                    </Grid>
+                        
+                    <StackPanel
+                        Orientation="Vertical"
+                        Grid.Row="3"
+                        Margin="15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="System Buttons"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="{StaticResource LoginFormTextSize}"
+                                FontFamily="{StaticResource RobotoSlabRegular}"
+                                Foreground="{StaticResource Text}"
+                                TextDecorations="Underline" />
+                            <StackPanel
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                Background="{StaticResource Background}"
+                                HorizontalAlignment="Stretch">
+                                <RadioButton
+                                    x:Name="ColoredOption"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Cursor="Hand"
+                                    Width="150"
+                                    Height="75"
+                                    BorderBrush="Transparent"
+                                    Padding="0"
+                                    Margin="15, 5"
+                                    GroupName="SystemButtons"
+                                    Tag="Colored"
+                                    Command="{Binding SystemButtonsCommand}"
+                                    CommandParameter="{Binding ElementName=ColoredOption, Path=Tag}">
+                                    <Image
+                                        Source="{StaticResource ColoredSystemButtonsImage}"
+                                        HorizontalAlignment="Center"
+                                        Width="125"
+                                        Height="50">
+                                    </Image>
+                                </RadioButton>
+                                <RadioButton
+                                    x:Name="SimpleOption"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Cursor="Hand"
+                                    Width="150"
+                                    Height="75"
+                                    BorderBrush="Transparent"
+                                    Padding="0"
+                                    Margin="15, 5"
+                                    GroupName="SystemButtons"
+                                    Tag="Simple"
+                                    Command="{Binding SystemButtonsCommand}"
+                                    CommandParameter="{Binding ElementName=SimpleOption, Path=Tag}">
+                                    <Image
+                                        Source="{StaticResource SimpleSystemButtonsImage}"
+                                        HorizontalAlignment="Center"
+                                        Width="125"
+                                        Height="50">
+                                    </Image>
+                                </RadioButton>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Separator -->
+                        <Grid Background="{StaticResource ValorantRedDark}" Width="1200" Height="2" Margin="15" />
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

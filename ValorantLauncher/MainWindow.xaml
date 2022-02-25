@@ -142,9 +142,11 @@
                     Margin="10, 0">
 
                         <Button
-                            Style="{StaticResource SystemButton}"
+                            Style="{Binding SystemButtonsStyle}"
+                            d:Style="{StaticResource SimpleSystemButton}"
                             Background="{StaticResource MinimizeButtonBackground}"
                             BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
+                            Tag="WindowMinimize"
                             Command="{Binding MinimizeCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                             <Button.ToolTip>
@@ -155,9 +157,11 @@
                             </Button.ToolTip>
                         </Button>
                         <Button
-                            Style="{StaticResource SystemButton}"
+                            Style="{Binding SystemButtonsStyle}"
+                            d:Style="{StaticResource SimpleSystemButton}"
                             Background="{StaticResource CloseButtonBackground}"
                             BorderBrush="{StaticResource CloseButtonBackgroundHover}"
+                            Tag="WindowClose"
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                             <Button.ToolTip>

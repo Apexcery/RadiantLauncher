@@ -1,4 +1,7 @@
-﻿using ValorantLauncher.Interfaces;
+﻿using System.ComponentModel;
+using System.Windows;
+using ValorantLauncher.Interfaces;
+using ValorantLauncher.Models;
 using ValorantLauncher.Utils;
 
 namespace ValorantLauncher.ViewModels
@@ -36,7 +39,18 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
-        public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel, SettingsViewModel settingsViewModel)
+        private Style _systemButtonsStyle;
+        public Style SystemButtonsStyle
+        {
+            get => _systemButtonsStyle;
+            set
+            {
+                _systemButtonsStyle = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public MainViewModel(AppConfig appConfig, HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel, SettingsViewModel settingsViewModel)
         {
             this.MinimizeCommand = new(this.MinimizeApplication);
             this.CloseCommand = new(this.CloseApplication);
@@ -48,6 +62,16 @@ namespace ValorantLauncher.ViewModels
             CareerViewCommand = ChangeView(careerViewModel);
 
             SettingsViewCommand = ChangeView(settingsViewModel);
+
+            switch (appConfig.SystemButtonsType)
+            {
+                case SystemButtonsType.Colored:
+                    SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
+                    break;
+                case SystemButtonsType.Simple:
+                    SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
+                    break;
+            }
         }
 
         private RelayCommand<object> ChangeView(object vm)

@@ -52,6 +52,8 @@
     <None Remove="Resources\Images\Rank Images\Silver II.png" />
     <None Remove="Resources\Images\Rank Images\Silver III.png" />
     <None Remove="Resources\Images\Rank Images\Unranked.png" />
+    <None Remove="Resources\Images\Settings Images\System Buttons\Colored.png" />
+    <None Remove="Resources\Images\Settings Images\System Buttons\Simple.png" />
     <None Remove="Resources\Images\ValorantLogo.png" />
   </ItemGroup>
 
@@ -122,6 +124,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Agent Images\Icons\Yoru.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\Settings Images\System Buttons\Colored.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\Settings Images\System Buttons\Simple.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 

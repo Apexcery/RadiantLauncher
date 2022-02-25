@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
+using ValorantLauncher.Constants;
 using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
 using ValorantLauncher.Models.Client;
@@ -174,15 +175,15 @@ namespace ValorantLauncher.ViewModels
             // Clear saved login details
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
+            var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
 
-            if (!string.IsNullOrEmpty(applicationName))
+            if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
             {
                 var folderPath = Path.Combine(localAppData, applicationName);
                 if (!Directory.Exists(folderPath))
                     Directory.CreateDirectory(folderPath);
-
-                var fileName = "config.json";
-                var filePath = Path.Combine(folderPath, fileName);
+                
+                var filePath = Path.Combine(folderPath, configFileName);
 
                 _appConfig.LoginAutomatically = LoginAutomatically;
                 _appConfig.LoginDetails.Username = "";
@@ -218,15 +219,15 @@ namespace ValorantLauncher.ViewModels
                 // Save login details
                 var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
+                var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
 
-                if (!string.IsNullOrEmpty(applicationName))
+                if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
                 {
                     var folderPath = Path.Combine(localAppData, applicationName);
                     if (!Directory.Exists(folderPath))
                         Directory.CreateDirectory(folderPath);
-
-                    var fileName = "config.json";
-                    var filePath = Path.Combine(folderPath, fileName);
+                    
+                    var filePath = Path.Combine(folderPath, configFileName);
 
                     _appConfig.LoginAutomatically = LoginAutomatically;
                     _appConfig.LoginDetails.Username = LoginAutomatically ? username : "";
