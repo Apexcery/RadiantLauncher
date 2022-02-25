@@ -11,13 +11,11 @@
              d:DataContext="{d:DesignInstance {x:Type local:MatchHistoryItem}}"
              Margin="5"
              MinHeight="100"
-             MaxHeight="100">
+             MaxHeight="100"
+             Background="{StaticResource BackgroundDark}">
     <utils:ObservableUserControl.Resources>
         <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
     </utils:ObservableUserControl.Resources>
-    <utils:ObservableUserControl.Background>
-        <StaticResource ResourceKey="Background"/>
-    </utils:ObservableUserControl.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="125px" /> <!-- Image -->

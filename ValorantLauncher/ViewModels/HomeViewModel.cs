@@ -16,6 +16,7 @@ namespace ValorantLauncher.ViewModels
     {
         private readonly IAuthService _authService;
         private UserData _userData;
+        private readonly AppConfig _appConfig;
 
         public RelayCommand<object> LoginCommand { get; }
         public RelayCommand<object> LogoutCommand { get; }
@@ -79,13 +80,25 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
-        public HomeViewModel(IAuthService authService, UserData userData)
+        private bool _loginAutomatically = false;
+        public bool LoginAutomatically
+        {
+            get => _loginAutomatically;
+            set
+            {
+                _loginAutomatically = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public HomeViewModel(IAuthService authService, UserData userData, AppConfig appConfig)
         {
             _authService = authService;
             _userData = userData;
+            _appConfig = appConfig;
 
-            LoginCommand = new RelayCommand<object>(async o => await Login(o));
-            LogoutCommand = new RelayCommand<object>(Logout);
+            LoginCommand = new RelayCommand<object>(async o => await LoginWithWindowData(o));
+            LogoutCommand = new RelayCommand<object>(async o => await Logout(o));
             PlayCommand = new RelayCommand<object>(async _ => await Play());
         }
 
@@ -144,7 +157,7 @@ namespace ValorantLauncher.ViewModels
             return true;
         }
 
-        private void Logout(object obj)
+        private async Task Logout(object obj)
         {
             var passwordBox = (PasswordBox)obj;
             _userData = _userData.Clear();
@@ -155,16 +168,85 @@ namespace ValorantLauncher.ViewModels
             PasswordBoxHelper.SetPassword(passwordBox, "");
             PlayFormVisible = false;
             LogInFormVisible = true;
+
+            // Clear saved login details
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
+
+            if (!string.IsNullOrEmpty(applicationName))
+            {
+                var folderPath = Path.Combine(localAppData, applicationName);
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                var fileName = "config.json";
+                var filePath = Path.Combine(folderPath, fileName);
+
+                _appConfig.LoginAutomatically = LoginAutomatically;
+                _appConfig.LoginDetails.Username = "";
+                _appConfig.LoginDetails.Password = "";
+
+                var appConfigAsText = JsonConvert.SerializeObject(_appConfig, Formatting.Indented);
+                await File.WriteAllTextAsync(filePath, appConfigAsText);
+            }
         }
 
-        private async Task Login(object obj)
+        public async Task LoginWithSavedData()
+        {
+            // Login automatically
+            if (_appConfig.LoginAutomatically && _appConfig.LoginDetails.IsValid())
+            {
+                await Login(_appConfig.LoginDetails.Username, _appConfig.LoginDetails.Password);
+            }
+        }
+
+        private async Task LoginWithWindowData(object obj)
         {
             var passwordBox = (PasswordBox)obj;
+            var username = UsernameText;
+            var password = passwordBox.Password;
+
+            var loginSuccess = await Login(username, password);
+            if (loginSuccess)
+            {
+                // Save login details
+                var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
+
+                if (!string.IsNullOrEmpty(applicationName))
+                {
+                    var folderPath = Path.Combine(localAppData, applicationName);
+                    if (!Directory.Exists(folderPath))
+                        Directory.CreateDirectory(folderPath);
+
+                    var fileName = "config.json";
+                    var filePath = Path.Combine(folderPath, fileName);
+
+                    _appConfig.LoginAutomatically = LoginAutomatically;
+                    _appConfig.LoginDetails.Username = LoginAutomatically ? username : "";
+                    _appConfig.LoginDetails.Password = LoginAutomatically ? password : "";
+
+                    var appConfigAsText = JsonConvert.SerializeObject(_appConfig, Formatting.Indented);
+                    await File.WriteAllTextAsync(filePath, appConfigAsText);
+                }
+            }
+        }
+
+        private async Task<bool> Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Invalid Username or Password.");
+                return false;
+            }
+                
             LoadingVisible = true;
             LogInFormVisible = false;
-            var logInSuccess = await _authService.Login(UsernameText, passwordBox.Password);
+
+            var logInSuccess = await _authService.Login(username, password);
             if (logInSuccess)
             {
+                // Change partial view
                 GameNameText = _userData.RiotUserData.AccountInfo.GameName;
                 PlayFormVisible = true;
             }
@@ -172,7 +254,10 @@ namespace ValorantLauncher.ViewModels
             {
                 LogInFormVisible = true;
             }
+
             LoadingVisible = false;
+
+            return logInSuccess;
         }
     }
 }

@@ -9,7 +9,7 @@
     xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     mc:Ignorable="d"
     d:DesignWidth="1280" d:DesignHeight="720"
-    Background="{StaticResource BackgroundLight}"
+    Background="{StaticResource Background}"
     d:DataContext="{d:DesignInstance Type=viewModels:CareerViewModel}">
     <Grid>
         <Grid.RowDefinitions>

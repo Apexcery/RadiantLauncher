@@ -31,7 +31,7 @@
     <Color x:Key="MatchVictoryColor">#16E5b4</Color>
     <Color x:Key="MatchDefeatColor">#EF5351</Color>
     <Color x:Key="MatchDrawColor">#EEEEEE</Color>
-    <Color x:Key="MatchDarkColor">#FF191919</Color>
+    <Color x:Key="MatchDarkColor">#FF0E0E0E</Color>
 
     <SolidColorBrush x:Key="MatchVictoryBrush" Color="#16E5b4" />
     <SolidColorBrush x:Key="MatchDefeatBrush" Color="#EF5351" />
