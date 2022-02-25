@@ -26,27 +26,23 @@ namespace ValorantLauncher.ViewModels
 
         private async Task ChangeSystemButtons(string value)
         {
-            SystemButtonsType systemButtonsType;
-            if (Enum.TryParse(value, true, out systemButtonsType))
+            if (Enum.TryParse(value, true, out SystemButtonsType systemButtonsType) && Enum.IsDefined(typeof(SystemButtonsType), systemButtonsType))
             {
-                if (Enum.IsDefined(typeof(SystemButtonsType), systemButtonsType))
+                var mainWindow = Application.Current.MainWindow;
+                var mainVm = (MainViewModel)mainWindow?.DataContext;
+                if (mainVm != null)
                 {
-                    var mainWindow = Application.Current.MainWindow;
-                    var mainVm = (MainViewModel)mainWindow?.DataContext;
-                    if (mainVm != null)
+                    switch (systemButtonsType)
                     {
-                        switch (systemButtonsType)
-                        {
-                            case SystemButtonsType.Colored:
-                                mainVm.SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
-                                break;
-                            case SystemButtonsType.Simple:
-                                mainVm.SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
-                                break;
-                        }
-                        _appConfig.SystemButtonsType = systemButtonsType;
-                        await SaveConfig();
+                        case SystemButtonsType.Colored:
+                            mainVm.SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
+                            break;
+                        case SystemButtonsType.Simple:
+                            mainVm.SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
+                            break;
                     }
+                    _appConfig.SystemButtonsType = systemButtonsType;
+                    await SaveConfig();
                 }
             }
         }
