@@ -15,7 +15,13 @@ namespace ValorantLauncher.Views.ContentViews
 
         private async void OnLoaded(object sender, EventArgs e)
         {
-            await ((CareerViewModel)DataContext).GetRankData();
+            var vm = (CareerViewModel)DataContext;
+            if (vm.UserData.RiotUserData == null)
+            {
+                vm.ClearCareerData();
+                return;
+            }
+            await vm.GetRankData();
         }
     }
 }

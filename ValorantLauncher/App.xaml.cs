@@ -18,7 +18,7 @@ namespace ValorantLauncher
             base.OnStartup(e);
 
             var services = new ServiceCollection();
-
+            
             services.AddSingleton<UserData>();
 
             services.AddSingleton<MainWindow>();

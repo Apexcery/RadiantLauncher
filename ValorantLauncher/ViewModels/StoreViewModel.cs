@@ -18,7 +18,7 @@ namespace ValorantLauncher.ViewModels
 {
     public class StoreViewModel : Observable
     {
-        private readonly UserData _userData;
+        public readonly UserData UserData;
         private readonly IStoreService _storeService;
 
         private ImageSource _bundleImageSource;
@@ -96,10 +96,10 @@ namespace ValorantLauncher.ViewModels
 
         public StoreViewModel(UserData userData, IStoreService storeService)
         {
-            _userData = userData;
+            UserData = userData;
             _storeService = storeService;
 
-            if (_userData.RiotUserData == null)
+            if (UserData.RiotUserData == null)
                 ClearStoreData();
 
             ShowNightMarketCommand = ShowNightMarket();
@@ -116,12 +116,16 @@ namespace ValorantLauncher.ViewModels
         public void ClearStoreData()
         {
             RotatingStoreItems.Clear();
+            NightMarketItems.Clear();
+            IsNightMarketAvailable = false;
             BundleImageSource = null;
+            BundleName = null;
+            BundleCost = null;
         }
 
         public async Task GetStoreData()
         {
-            if (_userData.RiotUserData?.Puuid == null || _userData.RiotUrl?.PdUrl == null)
+            if (UserData.RiotUserData?.Puuid == null || UserData.RiotUrl?.PdUrl == null)
             {
                 MessageBox.Show("Log in to your account before trying to view the store.");
                 return;

@@ -100,8 +100,11 @@ namespace ValorantLauncher.Services
                 return false;
             }
 
-            _userData.TokenData.AccessToken = accessToken;
-            _userData.TokenData.IdToken = idToken;
+            _userData.TokenData = new UserData.TokenDataObject
+            {
+                AccessToken = accessToken,
+                IdToken = idToken
+            };
 
             _userData.Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
 
@@ -176,28 +179,46 @@ namespace ValorantLauncher.Services
             switch (liveRegion)
             {
                 case "na":
-                    _userData.RiotUrl.GlzUrl = "https://glz-na-1.na.a.pvp.net";
-                    _userData.RiotUrl.PdUrl = "https://pd.na.a.pvp.net";
+                    _userData.RiotUrl = new()
+                    {
+                        GlzUrl = "https://glz-na-1.na.a.pvp.net",
+                        PdUrl = "https://pd.na.a.pvp.net"
+                    };
                     return RiotRegionEnum.NA;
                 case "eu":
-                    _userData.RiotUrl.GlzUrl = "https://glz-eu-1.eu.a.pvp.net";
-                    _userData.RiotUrl.PdUrl = "https://pd.eu.a.pvp.net";
+                    _userData.RiotUrl = new()
+                    {
+                        GlzUrl = "https://glz-eu-1.eu.a.pvp.net",
+                        PdUrl = "https://pd.eu.a.pvp.net"
+                    };
                     return RiotRegionEnum.EU;
                 case "kr":
-                    _userData.RiotUrl.GlzUrl = "https://glz-kr-1.kr.a.pvp.net";
-                    _userData.RiotUrl.PdUrl = "https://pd.kr.a.pvp.net";
+                    _userData.RiotUrl = new()
+                    {
+                        GlzUrl = "https://glz-kr-1.kr.a.pvp.net",
+                        PdUrl = "https://pd.kr.a.pvp.net"
+                    };
                     return RiotRegionEnum.KR;
                 case "latam":
-                    _userData.RiotUrl.GlzUrl = "https://glz-latam-1.na.a.pvp.net";
-                    _userData.RiotUrl.PdUrl = "https://pd.na.a.pvp.net";
+                    _userData.RiotUrl = new()
+                    {
+                        GlzUrl = "https://glz-latam-1.na.a.pvp.net",
+                        PdUrl = "https://pd.na.a.pvp.net"
+                    };
                     return RiotRegionEnum.LATAM;
                 case "br":
-                    _userData.RiotUrl.GlzUrl = "https://glz-br-1.na.a.pvp.net";
-                    _userData.RiotUrl.PdUrl = "https://pd.na.a.pvp.net";
+                    _userData.RiotUrl = new()
+                    {
+                        GlzUrl = "https://glz-br-1.na.a.pvp.net",
+                        PdUrl = "https://pd.na.a.pvp.net"
+                    };
                     return RiotRegionEnum.BR;
                 case "ap":
-                    _userData.RiotUrl.GlzUrl = "https://glz-ap-1.ap.a.pvp.net";
-                    _userData.RiotUrl.PdUrl = "https://pd.ap.a.pvp.net";
+                    _userData.RiotUrl = new()
+                    {
+                        GlzUrl = "https://glz-ap-1.ap.a.pvp.net",
+                        PdUrl = "https://pd.ap.a.pvp.net"
+                    };
                     return RiotRegionEnum.AP;
             }
 

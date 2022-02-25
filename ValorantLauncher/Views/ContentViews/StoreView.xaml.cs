@@ -15,8 +15,14 @@ namespace ValorantLauncher.Views.ContentViews
 
         private async void OnLoaded(object sender, EventArgs e)
         {
-            if (ItemsControl.Items.Count <= 0)
-                await ((StoreViewModel)DataContext).GetStoreData();
+            var vm = (StoreViewModel)DataContext;
+            if (vm.UserData.RiotUserData == null)
+            {
+                vm.ClearStoreData();
+                return;
+            }
+            // if (ItemsControl.Items.Count <= 0)
+            await vm.GetStoreData();
         }
     }
 }

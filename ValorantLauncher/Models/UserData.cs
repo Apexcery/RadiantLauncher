@@ -7,16 +7,20 @@ namespace ValorantLauncher.Models
 {
     public class UserData
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+        
         public HttpClientHandler ClientHandler;
 
-        public TokenDataObject TokenData { get; set; } = new();
-        public RiotUserDataObject RiotUserData { get; set; } = new();
-        public RiotRegionEnum RiotRegion { get; set; }
-        public RiotUrlObject RiotUrl { get; set; } = new();
 
-        public UserData()
+        public TokenDataObject TokenData { get; set; }
+        public RiotUserDataObject RiotUserData { get; set; }
+        public RiotRegionEnum RiotRegion { get; set; }
+        public RiotUrlObject RiotUrl { get; set; }
+
+        public UserData(IHttpClientFactory httpClientFactory)
         {
-            ClientHandler = new HttpClientHandler
+            _httpClientFactory = httpClientFactory;
+            ClientHandler = new()
             {
                 UseCookies = true,
                 CookieContainer = new CookieContainer()
@@ -117,10 +121,12 @@ namespace ValorantLauncher.Models
 
         public UserData Clear()
         {
-            this.TokenData = new();
-            this.RiotUserData = new();
-            this.RiotUrl = new();
-            this.ClientHandler.CookieContainer = new CookieContainer();
+            this.TokenData = null;
+            this.RiotUserData = null;
+            this.RiotUrl = null;
+            this.ClientHandler.CookieContainer = new();
+
+            this.Client = _httpClientFactory.CreateClient("ValClient");
 
             return this;
         }

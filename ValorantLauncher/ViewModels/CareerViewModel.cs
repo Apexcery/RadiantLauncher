@@ -18,7 +18,7 @@ namespace ValorantLauncher.ViewModels
     public class CareerViewModel : Observable
     {
         private readonly ICareerService _careerService;
-        private readonly UserData _userData;
+        public readonly UserData UserData;
 
         private ObservableCollection<Image> _rankHistoryItems = new();
         public ObservableCollection<Image> RankHistoryItems
@@ -86,7 +86,20 @@ namespace ValorantLauncher.ViewModels
         public CareerViewModel(ICareerService careerService, UserData userData)
         {
             _careerService = careerService;
-            _userData = userData;
+            UserData = userData;
+
+            if (UserData.RiotUserData == null)
+                ClearCareerData();
+        }
+
+        public void ClearCareerData()
+        {
+            RankHistoryItems.Clear();
+            RankHistoryName.Clear();
+            RankHistoryRank.Clear();
+            MatchHistoryItems.Clear();
+            RankChartValues.Clear();
+            RankChartLabels.Clear();
         }
 
         public async Task GetRankData()
@@ -183,7 +196,7 @@ namespace ValorantLauncher.ViewModels
             foreach (var matchData in matchDataResults)
             {
                 var matchingRankUpdate = playerRankUpdates.Matches.FirstOrDefault(x => x.MatchID.Equals(matchData.MatchInfo.MatchId));
-                var matchHistoryItem = new MatchHistoryItem(matchData, matchingRankUpdate, _userData);
+                var matchHistoryItem = new MatchHistoryItem(matchData, matchingRankUpdate, UserData);
                 MatchHistoryItems.Add(matchHistoryItem);
             }
         }

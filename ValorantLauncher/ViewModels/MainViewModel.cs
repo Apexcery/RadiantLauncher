@@ -25,8 +25,8 @@ namespace ValorantLauncher.ViewModels
 
         public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel)
         {
-            this.MinimizeCommand = new RelayCommand<IMinimizable>(this.MinimizeApplication);
-            this.CloseCommand = new RelayCommand<ICloseable>(this.CloseApplication);
+            this.MinimizeCommand = new(this.MinimizeApplication);
+            this.CloseCommand = new(this.CloseApplication);
 
             CurrentView = homeViewModel;
 
@@ -37,7 +37,7 @@ namespace ValorantLauncher.ViewModels
 
         private RelayCommand<object> ChangeView(object vm)
         {
-            return new RelayCommand<object>(_ => CurrentView = vm);
+            return new(_ => CurrentView = vm);
         }
 
         private void MinimizeApplication(IMinimizable window)

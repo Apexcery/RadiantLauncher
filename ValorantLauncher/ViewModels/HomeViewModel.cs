@@ -149,11 +149,11 @@ namespace ValorantLauncher.ViewModels
             var passwordBox = (PasswordBox)obj;
             _userData = _userData.Clear();
             GameNameText = "";
-            PlayFormVisible = false;
             UsernameText = "";
             passwordBox.Clear();
             passwordBox.SecurePassword.Clear();
             PasswordBoxHelper.SetPassword(passwordBox, "");
+            PlayFormVisible = false;
             LogInFormVisible = true;
         }
 

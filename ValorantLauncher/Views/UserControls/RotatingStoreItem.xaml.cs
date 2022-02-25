@@ -32,10 +32,12 @@ namespace ValorantLauncher.Views.UserControls
             var skinPrice = await _storeService.GetSkinPrice(_itemId);
 
             var uri = skinInfo.DisplayIcon;
+            if (skinInfo.Levels.Any())
+                uri = skinInfo.Levels.Last().DisplayIcon;
             if (string.IsNullOrEmpty(uri) && skinInfo.Chromas.Any())
-            {
                 uri = skinInfo.Chromas.Last().DisplayIcon;
-            }
+            if (string.IsNullOrEmpty(uri))
+                uri = skinInfo.DisplayIcon;
 
             if (!string.IsNullOrEmpty(uri))
             {
