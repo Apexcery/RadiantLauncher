@@ -23,6 +23,8 @@ namespace ValorantLauncher.ViewModels
         public RelayCommand<object> StoreViewCommand { get; }
         public RelayCommand<object> CareerViewCommand { get; }
 
+        public RelayCommand<object> SettingsViewCommand { get; }
+
         private bool _isLoggedIn;
         public bool IsLoggedIn
         {
@@ -34,7 +36,7 @@ namespace ValorantLauncher.ViewModels
             }
         }
 
-        public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel)
+        public MainViewModel(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel, SettingsViewModel settingsViewModel)
         {
             this.MinimizeCommand = new(this.MinimizeApplication);
             this.CloseCommand = new(this.CloseApplication);
@@ -44,6 +46,8 @@ namespace ValorantLauncher.ViewModels
             HomeViewCommand = ChangeView(homeViewModel);
             StoreViewCommand = ChangeView(storeViewModel);
             CareerViewCommand = ChangeView(careerViewModel);
+
+            SettingsViewCommand = ChangeView(settingsViewModel);
         }
 
         private RelayCommand<object> ChangeView(object vm)

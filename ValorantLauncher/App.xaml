@@ -41,6 +41,10 @@
                 <contentViews:CareerView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+                <contentViews:SettingsView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

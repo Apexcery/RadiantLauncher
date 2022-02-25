@@ -43,12 +43,16 @@ namespace ValorantLauncher
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainViewModel>();
+
             services.AddSingleton<HomeView>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<StoreView>();
             services.AddSingleton<StoreViewModel>();
             services.AddSingleton<CareerView>();
             services.AddSingleton<CareerViewModel>();
+
+            services.AddSingleton<SettingsView>();
+            services.AddSingleton<SettingsViewModel>();
 
             services.AddHttpClient("ValClient").ConfigureHttpClient(client =>
             {
