@@ -41,7 +41,7 @@ namespace ValorantLauncher.ViewModels
                             mainVm.SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
                             break;
                     }
-                    _appConfig.SystemButtonsType = systemButtonsType;
+                    _appConfig.Settings.SystemButtonsType = systemButtonsType;
                     await SaveConfig();
                 }
             }

@@ -83,6 +83,7 @@
                                 <RadioButton
                                     x:Name="ColoredOption"
                                     Style="{StaticResource MaterialDesignFlatButton}"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
                                     Cursor="Hand"
                                     Width="150"
                                     Height="75"
@@ -93,16 +94,37 @@
                                     Tag="Colored"
                                     Command="{Binding SystemButtonsCommand}"
                                     CommandParameter="{Binding ElementName=ColoredOption, Path=Tag}">
-                                    <Image
-                                        Source="{StaticResource ColoredSystemButtonsImage}"
-                                        HorizontalAlignment="Center"
+                                    <Border
+                                        Background="{StaticResource BackgroundDark}"
                                         Width="125"
-                                        Height="50">
-                                    </Image>
+                                        Height="50"
+                                        CornerRadius="10">
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Center">
+                                            <Button
+                                                Style="{StaticResource ColoredSystemButton}"
+                                                Background="{StaticResource MinimizeButtonBackground}"
+                                                BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
+                                                IsHitTestVisible="False"
+                                                IsEnabled="False"
+                                                Margin="10, 0">
+                                            </Button>
+                                            <Button
+                                                Style="{StaticResource ColoredSystemButton}"
+                                                Background="{StaticResource CloseButtonBackground}"
+                                                BorderBrush="{StaticResource CloseButtonBackgroundHover}"
+                                                IsHitTestVisible="False"
+                                                IsEnabled="False"
+                                                Margin="10, 0">
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
                                 </RadioButton>
                                 <RadioButton
                                     x:Name="SimpleOption"
                                     Style="{StaticResource MaterialDesignFlatButton}"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
                                     Cursor="Hand"
                                     Width="150"
                                     Height="75"
@@ -113,12 +135,30 @@
                                     Tag="Simple"
                                     Command="{Binding SystemButtonsCommand}"
                                     CommandParameter="{Binding ElementName=SimpleOption, Path=Tag}">
-                                    <Image
-                                        Source="{StaticResource SimpleSystemButtonsImage}"
-                                        HorizontalAlignment="Center"
+                                    <Border
+                                        Background="{StaticResource BackgroundDark}"
                                         Width="125"
-                                        Height="50">
-                                    </Image>
+                                        Height="50"
+                                        CornerRadius="10">
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Center">
+                                            <Button
+                                                Style="{StaticResource SimpleSystemButton}"
+                                                Tag="Minus"
+                                                IsHitTestVisible="False"
+                                                IsEnabled="False"
+                                                Margin="10, 0">
+                                            </Button>
+                                            <Button
+                                                Style="{StaticResource SimpleSystemButton}"
+                                                Tag="Close"
+                                                IsHitTestVisible="False"
+                                                IsEnabled="False"
+                                                Margin="10, 0">
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
                                 </RadioButton>
                             </StackPanel>
                         </Grid>

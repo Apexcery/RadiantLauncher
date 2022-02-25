@@ -63,7 +63,7 @@ namespace ValorantLauncher.ViewModels
 
             SettingsViewCommand = ChangeView(settingsViewModel);
 
-            switch (appConfig.SystemButtonsType)
+            switch (appConfig.Settings.SystemButtonsType)
             {
                 case SystemButtonsType.Colored:
                     SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;

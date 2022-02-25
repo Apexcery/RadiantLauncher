@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using ValorantLauncher.Constants;
 using ValorantLauncher.Interfaces;
 using ValorantLauncher.Models;
 using ValorantLauncher.Services;

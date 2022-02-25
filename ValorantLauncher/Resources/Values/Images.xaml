@@ -53,10 +53,5 @@
     <BitmapImage x:Key="SovaImage" UriSource="../Images/Agent Images/Icons/Sova.png" />
     <BitmapImage x:Key="ViperImage" UriSource="../Images/Agent Images/Icons/Viper.png" />
     <BitmapImage x:Key="YoruImage" UriSource="../Images/Agent Images/Icons/Yoru.png" />
-
-    <!-- Settings Images -->
-        <!-- System Buttons -->
-        <BitmapImage x:Key="ColoredSystemButtonsImage" UriSource="../Images/Settings Images/System Buttons/Colored.png" />
-        <BitmapImage x:Key="SimpleSystemButtonsImage" UriSource="../Images/Settings Images/System Buttons/Simple.png" />
     
 </ResourceDictionary>

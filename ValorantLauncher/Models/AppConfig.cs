@@ -9,8 +9,7 @@ namespace ValorantLauncher.Models
 
         public LoginDetails LoginDetails { get; set; } = new();
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public SystemButtonsType SystemButtonsType { get; set; } = SystemButtonsType.Colored;
+        public Settings Settings { get; set; } = new();
     }
 
     public class LoginDetails
@@ -26,6 +25,12 @@ namespace ValorantLauncher.Models
 
             return false;
         }
+    }
+
+    public class Settings
+    {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public SystemButtonsType SystemButtonsType { get; set; } = SystemButtonsType.Colored;
     }
 
     public enum SystemButtonsType
