@@ -21,7 +21,7 @@ namespace ValorantLauncher.Views.ContentViews
                 vm.ClearStoreData();
                 return;
             }
-            // if (ItemsControl.Items.Count <= 0)
+
             await vm.GetStoreData();
         }
     }

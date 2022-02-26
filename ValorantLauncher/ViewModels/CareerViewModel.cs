@@ -87,9 +87,6 @@ namespace ValorantLauncher.ViewModels
         {
             _careerService = careerService;
             UserData = userData;
-
-            if (UserData.RiotUserData == null)
-                ClearCareerData();
         }
 
         public void ClearCareerData()
@@ -104,6 +101,8 @@ namespace ValorantLauncher.ViewModels
 
         public async Task GetRankData()
         {
+            ClearCareerData();
+
             if (RankHistoryItems.Any())
                 return;
 

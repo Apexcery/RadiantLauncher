@@ -18,14 +18,13 @@ namespace ValorantLauncher.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly UserData _userData;
+        private UserData _userData;
 
         private readonly Dictionary<string, Uri> _apiUris;
 
-        public AuthService(UserData userData, IHttpClientFactory httpClientFactory)
+        public AuthService(UserData userData)
         {
             _userData = userData;
-            _userData.Client = httpClientFactory.CreateClient("ValClient");
             _apiUris = ApiURIs.URIs;
         }
 
@@ -37,7 +36,7 @@ namespace ValorantLauncher.Services
                 return false;
             }
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls11;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls11;
 
             var authInitCookieData = new AuthInitCookieData();
             var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"));
@@ -47,11 +46,9 @@ namespace ValorantLauncher.Services
                 AddClientCookies(initResponse.Headers.GetValues("Set-Cookie"));
             }
 
-            AuthResponse authResponse = null;
-            
-            authResponse = await initResponse.Content.ReadAsJsonAsync<AuthResponse>();
+            var authResponse = await initResponse.Content.ReadAsJsonAsync<AuthResponse>();
 
-            if (authResponse.Type == "auth")
+            if (authResponse.Type.Equals("auth", StringComparison.OrdinalIgnoreCase) || authResponse.Type.Equals("response", StringComparison.OrdinalIgnoreCase))
             {
                 var authData = new AuthData
                 {
@@ -73,7 +70,7 @@ namespace ValorantLauncher.Services
 
             if (!string.IsNullOrEmpty(authResponse.Error))
             {
-                MessageBox.Show("Failed to log in."); //TODO: Better error popup.
+                MessageBox.Show($"Failed to log in:\n{authResponse.Error}"); //TODO: Better error popup.
                 return false;
             }
 
@@ -96,7 +93,7 @@ namespace ValorantLauncher.Services
             var idToken = paramaters["id_token"];
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(idToken))
             {
-                MessageBox.Show("Failed to log in."); //TODO: Better error popup.
+                MessageBox.Show("Failed to log in:\nAccess or ID Token was invalid."); //TODO: Better error popup.
                 return false;
             }
 
@@ -111,7 +108,7 @@ namespace ValorantLauncher.Services
             var entitlementToken = await GetEntitlementToken();
             if (string.IsNullOrEmpty(entitlementToken))
             {
-                MessageBox.Show("Failed to log in."); //TODO: Better error popup.
+                MessageBox.Show("Failed to log in:\nEntitlement Token was invalid."); //TODO: Better error popup.
                 return false;
             }
             _userData.TokenData.EntitlementToken = entitlementToken;
@@ -122,7 +119,7 @@ namespace ValorantLauncher.Services
             var region = await GetUserRegion();
             if (region == null)
             {
-                MessageBox.Show("Failed to log in."); //TODO: Better error popup.
+                MessageBox.Show("Failed to log in:\nCould not retrieve user region."); //TODO: Better error popup.
                 return false;
             }
             _userData.RiotRegion = region.Value;

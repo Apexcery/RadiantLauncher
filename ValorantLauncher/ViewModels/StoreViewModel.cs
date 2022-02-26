@@ -99,9 +99,6 @@ namespace ValorantLauncher.ViewModels
             UserData = userData;
             _storeService = storeService;
 
-            if (UserData.RiotUserData == null)
-                ClearStoreData();
-
             ShowNightMarketCommand = ShowNightMarket();
         }
 
@@ -125,6 +122,8 @@ namespace ValorantLauncher.ViewModels
 
         public async Task GetStoreData()
         {
+            ClearStoreData();
+
             if (UserData.RiotUserData?.Puuid == null || UserData.RiotUrl?.PdUrl == null)
             {
                 MessageBox.Show("Log in to your account before trying to view the store.");
