@@ -6,6 +6,7 @@ A custom launcher for VALORANT with added features.
 - View the store (including rotating items and night market when available).
 - View your ranks from previous acts.
 - View your match history.
+- Customize the app to your tastes (colour theme, button styles).
 
 <details>
 <summary> Screenshots </summary>
@@ -21,4 +22,11 @@ A custom launcher for VALORANT with added features.
 ## Career
 
 ![Career](./Docs/Images/Career.png)
-</details> 
+</details>
+
+<br />
+<br />
+
+### Credits
+- Developed by: [Apexcery](https://github.com/Apexcery)
+- Heavily inspired by: [Assist](https://github.com/RumbleMike/Assist)
