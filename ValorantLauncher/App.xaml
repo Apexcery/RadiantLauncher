@@ -29,6 +29,7 @@
                 <!-- Settings Styles -->
                 <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/ColoredSystemButton.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/SimpleSystemButton.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Settings/CreditsIconLink.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 
