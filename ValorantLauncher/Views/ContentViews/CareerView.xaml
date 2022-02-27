@@ -38,7 +38,8 @@
                 <ItemsControl
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    ItemsSource="{Binding RankHistoryName, UpdateSourceTrigger=Explicit}">
+                    ItemsSource="{Binding RankHistoryName, UpdateSourceTrigger=Explicit}"
+                    Margin="0, 0, 0, 5">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid
@@ -66,7 +67,8 @@
                 <ItemsControl
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    ItemsSource="{Binding RankHistoryRank, UpdateSourceTrigger=Explicit}">
+                    ItemsSource="{Binding RankHistoryRank, UpdateSourceTrigger=Explicit}"
+                    Margin="0, 5, 0, 0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid
@@ -94,8 +96,9 @@
                     Foreground="{DynamicResource Text}"
                     FontSize="{StaticResource LoginFormTextSize}"/>
                 <liveCharts:CartesianChart
-                    MinHeight="125"
-                    VerticalAlignment="Top"
+                    x:Name="RankGraph"
+                    MinHeight="135"
+                    VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     MinWidth="450"
                     LegendLocation="Bottom"
@@ -107,7 +110,7 @@
                         <liveCharts:LineSeries
                             Title="RR"
                             Values="{Binding RankChartValues}"
-                            Stroke="{DynamicResource ValorantWhite}"
+                            Stroke="{DynamicResource Text}"
                             Fill="{DynamicResource ValorantRedDark}"
                             DataLabels="True"
                             PointGeometrySize="10"
@@ -116,6 +119,21 @@
                     </liveCharts:CartesianChart.Series>
                     <liveCharts:CartesianChart.AxisX>
                         <liveCharts:Axis
+                            MinValue="0"
+                            MaxValue="4"
+                            IsEnabled="True"
+                            ShowLabels="True"
+                            Labels="{Binding RankupChartLabels}"
+                            FontSize="14"
+                            Foreground="{DynamicResource Text}"
+                            Position="RightTop">
+                            <liveCharts:Axis.Separator>
+                                <liveCharts:Separator StrokeThickness="0" Step="1" />
+                            </liveCharts:Axis.Separator>
+                        </liveCharts:Axis>
+                        <liveCharts:Axis
+                            MinValue="0"
+                            MaxValue="4"
                             IsEnabled="True"
                             ShowLabels="True"
                             Labels="{Binding RankChartLabels}"
@@ -129,7 +147,7 @@
                     <liveCharts:CartesianChart.AxisY>
                         <liveCharts:Axis
                             MinValue="0"
-                            MaxValue="100"
+                            MaxValue="125"
                             ShowLabels="False"
                             IsEnabled="True">
                             <liveCharts:Axis.Separator>

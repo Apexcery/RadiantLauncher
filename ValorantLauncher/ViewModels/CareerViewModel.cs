@@ -82,6 +82,16 @@ namespace ValorantLauncher.ViewModels
                 OnPropertyChanged();
             }
         }
+        private ChartValues<string> _rankupChartLabels = new();
+        public ChartValues<string> RankupChartLabels
+        {
+            get => _rankupChartLabels;
+            set
+            {
+                _rankupChartLabels = value;
+                OnPropertyChanged();
+            }
+        }
 
         public CareerViewModel(ICareerService careerService, UserData userData)
         {
@@ -97,6 +107,7 @@ namespace ValorantLauncher.ViewModels
             MatchHistoryItems.Clear();
             RankChartValues.Clear();
             RankChartLabels.Clear();
+            RankupChartLabels.Clear();
         }
 
         public async Task GetRankData()
@@ -185,6 +196,21 @@ namespace ValorantLauncher.ViewModels
                 var rankUpdate = recentMatches[i];
                 RankChartValues.Add(rankUpdate.RankedRatingAfterUpdate);
                 RankChartLabels.Add($"Game {i + 1}");
+                if (rankUpdate.TierBeforeUpdate > rankUpdate.TierAfterUpdate)
+                {
+                    // Rank tier decrease
+                    RankupChartLabels.Add("[De-Rank]");
+                }
+                else if (rankUpdate.TierBeforeUpdate < rankUpdate.TierAfterUpdate)
+                {
+                    // Rank tier increase
+                    RankupChartLabels.Add("[Rank-Up]");
+                }
+                else
+                {
+                    // Rank tier didn't change
+                    RankupChartLabels.Add("");
+                }
             }
         }
 
