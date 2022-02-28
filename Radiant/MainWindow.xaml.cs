@@ -27,6 +27,12 @@ namespace Radiant
 
         private void SystemBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
+            CloseDialogs();
+            DragMove();
+        }
+
+        public void CloseDialogs()
+        {
             try
             {
                 if (DialogHost.IsDialogOpen("MainDialogHost"))
@@ -42,8 +48,6 @@ namespace Radiant
             {
                 // ignored, if dialog host does not exist yet, an exception is thrown.
             }
-
-            DragMove();
         }
     }
 }

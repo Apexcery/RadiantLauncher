@@ -6,24 +6,28 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using Radiant.Extensions;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.Auth;
 using Radiant.Models.Enums;
+using Radiant.Views.Dialogues;
 
 namespace Radiant.Services
 {
     public class AuthService : IAuthService
     {
-        private UserData _userData;
+        private readonly UserData _userData;
+        private readonly AppConfig _appConfig;
 
         private readonly Dictionary<string, Uri> _apiUris;
 
-        public AuthService(UserData userData)
+        public AuthService(UserData userData, AppConfig appConfig)
         {
             _userData = userData;
+            _appConfig = appConfig;
             _apiUris = ApiURIs.URIs;
         }
 
@@ -31,7 +35,9 @@ namespace Radiant.Services
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Invalid username or password"); //TODO: Better error popup.
+
+                var dialog = new PopupDialog(_appConfig, "Error", "Invalid username or password");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
 
@@ -69,7 +75,8 @@ namespace Radiant.Services
 
             if (!string.IsNullOrEmpty(authResponse.Error))
             {
-                MessageBox.Show($"Failed to log in:\n{authResponse.Error}"); //TODO: Better error popup.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", $"Error: {authResponse.Error}");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
 
@@ -80,7 +87,8 @@ namespace Radiant.Services
 
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
             {
-                MessageBox.Show("Failed to log in."); //TODO: Better error popup.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Error: auth response uri is invalid.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
 
@@ -92,7 +100,8 @@ namespace Radiant.Services
             var idToken = paramaters["id_token"];
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(idToken))
             {
-                MessageBox.Show("Failed to log in:\nAccess or ID Token was invalid."); //TODO: Better error popup.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Access or ID Token was invalid.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
 
@@ -107,7 +116,8 @@ namespace Radiant.Services
             var entitlementToken = await GetEntitlementToken();
             if (string.IsNullOrEmpty(entitlementToken))
             {
-                MessageBox.Show("Failed to log in:\nEntitlement Token was invalid."); //TODO: Better error popup.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Entitlement Token was invalid.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
             _userData.TokenData.EntitlementToken = entitlementToken;
@@ -118,7 +128,8 @@ namespace Radiant.Services
             var region = await GetUserRegion();
             if (region == null)
             {
-                MessageBox.Show("Failed to log in:\nCould not retrieve user region."); //TODO: Better error popup.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Could not retrieve user region.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
             _userData.RiotRegion = region.Value;

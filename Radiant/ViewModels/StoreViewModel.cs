@@ -19,6 +19,7 @@ namespace Radiant.ViewModels
     public class StoreViewModel : Observable
     {
         public readonly UserData UserData;
+        private readonly AppConfig _appConfig;
         private readonly IStoreService _storeService;
 
         private ImageSource _bundleImageSource;
@@ -94,9 +95,10 @@ namespace Radiant.ViewModels
 
         private NightMarket _nightMarket;
 
-        public StoreViewModel(UserData userData, IStoreService storeService)
+        public StoreViewModel(UserData userData, AppConfig appConfig, IStoreService storeService)
         {
             UserData = userData;
+            _appConfig = appConfig;
             _storeService = storeService;
 
             ShowNightMarketCommand = ShowNightMarket();
@@ -126,7 +128,8 @@ namespace Radiant.ViewModels
 
             if (UserData.RiotUserData?.Puuid == null || UserData.RiotUrl?.PdUrl == null)
             {
-                MessageBox.Show("Log in to your account before trying to view the store.");
+                var dialog = new PopupDialog(_appConfig, "Error", "Log in to your account before trying to view the store.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return;
             }
 

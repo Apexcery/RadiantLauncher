@@ -1,0 +1,71 @@
+﻿<utils:ObservableUserControl
+    x:Class="Radiant.Views.Dialogues.PopupDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:Radiant.Views.Dialogues"
+    xmlns:utils="clr-namespace:Radiant.Utils"
+    mc:Ignorable="d" 
+    d:DataContext="{d:DesignInstance Type=local:PopupDialog}"
+    Width="400" Height="225"
+    Background="{DynamicResource Background}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="0"
+            Background="{DynamicResource BackgroundDark}">
+            
+            <TextBlock
+                Text="{Binding DialogTitle}"
+                d:Text="Dialogue Title"
+                Foreground="{DynamicResource Text}"
+                FontSize="{StaticResource LoginFormTextSize}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="10, 0"/>
+
+            <Button
+                Style="{Binding SystemButtonsStyle}"
+                d:Style="{StaticResource SimpleSystemButton}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Background="{DynamicResource CloseButtonBackground}"
+                BorderBrush="{DynamicResource CloseButtonBackgroundHover}"
+                Tag="Close"
+                Command="{Binding CloseCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                <Button.ToolTip>
+                    <ToolTip
+                        Content="Close"
+                        Placement="Bottom"
+                        HorizontalOffset="-10" />
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
+        <Grid
+            Grid.Row="1">
+
+            <ItemsControl
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                ItemsSource="{Binding MessageItems, UpdateSourceTrigger=Explicit}"
+                Margin="15">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Orientation="Vertical"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+        </Grid>
+    </Grid>
+</utils:ObservableUserControl>

@@ -1,26 +1,31 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 using Radiant.Extensions;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.Career;
+using Radiant.Views.Dialogues;
 
 namespace Radiant.Services
 {
     public class CareerService : ICareerService
     {
         private readonly UserData _userData;
+        private readonly AppConfig _appConfig;
 
-        public CareerService(UserData userData)
+        public CareerService(UserData userData, AppConfig appConfig)
         {
             _userData = userData;
+            _appConfig = appConfig;
         }
 
         public async Task<PlayerRankInfo> GetPlayerRankInfo()
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
-                MessageBox.Show("Login to your account before trying to view your career."); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your career.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -28,7 +33,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/mmr/v1/players/{_userData.RiotUserData.Puuid}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Failed to get player's career rank."); //TODO: Better error messages.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get player's career rank.", response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -40,7 +46,8 @@ namespace Radiant.Services
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
-                MessageBox.Show("Login to your account before trying to view your career."); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your career.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -51,7 +58,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync(requestUrl);
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Failed to get player's rank updates."); //TODO: Better error messages.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get player's rank updates.", response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -63,7 +71,8 @@ namespace Radiant.Services
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
-                MessageBox.Show("Login to your account before trying to view your career."); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your career.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -75,7 +84,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{requestUrl}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Failed to get player's match history."); //TODO: Better error messages.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get player's match history.", response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -87,7 +97,8 @@ namespace Radiant.Services
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
-                MessageBox.Show("Login to your account before trying to view your career."); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your career.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -95,7 +106,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/match-details/v1/matches/{matchId}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show($"Failed to get match details for match: {matchId}."); //TODO: Better error messages.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get match details for match ID:", matchId, response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 

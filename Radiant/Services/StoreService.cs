@@ -1,27 +1,32 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 using Radiant.Extensions;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.Store;
+using Radiant.Views.Dialogues;
 
 namespace Radiant.Services
 {
     public class StoreService : IStoreService
     {
         private readonly UserData _userData;
+        private readonly AppConfig _appConfig;
 
-        public StoreService(UserData userData)
+        public StoreService(UserData userData, AppConfig appConfig)
         {
             _userData = userData;
+            _appConfig = appConfig;
         }
 
         public async Task<PlayerStore> GetPlayerStore()
         {
             if (_userData.RiotUserData?.Puuid == null || _userData.RiotUrl?.PdUrl == null)
             {
-                MessageBox.Show("Login to your account before trying to view your store."); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your store.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -29,7 +34,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/store/v2/storefront/{_userData.RiotUserData.Puuid}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Failed to get player's store."); //TODO: Better error messages.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get player's store.", response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -41,7 +47,8 @@ namespace Radiant.Services
         {
             if (_userData.RiotUrl?.PdUrl == null)
             {
-                MessageBox.Show("Login to your account before trying to view your store."); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your store.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -51,7 +58,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/store/v1/offers/");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Failed to get store offers."); //TODO: Better error messages.
+                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get store offers.", response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -65,7 +73,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show($"Could not retrieve skin data for ID: {itemId}"); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Could not retrieve skin data for ID:", itemId, response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 
@@ -79,7 +88,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show($"Could not retrieve skin price for ID: {itemId}"); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Could not retrieve skin price for ID:", itemId, response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return 99999;
             }
 
@@ -93,7 +103,8 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/{bundleId}");
             if (!response.IsSuccessStatusCode)
             {
-                MessageBox.Show($"Could not retrieve bundle data for ID: {bundleId}"); //TODO: Better error handling.
+                var dialog = new PopupDialog(_appConfig, "Error", "Could not retrieve bundle data for ID:", bundleId, response.ReasonPhrase);
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
 

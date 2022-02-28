@@ -82,11 +82,12 @@
                         FontFamily="{StaticResource RobotoSlabBold}"
                         Foreground="{DynamicResource BackgroundDark}"
                         IsChecked="{Binding Path=LoginAutomatically, Mode=TwoWay, FallbackValue=False}"
-                        Checked="LoginAutomatically_OnChecked"
+                        Command="{Binding LoginAutomaticallyCommand}"
                         FontWeight="Bold"
                         Content="Login Automatically"
                         HorizontalAlignment="Center"
                         Margin="0, 10, 0, 0" />
+                    <!-- Checked="LoginAutomatically_OnChecked" -->
 
                     <Button
                         Margin="0, 15, 0, 0"

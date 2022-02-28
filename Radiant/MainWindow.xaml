@@ -10,7 +10,7 @@
     Title="MainWindow"
     Width="1280"  Height="720"
     MinWidth="1280" MinHeight="720"
-    MaxWidth="1920" MaxHeight="1080"
+    MaxWidth="1280" MaxHeight="720"
     WindowStyle="None"
     ResizeMode="NoResize"
     AllowsTransparency="True"

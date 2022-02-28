@@ -4,11 +4,13 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.Client;
 using Radiant.Utils;
+using Radiant.Views.Dialogues;
 
 namespace Radiant.ViewModels
 {
@@ -21,6 +23,7 @@ namespace Radiant.ViewModels
         public RelayCommand<object> LoginCommand { get; }
         public RelayCommand<object> LogoutCommand { get; }
         public RelayCommand<object> PlayCommand { get; }
+        public RelayCommand<object> LoginAutomaticallyCommand { get; }
 
         private bool _logInFormVisible = true;
         public bool LogInFormVisible
@@ -91,6 +94,7 @@ namespace Radiant.ViewModels
             }
         }
 
+
         private MainViewModel _mainViewModel;
 
         public HomeViewModel(IAuthService authService, UserData userData, AppConfig appConfig)
@@ -102,6 +106,25 @@ namespace Radiant.ViewModels
             LoginCommand = new RelayCommand<object>(async o => await LoginWithWindowData(o));
             LogoutCommand = new RelayCommand<object>(async o => await Logout(o));
             PlayCommand = new RelayCommand<object>(async _ => await Play());
+
+            LoginAutomaticallyCommand = new RelayCommand<object>(async _ => await LoginAutomaticallyCheck());
+        }
+
+        private async Task LoginAutomaticallyCheck()
+        {
+            var loginFormVisible = LogInFormVisible;
+
+            if (_loginAutomatically && loginFormVisible)
+            {
+                var mainWindow = Application.Current.MainWindow;
+                if (mainWindow == null)
+                    return;
+
+                var dialog = new PopupDialog(_appConfig, "Are you sure?",
+                    "Checking this box to log in automatically will save your username and password to this PC.",
+                    "Do not do this if this is a shared computer.");
+                await DialogHost.Show(dialog, "MainDialogHost");
+            }
         }
 
         private async Task Play()
@@ -110,7 +133,8 @@ namespace Radiant.ViewModels
             var riotClientExists = CheckForRiotClient(out clientPath);
             if (!riotClientExists)
             {
-                MessageBox.Show("Riot Client not detected, is VALORANT installed?");
+                var dialog = new PopupDialog(_appConfig, "Error", "Riot Client not detected, is VALORANT installed?");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return;
             }
 
@@ -242,7 +266,8 @@ namespace Radiant.ViewModels
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Invalid Username or Password.");
+                var dialog = new PopupDialog(_appConfig, "Error", "Invalid Username or Password.");
+                await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
             
