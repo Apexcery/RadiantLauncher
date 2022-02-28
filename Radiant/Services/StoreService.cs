@@ -25,7 +25,7 @@ namespace Radiant.Services
         {
             if (_userData.RiotUserData?.Puuid == null || _userData.RiotUrl?.PdUrl == null)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your store.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Login to your account before trying to view your store."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
@@ -34,7 +34,7 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/store/v2/storefront/{_userData.RiotUserData.Puuid}");
             if (!response.IsSuccessStatusCode)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get player's store.", response.ReasonPhrase);
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get player's store.", response.ReasonPhrase});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
@@ -47,7 +47,7 @@ namespace Radiant.Services
         {
             if (_userData.RiotUrl?.PdUrl == null)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Login to your account before trying to view your store.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Login to your account before trying to view your store."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
@@ -58,7 +58,7 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/store/v1/offers/");
             if (!response.IsSuccessStatusCode)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to get store offers.", response.ReasonPhrase);
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get store offers.", response.ReasonPhrase});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
@@ -73,7 +73,7 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
             if (!response.IsSuccessStatusCode)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Could not retrieve skin data for ID:", itemId, response.ReasonPhrase);
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve skin data for ID:", itemId, response.ReasonPhrase});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }
@@ -88,7 +88,7 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
             if (!response.IsSuccessStatusCode)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Could not retrieve skin price for ID:", itemId, response.ReasonPhrase);
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve skin price for ID:", itemId, response.ReasonPhrase});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return 99999;
             }
@@ -103,7 +103,7 @@ namespace Radiant.Services
             var response = await _userData.Client.GetAsync($"{baseAddress}/{bundleId}");
             if (!response.IsSuccessStatusCode)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Could not retrieve bundle data for ID:", bundleId, response.ReasonPhrase);
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve bundle data for ID:", bundleId, response.ReasonPhrase});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return null;
             }

@@ -121,8 +121,8 @@ namespace Radiant.ViewModels
                     return;
 
                 var dialog = new PopupDialog(_appConfig, "Are you sure?",
-                    "Checking this box to log in automatically will save your username and password to this PC.",
-                    "Do not do this if this is a shared computer.");
+                    new []{"Checking this box to log in automatically will save your username and password to this PC.",
+                    "Do not do this if this is a shared computer."});
                 await DialogHost.Show(dialog, "MainDialogHost");
             }
         }
@@ -133,7 +133,7 @@ namespace Radiant.ViewModels
             var riotClientExists = CheckForRiotClient(out clientPath);
             if (!riotClientExists)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Riot Client not detected, is VALORANT installed?");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Riot Client not detected, is VALORANT installed?"});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return;
             }
@@ -266,7 +266,7 @@ namespace Radiant.ViewModels
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Invalid Username or Password.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Invalid Username or Password."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }

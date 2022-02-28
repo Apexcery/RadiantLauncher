@@ -25,6 +25,8 @@
                 d:Text="Dialogue Title"
                 Foreground="{DynamicResource Text}"
                 FontSize="{StaticResource LoginFormTextSize}"
+                FontFamily="{StaticResource RobotoSlabBold}"
+                FontWeight="Bold"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
                 Margin="10, 0"/>
@@ -51,20 +53,35 @@
         <Grid
             Grid.Row="1">
 
-            <ItemsControl
+            <StackPanel
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                ItemsSource="{Binding MessageItems, UpdateSourceTrigger=Explicit}"
-                Margin="15">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel
-                            Orientation="Vertical"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+                HorizontalAlignment="Center">
+                <ItemsControl
+                    ItemsSource="{Binding MessageItems, UpdateSourceTrigger=Explicit}"
+                    Margin="15">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Orientation="Vertical"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+                <ItemsControl
+                    ItemsSource="{Binding FrameworkItems, UpdateSourceTrigger=Explicit}"
+                    Margin="15">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Orientation="Vertical"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </StackPanel>
 
         </Grid>
     </Grid>

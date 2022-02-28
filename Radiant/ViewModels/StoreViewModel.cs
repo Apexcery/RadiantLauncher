@@ -128,7 +128,7 @@ namespace Radiant.ViewModels
 
             if (UserData.RiotUserData?.Puuid == null || UserData.RiotUrl?.PdUrl == null)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Log in to your account before trying to view the store.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Log in to your account before trying to view the store."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return;
             }

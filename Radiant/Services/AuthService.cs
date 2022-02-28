@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using Radiant.Extensions;
@@ -33,10 +37,13 @@ namespace Radiant.Services
 
         public async Task<bool> Login(string username, string password)
         {
+            // var authResponseTemp = await Show2StepAuthDialog("gleesonno1@gmail.com");
+            // return false;
+
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
 
-                var dialog = new PopupDialog(_appConfig, "Error", "Invalid username or password");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Invalid username or password"});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
@@ -75,19 +82,20 @@ namespace Radiant.Services
 
             if (!string.IsNullOrEmpty(authResponse.Error))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", $"Error: {authResponse.Error}");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", $"Error: {authResponse.Error}"});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
 
             if (authResponse.Type.Equals("multifactor"))
             {
+                authResponse = await Show2StepAuthDialog(authResponse.Multifactor.Email);
                 //TODO: Need to deal with 2 step auth.
             }
 
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Error: auth response uri is invalid.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Error: auth response uri is invalid."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
@@ -100,7 +108,7 @@ namespace Radiant.Services
             var idToken = paramaters["id_token"];
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(idToken))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Access or ID Token was invalid.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Access or ID Token was invalid."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
@@ -116,7 +124,7 @@ namespace Radiant.Services
             var entitlementToken = await GetEntitlementToken();
             if (string.IsNullOrEmpty(entitlementToken))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Entitlement Token was invalid.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Entitlement Token was invalid."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
@@ -128,7 +136,7 @@ namespace Radiant.Services
             var region = await GetUserRegion();
             if (region == null)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", "Failed to log in.", "Could not retrieve user region.");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Could not retrieve user region."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
@@ -137,6 +145,93 @@ namespace Radiant.Services
             await AddClientHeaders();
 
             return true;
+        }
+
+        private async Task<AuthResponse> Show2StepAuthDialog(string email)
+        {
+            var authCode = "";
+            AuthResponse authResponse = null;
+
+            var textBox = new TextBox
+            {
+                Tag = "Code: ",
+                Text = "",
+                Style = Application.Current.TryFindResource("LoginFormTextBox") as Style,
+                Foreground = Application.Current.TryFindResource("Text") as SolidColorBrush,
+                FontFamily = Application.Current.TryFindResource("RobotoSlabBold") as FontFamily,
+                MaxLength = 6
+            };
+            HintAssist.SetHint(textBox, "Code:");
+            HintAssist.SetForeground(textBox, Application.Current.TryFindResource("BackgroundDark") as SolidColorBrush);
+            HintAssist.SetFontFamily(textBox, Application.Current.TryFindResource("RobotoSlabBold") as FontFamily);
+
+            var button = new Button
+            {
+                Content = "Submit",
+                Width = 100,
+                Height = 35,
+                IsDefault = true,
+                Background = Application.Current.TryFindResource("ValorantRed") as SolidColorBrush,
+                BorderBrush = Brushes.Transparent,
+                BorderThickness = new Thickness(0),
+                IsEnabled = false
+            };
+            ButtonAssist.SetCornerRadius(button, new CornerRadius(5));
+
+            textBox.TextChanged += (sender, e) =>
+            {
+                var tb = (TextBox)sender;
+                var cursorPos = tb.CaretIndex;
+                var regex = new Regex("[^0-9]+");
+                var fullText = tb.Text;
+                var cleanedText = Regex.Replace(fullText, "[^0-9]+", "");
+                tb.Text = cleanedText;
+                tb.CaretIndex = Math.Min(cursorPos, tb.Text.Length);
+                authCode = cleanedText;
+                button.IsEnabled = tb.Text.Length == 6;
+            };
+            button.Click += async (sender, e) =>
+            {
+                var button = (Button)sender;
+                button.IsEnabled = false;
+                var mfaData = new MFAData
+                {
+                    Code = authCode
+                };
+                var mfaDataAsJson = JsonConvert.SerializeObject(mfaData);
+                var mfaResponse = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(mfaDataAsJson, Encoding.UTF8, "application/json"));
+                if (!mfaResponse.IsSuccessStatusCode)
+                {
+                    var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Could not verify 2fa code." });
+                    DialogHost.Close("MainDialogHost");
+                    await DialogHost.Show(dialog, "MainDialogHost");
+                    return;
+                }
+
+                authResponse = await mfaResponse.Content.ReadAsJsonAsync<AuthResponse>();
+                DialogHost.Close("MainDialogHost");
+            };
+
+            var grid = new Grid
+            {
+                Children =
+                {
+                    new StackPanel
+                    {
+                        Orientation = Orientation.Vertical,
+                        Children =
+                        {
+                            textBox,
+                            button
+                        }
+                    }
+                }
+            };
+            
+            var dialog = new PopupDialog(_appConfig, "2-Step Auth", new[] { $"Enter the code that was sent to: {email}" }, new[] { grid });
+            await DialogHost.Show(dialog, "MainDialogHost");
+
+            return authResponse;
         }
 
         private void AddClientCookies(IEnumerable<string> cookieHeaders)
