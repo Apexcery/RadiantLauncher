@@ -52,6 +52,12 @@ namespace Radiant.Services
 
             var authInitCookieData = new AuthInitCookieData();
             var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"));
+            if (!initResponse.IsSuccessStatusCode)
+            {
+                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in." });
+                await DialogHost.Show(dialog, "MainDialogHost");
+                return false;
+            }
 
             if (initResponse.Headers.Contains("Set-Cookie"))
             {
@@ -60,7 +66,7 @@ namespace Radiant.Services
 
             var authResponse = await initResponse.Content.ReadAsJsonAsync<AuthResponse>();
 
-            if (authResponse.Type.Equals("auth", StringComparison.OrdinalIgnoreCase) || authResponse.Type.Equals("response", StringComparison.OrdinalIgnoreCase))
+            if (authResponse.Type.Equals("auth", StringComparison.OrdinalIgnoreCase))
             {
                 var authData = new AuthData
                 {
@@ -71,7 +77,13 @@ namespace Radiant.Services
                 };
 
                 var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"));
-                
+                if (!response.IsSuccessStatusCode)
+                {
+                    var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in." });
+                    await DialogHost.Show(dialog, "MainDialogHost");
+                    return false;
+                }
+
                 if (response.Headers.Contains("Set-Cookie"))
                 {
                     AddClientCookies(response.Headers.GetValues("Set-Cookie"));
@@ -90,12 +102,11 @@ namespace Radiant.Services
             if (authResponse.Type.Equals("multifactor"))
             {
                 authResponse = await Show2StepAuthDialog(authResponse.Multifactor.Email);
-                //TODO: Need to deal with 2 step auth.
             }
 
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Error: auth response uri is invalid."});
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
@@ -132,17 +143,29 @@ namespace Radiant.Services
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-Entitlements-JWT", entitlementToken);
 
             _userData.RiotUserData = await GetUserData();
+            if (_userData.RiotUserData == null)
+            {
+                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve user data." });
+                await DialogHost.Show(dialog, "MainDialogHost");
+                return false;
+            }
 
             var region = await GetUserRegion();
             if (region == null)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Could not retrieve user region."});
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Failed to retrieve user region."});
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
             _userData.RiotRegion = region.Value;
 
-            await AddClientHeaders();
+            var addHeaderSuccess = await AddClientHeaders();
+            if (!addHeaderSuccess)
+            {
+                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve client headers." });
+                await DialogHost.Show(dialog, "MainDialogHost");
+                return false;
+            }
 
             return true;
         }
@@ -157,7 +180,7 @@ namespace Radiant.Services
                 Tag = "Code: ",
                 Text = "",
                 Style = Application.Current.TryFindResource("LoginFormTextBox") as Style,
-                Foreground = Application.Current.TryFindResource("Text") as SolidColorBrush,
+                Foreground = Brushes.Black,
                 FontFamily = Application.Current.TryFindResource("RobotoSlabBold") as FontFamily,
                 MaxLength = 6
             };
@@ -208,6 +231,11 @@ namespace Radiant.Services
                     return;
                 }
 
+                if (mfaResponse.Headers.Contains("Set-Cookie"))
+                {
+                    AddClientCookies(mfaResponse.Headers.GetValues("Set-Cookie"));
+                }
+
                 authResponse = await mfaResponse.Content.ReadAsJsonAsync<AuthResponse>();
                 DialogHost.Close("MainDialogHost");
             };
@@ -242,15 +270,17 @@ namespace Radiant.Services
             }
         }
 
-        private async Task AddClientHeaders()
+        private async Task<bool> AddClientHeaders()
         {
             var response = await _userData.Client.GetAsync(_apiUris["ClientVersionUri"]);
             if (!response.IsSuccessStatusCode)
-                return;
+                return false;
 
             var versions = await response.Content.ReadAsJsonAsync<RiotClientVersions>();
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-ClientVersion", versions.Data.RiotClientVersion);
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-ClientPlatform", "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9");
+
+            return true;
         }
 
         private async Task<RiotRegionEnum?> GetUserRegion(string region = null)

@@ -19,24 +19,24 @@ namespace Radiant.Models.Client
 
         public ClientPrivateModel(UserData userData)
         {
-            foreach (Cookie cook in userData.ClientHandler.CookieContainer.GetCookies(ApiURIs.URIs["AuthUri"]))
+            foreach (Cookie cookie in userData.ClientHandler.CookieContainer.GetCookies(ApiURIs.URIs["AuthUri"]))
             {
-                switch (cook.Name)
+                switch (cookie.Name)
                 {
                     case "tdid":
-                        cookieValues.tdid = cook.Value;
+                        cookieValues.tdid = cookie.Value;
                         break;
                     case "ssid":
-                        cookieValues.ssid = cook.Value;
+                        cookieValues.ssid = cookie.Value;
                         break;
                     case "clid":
-                        cookieValues.clid = cook.Value;
+                        cookieValues.clid = cookie.Value;
                         break;
                     case "sub":
-                        cookieValues.sub = cook.Value;
+                        cookieValues.sub = cookie.Value;
                         break;
                     case "csid":
-                        cookieValues.csid = cook.Value;
+                        cookieValues.csid = cookie.Value;
                         break;
                 }
             }
