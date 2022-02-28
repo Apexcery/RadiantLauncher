@@ -12,10 +12,11 @@
     <Grid x:Name="Grid" ClipToBounds="True">
         <Border>
             <Border.Background>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="{DynamicResource ValorantRedColor}" Offset="0.0" />
-                    <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0.75" />
-                    <GradientStop Color="Black" Offset="1.15" />
+                <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 1">
+                    <GradientStopCollection>
+                        <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0" />
+                        <GradientStop Color="{DynamicResource BackgroundDarkColor}" Offset="0.1" />
+                    </GradientStopCollection>
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Effect>

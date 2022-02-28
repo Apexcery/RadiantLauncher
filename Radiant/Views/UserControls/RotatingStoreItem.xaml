@@ -4,20 +4,22 @@
      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
      xmlns:utils="clr-namespace:Radiant.Utils"
+     xmlns:userControls="clr-namespace:Radiant.Views.UserControls"
      x:Class="Radiant.Views.UserControls.RotatingStoreItem"
      mc:Ignorable="d" 
      d:DesignHeight="450" d:DesignWidth="800"
-     d:DataContext="{d:DesignInstance Type=local:RotatingStoreItem}"
+     d:DataContext="{d:DesignInstance Type=userControls:RotatingStoreItem}"
      Margin="3"
      MinWidth="200" MinHeight="150">
     <Grid x:Name="Grid" ClipToBounds="True">
         <Border
             Margin="-10">
             <Border.Background>
-                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                    <GradientStop Color="{DynamicResource ValorantRedColor}" Offset="0.0" />
-                    <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0.75" />
-                    <GradientStop Color="Black" Offset="1.15" />
+                <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 1">
+                    <GradientStopCollection>
+                        <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0" />
+                        <GradientStop Color="{DynamicResource BackgroundDarkColor}" Offset="0.1" />
+                    </GradientStopCollection>
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Effect>

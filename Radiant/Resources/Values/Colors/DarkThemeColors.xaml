@@ -6,6 +6,9 @@
     <SolidColorBrush x:Key="Background" Color="#FF191919" />
     <SolidColorBrush x:Key="BackgroundDark" Color="#FF0E0E0E" />
     <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121" />
+    <Color x:Key="BackgroundColor">#FF191919</Color>
+    <Color x:Key="BackgroundDarkColor">#FF0E0E0E</Color>
+    <Color x:Key="BackgroundLightColor">#FF212121</Color>
 
     <!-- Text Colors -->
     <SolidColorBrush x:Key="Text" Color="#EEEEEE" />
@@ -31,7 +34,6 @@
     <Color x:Key="MatchVictoryColor">#16E5b4</Color>
     <Color x:Key="MatchDefeatColor">#EF5351</Color>
     <Color x:Key="MatchDrawColor">#EEEEEE</Color>
-    <Color x:Key="MatchDarkColor">#FF0E0E0E</Color>
 
     <SolidColorBrush x:Key="MatchVictoryBrush" Color="#16E5b4" />
     <SolidColorBrush x:Key="MatchDefeatBrush" Color="#EF5351" />
