@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-
 using Newtonsoft.Json;
 
-namespace ValorantLauncher.Models.Career
+namespace Radiant.Models.Career
 {
     public class MatchData
     {

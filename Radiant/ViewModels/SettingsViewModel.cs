@@ -3,11 +3,10 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
-using ValorantLauncher.Constants;
-using ValorantLauncher.Models;
-using ValorantLauncher.Utils;
+using Radiant.Models;
+using Radiant.Utils;
 
-namespace ValorantLauncher.ViewModels
+namespace Radiant.ViewModels
 {
     public class SettingsViewModel : Observable
     {

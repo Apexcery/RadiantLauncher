@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ValorantLauncher.Models
+namespace Radiant.Models
 {
     public static class ApiURIs
     {

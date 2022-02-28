@@ -1,8 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-using ValorantLauncher.Utils;
+using Radiant.Utils;
 
-namespace ValorantLauncher.Models.Career
+namespace Radiant.Models.Career
 {
     public class CompetitiveUpdate
     {

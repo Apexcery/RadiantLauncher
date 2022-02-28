@@ -6,14 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using LiveCharts;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Models.Career;
-using ValorantLauncher.Utils;
-using ValorantLauncher.Views.UserControls;
-using ValorantLauncher.Constants;
+using Radiant.Constants;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Models.Career;
+using Radiant.Utils;
+using Radiant.Views.UserControls;
 
-namespace ValorantLauncher.ViewModels
+namespace Radiant.ViewModels
 {
     public class CareerViewModel : Observable
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ValorantLauncher.Models.Career
+namespace Radiant.Models.Career
 {
     public class PlayerRankUpdates
     {

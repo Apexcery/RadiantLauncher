@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ValorantLauncher.Models.Auth
+namespace Radiant.Models.Auth
 {
     public class AuthData
     {

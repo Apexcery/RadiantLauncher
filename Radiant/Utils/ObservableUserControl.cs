@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
-namespace ValorantLauncher.Utils
+namespace Radiant.Utils
 {
     public class ObservableUserControl : UserControl, INotifyPropertyChanged
     {

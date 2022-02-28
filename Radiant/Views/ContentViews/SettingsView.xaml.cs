@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace ValorantLauncher.Views.ContentViews
+namespace Radiant.Views.ContentViews
 {
     public partial class SettingsView : UserControl
     {

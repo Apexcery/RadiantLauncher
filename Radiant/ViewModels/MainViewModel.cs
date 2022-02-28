@@ -1,12 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Net.Http;
 using System.Windows;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Utils;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Utils;
 
-namespace ValorantLauncher.ViewModels
+namespace Radiant.ViewModels
 {
     public class MainViewModel : Observable
     {

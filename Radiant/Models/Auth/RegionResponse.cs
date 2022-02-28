@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ValorantLauncher.Models.Auth
+namespace Radiant.Models.Auth
 {
     public class RegionResponse
     {

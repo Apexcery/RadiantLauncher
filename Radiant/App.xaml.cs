@@ -1,18 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Services;
-using ValorantLauncher.ViewModels;
-using ValorantLauncher.Views.ContentViews;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Services;
+using Radiant.ViewModels;
+using Radiant.Views.ContentViews;
 
-namespace ValorantLauncher
+namespace Radiant
 {
     public partial class App : Application
     {

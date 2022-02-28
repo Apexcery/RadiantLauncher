@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ValorantLauncher.Interfaces
+namespace Radiant.Interfaces
 {
     public interface IAuthService
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ValorantLauncher.Utils
+namespace Radiant.Utils
 {
     public class RelayCommand<T> : ICommand
     {

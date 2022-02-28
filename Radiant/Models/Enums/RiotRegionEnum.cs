@@ -1,4 +1,4 @@
-﻿namespace ValorantLauncher.Models.Enums
+﻿namespace Radiant.Models.Enums
 {
     public enum RiotRegionEnum
     {

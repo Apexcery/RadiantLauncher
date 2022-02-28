@@ -1,4 +1,4 @@
-﻿namespace ValorantLauncher.Interfaces
+﻿namespace Radiant.Interfaces
 {
     public interface IMinimizable
     {

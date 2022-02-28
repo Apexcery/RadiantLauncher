@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ValorantLauncher.Models.Client
+namespace Radiant.Models.Client
 {
     public class RiotClientInstalls
     {

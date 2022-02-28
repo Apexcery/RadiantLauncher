@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using YamlDotNet.RepresentationModel;
 
-namespace ValorantLauncher.Models.Client
+namespace Radiant.Models.Client
 {
     public class ClientPrivateModel
     {

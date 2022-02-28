@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ValorantLauncher.Models.Store
+namespace Radiant.Models.Store
 {
     public class BundleInformation
     {

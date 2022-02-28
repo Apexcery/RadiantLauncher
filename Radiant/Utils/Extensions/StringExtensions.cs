@@ -1,4 +1,4 @@
-﻿namespace ValorantLauncher.Utils.Extensions
+﻿namespace Radiant.Utils.Extensions
 {
     public static class StringExtensions
     {

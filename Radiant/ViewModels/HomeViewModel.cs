@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
-using ValorantLauncher.Constants;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Models.Client;
-using ValorantLauncher.Utils;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Models.Client;
+using Radiant.Utils;
 
-namespace ValorantLauncher.ViewModels
+namespace Radiant.ViewModels
 {
     public class HomeViewModel : Observable
     {

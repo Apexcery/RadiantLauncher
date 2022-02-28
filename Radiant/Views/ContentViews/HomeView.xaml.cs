@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using ValorantLauncher.ViewModels;
+using Radiant.ViewModels;
 
-namespace ValorantLauncher.Views.ContentViews
+namespace Radiant.Views.ContentViews
 {
     public partial class HomeView : UserControl
     {

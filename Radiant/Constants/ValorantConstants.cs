@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ValorantLauncher.Constants
+namespace Radiant.Constants
 {
     public static class ValorantConstants
     {

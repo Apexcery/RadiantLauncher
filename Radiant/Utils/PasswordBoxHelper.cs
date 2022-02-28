@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ValorantLauncher.Utils
+namespace Radiant.Utils
 {
     public static class PasswordBoxHelper
     {

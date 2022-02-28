@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using ValorantLauncher.Utils;
+using Radiant.Utils;
 
-namespace ValorantLauncher.Models
+namespace Radiant.Models
 {
     public class AppConfig
     {

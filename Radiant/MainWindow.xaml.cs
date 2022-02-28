@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.ViewModels;
+using Radiant.Interfaces;
+using Radiant.ViewModels;
 
-namespace ValorantLauncher
+namespace Radiant
 {
     public partial class MainWindow : Window, IMinimizable, ICloseable
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ValorantLauncher.Models.Career;
+using Radiant.Models.Career;
 
-namespace ValorantLauncher.Interfaces
+namespace Radiant.Interfaces
 {
     public interface ICareerService
     {

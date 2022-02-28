@@ -1,11 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models.Store;
-using ValorantLauncher.Utils;
-using ValorantLauncher.Views.UserControls;
+﻿using Radiant.Utils;
 
-namespace ValorantLauncher.Views.Dialogues
+namespace Radiant.Views.Dialogues
 {
     public partial class NightMarketView : ObservableUserControl
     {

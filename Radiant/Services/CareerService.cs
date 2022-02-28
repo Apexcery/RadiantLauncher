@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
-using ValorantLauncher.Extensions;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Models.Career;
+using Radiant.Extensions;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Models.Career;
 
-namespace ValorantLauncher.Services
+namespace Radiant.Services
 {
     public class CareerService : ICareerService
     {

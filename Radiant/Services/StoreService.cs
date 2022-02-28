@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
-using ValorantLauncher.Extensions;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Models.Store;
+using Radiant.Extensions;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Models.Store;
 
-namespace ValorantLauncher.Services
+namespace Radiant.Services
 {
     public class StoreService : IStoreService
     {

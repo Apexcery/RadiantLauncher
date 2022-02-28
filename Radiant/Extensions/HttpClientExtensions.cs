@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace ValorantLauncher.Extensions
+namespace Radiant.Extensions
 {
     public static class HttpClientExtensions
     {

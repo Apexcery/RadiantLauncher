@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ValorantLauncher.Utils
+namespace Radiant.Utils
 {
     public class Observable : INotifyPropertyChanged
     {

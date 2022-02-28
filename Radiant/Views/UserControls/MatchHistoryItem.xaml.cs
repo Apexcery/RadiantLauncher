@@ -5,13 +5,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using ValorantLauncher.Constants;
-using ValorantLauncher.Models;
-using ValorantLauncher.Models.Career;
-using ValorantLauncher.Utils;
-using ValorantLauncher.Utils.Extensions;
+using Radiant.Constants;
+using Radiant.Models;
+using Radiant.Models.Career;
+using Radiant.Utils;
+using Radiant.Utils.Extensions;
 
-namespace ValorantLauncher.Views.UserControls
+namespace Radiant.Views.UserControls
 {
     public partial class MatchHistoryItem : ObservableUserControl
     {

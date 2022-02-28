@@ -7,14 +7,14 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Models;
-using ValorantLauncher.Models.Store;
-using ValorantLauncher.Utils;
-using ValorantLauncher.Views.Dialogues;
-using ValorantLauncher.Views.UserControls;
+using Radiant.Interfaces;
+using Radiant.Models;
+using Radiant.Models.Store;
+using Radiant.Utils;
+using Radiant.Views.Dialogues;
+using Radiant.Views.UserControls;
 
-namespace ValorantLauncher.ViewModels
+namespace Radiant.ViewModels
 {
     public class StoreViewModel : Observable
     {

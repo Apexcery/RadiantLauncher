@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ValorantLauncher.Models.Auth
+namespace Radiant.Models.Auth
 {
     public class AuthResponse
     {

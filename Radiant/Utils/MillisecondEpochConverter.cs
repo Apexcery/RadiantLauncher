@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ValorantLauncher.Utils
+namespace Radiant.Utils
 {
     public class MillisecondEpochConverter : DateTimeConverterBase
     {

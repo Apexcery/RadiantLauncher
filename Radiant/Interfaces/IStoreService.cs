@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ValorantLauncher.Models.Store;
+using Radiant.Models.Store;
 
-namespace ValorantLauncher.Interfaces
+namespace Radiant.Interfaces
 {
     public interface IStoreService
     {

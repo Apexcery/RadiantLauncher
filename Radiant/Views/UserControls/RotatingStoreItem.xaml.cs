@@ -3,10 +3,10 @@ using System.Linq;
 using System.Net.Cache;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using ValorantLauncher.Interfaces;
-using ValorantLauncher.Utils;
+using Radiant.Interfaces;
+using Radiant.Utils;
 
-namespace ValorantLauncher.Views.UserControls
+namespace Radiant.Views.UserControls
 {
     public partial class RotatingStoreItem : ObservableUserControl
     {

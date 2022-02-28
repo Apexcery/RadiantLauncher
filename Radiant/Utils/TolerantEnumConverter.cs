@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace ValorantLauncher.Utils
+namespace Radiant.Utils
 {
     public class TolerantEnumConverter : JsonConverter
     {
