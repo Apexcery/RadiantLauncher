@@ -12,20 +12,18 @@
      Margin="3"
      MinWidth="200" MinHeight="150">
     <Grid x:Name="Grid" ClipToBounds="True">
-        <Border
-            Margin="-10">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 1">
-                    <GradientStopCollection>
-                        <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0" />
-                        <GradientStop Color="{DynamicResource BackgroundDarkColor}" Offset="0.1" />
-                    </GradientStopCollection>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Border.Effect>
-                <BlurEffect Radius="20" RenderingBias="Performance" />
-            </Border.Effect>
-        </Border>
+        <Grid
+            Margin="-10"
+            Background="{DynamicResource BackgroundLight}">
+            <Border>
+                <Border.Background>
+                    <ImageBrush ImageSource="{StaticResource StoreBackground}" AlignmentX="Center" AlignmentY="Center" Stretch="UniformToFill" />
+                </Border.Background>
+                <Border.Effect>
+                    <BlurEffect Radius="20" RenderingBias="Performance" />
+                </Border.Effect>
+            </Border>
+        </Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />

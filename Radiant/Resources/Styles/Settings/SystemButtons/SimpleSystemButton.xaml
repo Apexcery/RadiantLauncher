@@ -19,7 +19,7 @@
                         Height="25"
                         Margin="5, 0"
                         CornerRadius="5"
-                        Background="{DynamicResource BackgroundDark}"
+                        Background="{DynamicResource Background}"
                         BorderThickness="0"
                         BorderBrush="Transparent"
                         Cursor="Hand">
@@ -35,7 +35,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Background}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundLight}" />
                             <Setter TargetName="Content" Property="Foreground" Value="{DynamicResource Text}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +29,7 @@
     <None Remove="Resources\Images\Agent Images\Icons\Sova.png" />
     <None Remove="Resources\Images\Agent Images\Icons\Viper.png" />
     <None Remove="Resources\Images\Agent Images\Icons\Yoru.png" />
+    <None Remove="Resources\Images\Icon-Wide.png" />
     <None Remove="Resources\Images\NightMarketIcon.png" />
     <None Remove="Resources\Images\NightMarketIcon.webp" />
     <None Remove="Resources\Images\Rank Images\Bronze I.png" />
@@ -52,6 +55,7 @@
     <None Remove="Resources\Images\Rank Images\Silver II.png" />
     <None Remove="Resources\Images\Rank Images\Silver III.png" />
     <None Remove="Resources\Images\Rank Images\Unranked.png" />
+    <None Remove="Resources\Images\StoreItemBackground.png" />
     <None Remove="Resources\Images\ValorantLogo.png" />
   </ItemGroup>
 
@@ -62,6 +66,9 @@
     <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
 
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
@@ -122,6 +129,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Agent Images\Icons\Yoru.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Icon-Wide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\StoreItemBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
@@ -202,6 +218,13 @@
     <Resource Include="Resources\Images\Rank Images\Radiant.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Images\Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

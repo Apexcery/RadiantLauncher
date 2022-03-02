@@ -14,33 +14,8 @@
     <SolidColorBrush x:Key="Text" Color="#EEEEEE" />
     <SolidColorBrush x:Key="TextDim" Color="#999999" />
 
-    <!-- System Button Colors -->
-    <SolidColorBrush x:Key="CloseButtonBackground" Color="#e74c3c" />
-    <SolidColorBrush x:Key="CloseButtonBackgroundHover" Color="#b03a2e" />
-    <SolidColorBrush x:Key="MinimizeButtonBackground" Color="#2ecc71" />
-    <SolidColorBrush x:Key="MinimizeButtonBackgroundHover" Color="#239b56" />
-
-    <!-- Valorant Colors -->
-    <SolidColorBrush x:Key="ValorantWhite" Color="#F9F9F9" />
-    <SolidColorBrush x:Key="TextBoxBackgroundValorant" Color="#EBEBEB" />
-    <SolidColorBrush x:Key="TextBoxBackgroundValorantDim" Color="#E7E7E7" />
-    <SolidColorBrush x:Key="ValorantRed" Color="#FD4556" />
-    <SolidColorBrush x:Key="ValorantRedDark" Color="#BD3944" />
-
-    <Color x:Key="ValorantRedColor">#FD4556</Color>
-    <Color x:Key="ValorantRedDarkColor">#9f0110</Color>
-
     <!-- Match History Colors -->
-    <Color x:Key="MatchVictoryColor">#16E5b4</Color>
-    <Color x:Key="MatchDefeatColor">#EF5351</Color>
-    <Color x:Key="MatchDrawColor">#EEEEEE</Color>
-
-    <SolidColorBrush x:Key="MatchVictoryBrush" Color="#16E5b4" />
-    <SolidColorBrush x:Key="MatchDefeatBrush" Color="#EF5351" />
-    <SolidColorBrush x:Key="MatchDrawBrush" Color="#EEEEEE" />
-
-    <!-- Color Themes -->
-    <SolidColorBrush x:Key="DarkColorTheme" Color="#FF0E0E0E" />
-    <SolidColorBrush x:Key="LightColorTheme" Color="#A1A1A1" />
+    <Color x:Key="MatchDrawColor">#E8E8E8</Color>
+    <SolidColorBrush x:Key="MatchDrawBrush" Color="#E8E8E8" />
 
 </ResourceDictionary>

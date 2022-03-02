@@ -26,7 +26,7 @@
                         HorizontalAlignment="Center"
                         Margin="0, 5"
                         CornerRadius="5"
-                        Background="{DynamicResource TextBoxBackgroundValorant}"
+                        Background="{StaticResource TextBoxBackgroundValorant}"
                         BorderThickness="2"
                         BorderBrush="Transparent">
                         <Grid>
@@ -57,13 +57,13 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
                         </Trigger>
                         <Trigger Property="TextBox.IsFocused" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -95,7 +95,7 @@
                         HorizontalAlignment="Center"
                         Margin="0, 5"
                         CornerRadius="5"
-                        Background="{DynamicResource TextBoxBackgroundValorant}"
+                        Background="{StaticResource TextBoxBackgroundValorant}"
                         BorderThickness="2"
                         BorderBrush="Transparent">
                         <!-- TODO: Figure out how to style a password box. -->
@@ -128,13 +128,13 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
                         </Trigger>
                         <Trigger Property="PasswordBox.IsFocused" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundValorantDim}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
                         </Trigger>
                     </ControlTemplate.Triggers>

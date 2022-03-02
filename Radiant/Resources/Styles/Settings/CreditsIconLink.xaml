@@ -35,7 +35,7 @@
                             <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource Text}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource ValorantRed}" />
+                            <Setter TargetName="Icon" Property="Foreground" Value="{StaticResource ValorantRed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

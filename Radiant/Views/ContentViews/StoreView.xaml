@@ -8,7 +8,8 @@
     xmlns:viewModels="clr-namespace:Radiant.ViewModels"
     mc:Ignorable="d" 
     d:DesignWidth="1280" d:DesignHeight="720"
-    d:DataContext="{d:DesignInstance viewModels:StoreViewModel}">
+    d:DataContext="{d:DesignInstance viewModels:StoreViewModel}"
+    Background="{DynamicResource BackgroundLight}">
     <UserControl.Resources>
         <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
     </UserControl.Resources>
@@ -36,12 +37,12 @@
                 HorizontalAlignment="Left"
                 Margin="25">
                 <TextBlock
-                    Foreground="{DynamicResource ValorantRed}"
+                    Foreground="{StaticResource ValorantRed}"
                     Text="{Binding BundleName, FallbackValue='Collection Bundle Name'}"
                     FontSize="48"
                     FontFamily="{StaticResource RobotoSlabRegular}"/>
                 <TextBlock
-                    Foreground="{DynamicResource ValorantRed}"
+                    Foreground="{StaticResource ValorantRed}"
                     Text="Collection"
                     FontSize="32"
                     FontFamily="{StaticResource RobotoSlabBold}"
@@ -60,7 +61,7 @@
                 materialDesign:ButtonAssist.CornerRadius="10"
                 Width="60"
                 Height="60"
-                Background="{DynamicResource ValorantRed}"
+                Background="{StaticResource ValorantRed}"
                 Command="{Binding ShowNightMarketCommand}">
                 <Image
                     Source="{StaticResource NightMarketIcon}"
@@ -87,7 +88,7 @@
                     VerticalAlignment="Center"
                     FontFamily="{StaticResource RobotoSlabBold}"
                     FontWeight="Bold"
-                    Foreground="{DynamicResource ValorantRed}"
+                    Foreground="{StaticResource ValorantRed}"
                     FontSize="32"
                     Margin="5, 0, 10, 0" />
             </StackPanel>

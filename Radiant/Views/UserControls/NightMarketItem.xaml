@@ -14,7 +14,7 @@
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 1">
                     <GradientStopCollection>
-                        <GradientStop Color="{DynamicResource ValorantRedDarkColor}" Offset="0" />
+                        <GradientStop Color="{StaticResource ValorantRedDarkColor}" Offset="0" />
                         <GradientStop Color="{DynamicResource BackgroundDarkColor}" Offset="0.1" />
                     </GradientStopCollection>
                 </LinearGradientBrush>

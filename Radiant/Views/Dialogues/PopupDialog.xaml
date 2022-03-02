@@ -36,8 +36,8 @@
                 d:Style="{StaticResource SimpleSystemButton}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
-                Background="{DynamicResource CloseButtonBackground}"
-                BorderBrush="{DynamicResource CloseButtonBackgroundHover}"
+                Background="{StaticResource CloseButtonBackground}"
+                BorderBrush="{StaticResource CloseButtonBackgroundHover}"
                 Tag="Close"
                 Command="{Binding CloseCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">

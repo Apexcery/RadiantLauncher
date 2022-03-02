@@ -38,7 +38,7 @@
         <!-- Right Panel -->
         <Grid
             Grid.Column="1"
-            Background="{DynamicResource ValorantWhite}">
+            Background="{StaticResource ValorantWhite}">
 
             <!-- Login Form -->
             <Grid
@@ -97,7 +97,7 @@
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=TxtPassword}"
                         IsDefault="True"
-                        Background="{DynamicResource ValorantRed}"
+                        Background="{StaticResource ValorantRed}"
                         BorderBrush="Transparent"
                         BorderThickness="0"
                         materialDesign:ButtonAssist.CornerRadius="5" />
@@ -116,7 +116,7 @@
                     Width="50"
                     Height="50"
                     IsIndeterminate="True"
-                    Foreground="{DynamicResource ValorantRed}" />
+                    Foreground="{StaticResource ValorantRed}" />
             </Grid>
 
             <!-- Play Button Form -->
@@ -132,7 +132,7 @@
                     Width="150"
                     Height="50"
                     Command="{Binding PlayCommand}"
-                    Background="{DynamicResource ValorantRed}"
+                    Background="{StaticResource ValorantRed}"
                     BorderBrush="Transparent"
                     BorderThickness="0"
                     materialDesign:ButtonAssist.CornerRadius="5" />
@@ -157,7 +157,7 @@
                     Height="35"
                     Command="{Binding LogoutCommand}"
                     CommandParameter="{Binding ElementName=TxtPassword}"
-                    Background="{DynamicResource ValorantRed}"
+                    Background="{StaticResource ValorantRed}"
                     BorderBrush="Transparent"
                     BorderThickness="0"
                     VerticalAlignment="Bottom"

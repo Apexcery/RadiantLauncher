@@ -39,10 +39,6 @@ namespace Radiant
                 {
                     DialogHost.Close("MainDialogHost");
                 }
-                if (DialogHost.IsDialogOpen("StoreDialogHost"))
-                {
-                    DialogHost.Close("StoreDialogHost");
-                }
             }
             catch
             {

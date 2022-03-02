@@ -8,7 +8,7 @@
     xmlns:viewModels="clr-namespace:Radiant.ViewModels"
     mc:Ignorable="d"
     d:DesignWidth="1280" d:DesignHeight="720"
-    Background="{DynamicResource Background}"
+    Background="{DynamicResource BackgroundLight}"
     d:DataContext="{d:DesignInstance Type=viewModels:CareerViewModel}">
     <Grid>
         <Grid.RowDefinitions>
@@ -110,10 +110,10 @@
                             Title="RR"
                             Values="{Binding RankChartValues}"
                             Stroke="{DynamicResource Text}"
-                            Fill="{DynamicResource ValorantRedDark}"
+                            Fill="{StaticResource ValorantRedDark}"
                             DataLabels="True"
                             PointGeometrySize="10"
-                            PointForeground="{DynamicResource ValorantRed}"
+                            PointForeground="{StaticResource ValorantRed}"
                             Foreground="{DynamicResource Text}"/>
                     </liveCharts:CartesianChart.Series>
                     <liveCharts:CartesianChart.AxisX>
@@ -159,7 +159,7 @@
         </Grid>
 
         <!-- Separator -->
-        <Grid Grid.Row="1" Background="{DynamicResource ValorantRedDark}" Width="1000" />
+        <Grid Grid.Row="1" Background="{StaticResource ValorantRedDark}" Width="1000" />
 
         <!-- Match History -->
         <Grid

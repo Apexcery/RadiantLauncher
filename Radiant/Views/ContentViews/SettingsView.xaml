@@ -13,7 +13,7 @@
     <Grid>
         <TabControl
             Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-            Background="{DynamicResource BackgroundLight}"
+            Background="{DynamicResource Background}"
             TabStripPlacement="Bottom">
             <TabItem
                 Style="{StaticResource MaterialDesignNavigationRailTabItem}">
@@ -35,7 +35,7 @@
                 </TabItem.ToolTip>
 
                 <Grid
-                    Background="{DynamicResource Background}">
+                    Background="{DynamicResource BackgroundLight}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15" /> <!-- Top Padding -->
                         <RowDefinition Height="50" /> <!-- Tab Title -->
@@ -78,7 +78,7 @@
                             <StackPanel
                                 Grid.Row="1"
                                 Orientation="Horizontal"
-                                Background="{DynamicResource Background}"
+                                Background="{DynamicResource BackgroundLight}"
                                 HorizontalAlignment="Stretch">
                                 <RadioButton
                                     x:Name="DarkTheme"
@@ -95,7 +95,7 @@
                                     Command="{Binding ColorThemeCommand}"
                                     CommandParameter="{Binding ElementName=DarkTheme, Path=Tag}">
                                     <Border
-                                        Background="{DynamicResource DarkColorTheme}"
+                                        Background="{StaticResource DarkColorTheme}"
                                         Width="125"
                                         Height="50"
                                         CornerRadius="10">
@@ -116,7 +116,7 @@
                                     Command="{Binding ColorThemeCommand}"
                                     CommandParameter="{Binding ElementName=LightTheme, Path=Tag}">
                                     <Border
-                                        Background="{DynamicResource LightColorTheme}"
+                                        Background="{StaticResource LightColorTheme}"
                                         Width="125"
                                         Height="50"
                                         CornerRadius="10">
@@ -142,7 +142,7 @@
                             <StackPanel
                                 Grid.Row="1"
                                 Orientation="Horizontal"
-                                Background="{DynamicResource Background}"
+                                Background="{DynamicResource BackgroundLight}"
                                 HorizontalAlignment="Stretch">
                                 <RadioButton
                                     x:Name="ColoredOption"
@@ -159,7 +159,7 @@
                                     Command="{Binding SystemButtonsCommand}"
                                     CommandParameter="{Binding ElementName=ColoredOption, Path=Tag}">
                                     <Border
-                                        Background="{DynamicResource BackgroundDark}"
+                                        Background="{DynamicResource Background}"
                                         Width="125"
                                         Height="50"
                                         CornerRadius="10">
@@ -168,16 +168,16 @@
                                             HorizontalAlignment="Center">
                                             <Button
                                                 Style="{StaticResource ColoredSystemButton}"
-                                                Background="{DynamicResource MinimizeButtonBackground}"
-                                                BorderBrush="{DynamicResource MinimizeButtonBackgroundHover}"
+                                                Background="{StaticResource MinimizeButtonBackground}"
+                                                BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
                                                 IsHitTestVisible="False"
                                                 IsEnabled="False"
                                                 Margin="10, 0">
                                             </Button>
                                             <Button
                                                 Style="{StaticResource ColoredSystemButton}"
-                                                Background="{DynamicResource CloseButtonBackground}"
-                                                BorderBrush="{DynamicResource CloseButtonBackgroundHover}"
+                                                Background="{StaticResource CloseButtonBackground}"
+                                                BorderBrush="{StaticResource CloseButtonBackgroundHover}"
                                                 IsHitTestVisible="False"
                                                 IsEnabled="False"
                                                 Margin="10, 0">
@@ -200,7 +200,7 @@
                                     Command="{Binding SystemButtonsCommand}"
                                     CommandParameter="{Binding ElementName=SimpleOption, Path=Tag}">
                                     <Border
-                                        Background="{DynamicResource BackgroundDark}"
+                                        Background="{DynamicResource Background}"
                                         Width="125"
                                         Height="50"
                                         CornerRadius="10">
@@ -228,7 +228,7 @@
                         </Grid>
 
                         <!-- Separator -->
-                        <Grid Background="{DynamicResource ValorantRedDark}" Width="1200" Height="2" Margin="15" />
+                        <Grid Background="{StaticResource ValorantRedDark}" Width="1200" Height="2" Margin="15" />
 
                     </StackPanel>
                 </Grid>
@@ -253,7 +253,7 @@
                         HorizontalOffset="-8"/>
                 </TabItem.ToolTip>
                 <Grid
-                    Background="{DynamicResource Background}">
+                    Background="{DynamicResource BackgroundLight}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15" /> <!-- Top Padding -->
                         <RowDefinition Height="50" /> <!-- Tab Title -->
@@ -303,11 +303,15 @@
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         FontSize="{StaticResource LoginFormTitleTextSize}"
+                                        FontFamily="{StaticResource RobotoSlabRegular}"
+                                        Foreground="{DynamicResource Text}"
                                         Text="Q: I can't click on any of the navigation buttons at the side!">
                                     </TextBlock>
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         FontSize="{StaticResource LoginFormTextSize}"
+                                        FontFamily="{StaticResource RobotoSlabRegular}"
+                                        Foreground="{DynamicResource Text}"
                                         Text="A: Make sure you are logged in from the 'Play' screen. Once logged in, the other tabs should become available.">
                                     </TextBlock>
                                 </StackPanel>
@@ -317,15 +321,21 @@
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         FontSize="{StaticResource LoginFormTitleTextSize}"
+                                        FontFamily="{StaticResource RobotoSlabRegular}"
+                                        Foreground="{DynamicResource Text}"
                                         Text="Q: I keep getting an error when trying to log in!">
                                     </TextBlock>
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         FontSize="{StaticResource LoginFormTextSize}"
+                                        FontFamily="{StaticResource RobotoSlabRegular}"
+                                        Foreground="{DynamicResource Text}"
                                         Text="A: This can occur if the VALORANT servers are currently having issues." />
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         FontSize="{StaticResource LoginFormTextSize}"
+                                        FontFamily="{StaticResource RobotoSlabRegular}"
+                                        Foreground="{DynamicResource Text}"
                                         Text="If everything seems okay elsewhere, submit an issue on GitHub and I'll take a look." />
                                 </StackPanel>
                             </StackPanel>
@@ -349,7 +359,9 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 FontSize="24"
-                                Margin="0, 5">
+                                Margin="0, 5"
+                                FontFamily="{StaticResource RobotoSlabRegular}"
+                                Foreground="{DynamicResource Text}">
                                 <Run Text="Developed By: "></Run>
                                 <Hyperlink NavigateUri="https://github.com/Apexcery" RequestNavigate="RequestNavigateHandler">
                                     <Hyperlink.Style>
@@ -358,7 +370,7 @@
                                             <Setter Property="Foreground" Value="{DynamicResource Text}"/>
                                             <Style.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="{DynamicResource ValorantRed}"></Setter>
+                                                    <Setter Property="Foreground" Value="{StaticResource ValorantRed}"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -369,7 +381,9 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 FontSize="24"
-                                Margin="0, 5">
+                                Margin="0, 5"
+                                FontFamily="{StaticResource RobotoSlabRegular}"
+                                Foreground="{DynamicResource Text}">
                                 <Run Text="Heavily Inspired By: "></Run>
                                 <Hyperlink NavigateUri="https://github.com/RumbleMike/Assist" RequestNavigate="RequestNavigateHandler">
                                     <Hyperlink.Style>
@@ -378,7 +392,7 @@
                                             <Setter Property="Foreground" Value="{DynamicResource Text}"/>
                                             <Style.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="{DynamicResource ValorantRed}"></Setter>
+                                                    <Setter Property="Foreground" Value="{StaticResource ValorantRed}"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>

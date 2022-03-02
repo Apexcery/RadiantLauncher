@@ -13,7 +13,7 @@
              Margin="5"
              MinHeight="100"
              MaxHeight="100"
-             Background="{DynamicResource BackgroundDark}">
+             Background="{DynamicResource Background}">
     <utils:ObservableUserControl.Resources>
         <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
     </utils:ObservableUserControl.Resources>
@@ -62,11 +62,11 @@
                     Margin="0, 5">
                     <Run
                         Text="{Binding BlueTeamScore, FallbackValue=Blue}"
-                        Foreground="{DynamicResource MatchVictoryBrush}"/>
+                        Foreground="{StaticResource MatchVictoryBrush}"/>
                     <Run Text=":" />
                     <Run
                         Text="{Binding RedTeamScore, FallbackValue=Red}"
-                        Foreground="{DynamicResource MatchDefeatBrush}" />
+                        Foreground="{StaticResource MatchDefeatBrush}" />
                 </TextBlock>
                 <TextBlock
                     Text="{Binding MapName, FallbackValue=Map Name}"
