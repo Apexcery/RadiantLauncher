@@ -3,6 +3,9 @@
 ### A custom launcher for VALORANT with added features.
 
 <br />
+
+## [Download Latest](https://github.com/Apexcery/RadiantLauncher/releases/download/v1.0.0/Radiant.msi)
+
 <br />
 
 ## Features
@@ -33,6 +36,7 @@
 </details>
 
 <br />
+
 <br />
 
 ### Credits
