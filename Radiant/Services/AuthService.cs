@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -8,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
@@ -37,9 +35,6 @@ namespace Radiant.Services
 
         public async Task<bool> Login(string username, string password)
         {
-            // var authResponseTemp = await Show2StepAuthDialog("gleesonno1@gmail.com");
-            // return false;
-
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
 

@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using System.Windows;
 using MaterialDesignThemes.Wpf;
 using Radiant.Extensions;
 using Radiant.Interfaces;
