@@ -1,0 +1,118 @@
+﻿<UserControl
+    x:Class="Radiant.Views.ContentViews.StoreView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewModels="clr-namespace:Radiant.ViewModels"
+    mc:Ignorable="d" 
+    d:DesignWidth="1280" d:DesignHeight="720"
+    d:DataContext="{d:DesignInstance viewModels:StoreViewModel}"
+    Background="{DynamicResource BackgroundLight}">
+    <UserControl.Resources>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <!-- Featured Bundle -->
+        <Grid
+            Grid.Row="0">
+
+            <!-- Bundle Image -->
+            <Image
+                Source="{Binding BundleImageSource}"
+                Stretch="UniformToFill"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+            <!-- Bundle Name -->
+            <StackPanel
+                Orientation="Vertical"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="25">
+                <TextBlock
+                    Foreground="{StaticResource ValorantRed}"
+                    Text="{Binding BundleName, FallbackValue='Collection Bundle Name'}"
+                    FontSize="48"
+                    FontFamily="{StaticResource RobotoSlabRegular}"/>
+                <TextBlock
+                    Foreground="{StaticResource ValorantRed}"
+                    Text="Collection"
+                    FontSize="32"
+                    FontFamily="{StaticResource RobotoSlabBold}"
+                    FontWeight="Bold" />
+            </StackPanel>
+
+            <!-- Night Market Button -->
+            <Button
+                Visibility="{Binding IsNightMarketAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                ToolTip="Night Market"
+                BorderThickness="0"
+                Margin="25"
+                Padding="10"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                Width="60"
+                Height="60"
+                Background="{StaticResource ValorantRed}"
+                Command="{Binding ShowNightMarketCommand}">
+                <Image
+                    Source="{StaticResource NightMarketIcon}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Stretch="Uniform" />
+            </Button>
+
+            <!-- Bundle Price -->
+            <StackPanel
+                Orientation="Horizontal"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="25">
+                <Image
+                    Source="{StaticResource ValorantPointsIcon}"
+                    VerticalAlignment="Center"
+                    Width="32"
+                    Height="32"
+                    Margin="5"/>
+                <TextBlock
+                    x:Name="TxtItemCost"
+                    Text="{Binding BundleCost, FallbackValue=99999}"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource RobotoSlabBold}"
+                    FontWeight="Bold"
+                    Foreground="{StaticResource ValorantRed}"
+                    FontSize="32"
+                    Margin="5, 0, 10, 0" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Rotating Store -->
+        <Grid
+            Grid.Row="1"
+            VerticalAlignment="Stretch">
+            <ItemsControl
+                x:Name="ItemsControl"
+                VerticalAlignment="Stretch"
+                ItemsSource="{Binding RotatingStoreItems, UpdateSourceTrigger=Explicit}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid
+                            Columns="4"
+                            Rows="1"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+
+</UserControl>

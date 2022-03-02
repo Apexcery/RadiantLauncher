@@ -1,0 +1,54 @@
+﻿<Application
+    x:Class="Radiant.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewModels="clr-namespace:Radiant.ViewModels"
+    xmlns:contentViews="clr-namespace:Radiant.Views.ContentViews">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- Material Design Theming -->
+                <materialDesign:BundledTheme BaseTheme="Dark" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+
+                <!-- Values -->
+                <ResourceDictionary Source="Resources/Values/Colors/StaticColors.xaml" />
+                <ResourceDictionary Source="Resources/Values/Colors/DarkThemeColors.xaml" />
+                <ResourceDictionary Source="Resources/Values/Dimensions.xaml" />
+                <ResourceDictionary Source="Resources/Values/Fonts.xaml" />
+                <ResourceDictionary Source="Resources/Values/Strings.xaml" />
+                <ResourceDictionary Source="Resources/Values/Images.xaml" />
+                
+                <!-- Styles -->
+                <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
+                <ResourceDictionary Source="Resources/Styles/LoginFormTextBox.xaml" />
+
+                <!-- Settings Styles -->
+                <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/ColoredSystemButton.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/SimpleSystemButton.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Settings/CreditsIconLink.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <!-- View Models -->
+            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                <contentViews:HomeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:StoreViewModel}">
+                <contentViews:StoreView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CareerViewModel}">
+                <contentViews:CareerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
+                <contentViews:SettingsView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

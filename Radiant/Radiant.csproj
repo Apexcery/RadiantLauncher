@@ -1,0 +1,237 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <PackageIcon>Icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf" />
+    <None Remove="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf" />
+    <None Remove="Resources\Images\Agent Images\Icons\Astra.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Breach.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Brimstone.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Chamber.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Cypher.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Jett.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\KAYO.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Killjoy.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Neon.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Omen.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Phoenix.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Raze.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Reyna.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Sage.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Skye.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Sova.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Viper.png" />
+    <None Remove="Resources\Images\Agent Images\Icons\Yoru.png" />
+    <None Remove="Resources\Images\Icon-Wide.png" />
+    <None Remove="Resources\Images\NightMarketIcon.png" />
+    <None Remove="Resources\Images\NightMarketIcon.webp" />
+    <None Remove="Resources\Images\Rank Images\Bronze I.png" />
+    <None Remove="Resources\Images\Rank Images\Bronze II.png" />
+    <None Remove="Resources\Images\Rank Images\Bronze III.png" />
+    <None Remove="Resources\Images\Rank Images\Diamond I.png" />
+    <None Remove="Resources\Images\Rank Images\Diamond II.png" />
+    <None Remove="Resources\Images\Rank Images\Diamond III.png" />
+    <None Remove="Resources\Images\Rank Images\Gold I.png" />
+    <None Remove="Resources\Images\Rank Images\Gold II.png" />
+    <None Remove="Resources\Images\Rank Images\Gold III.png" />
+    <None Remove="Resources\Images\Rank Images\Immortal I.png" />
+    <None Remove="Resources\Images\Rank Images\Immortal II.png" />
+    <None Remove="Resources\Images\Rank Images\Immortal III.png" />
+    <None Remove="Resources\Images\Rank Images\Iron I.png" />
+    <None Remove="Resources\Images\Rank Images\Iron II.png" />
+    <None Remove="Resources\Images\Rank Images\Iron III.png" />
+    <None Remove="Resources\Images\Rank Images\Platinum I.png" />
+    <None Remove="Resources\Images\Rank Images\Platinum II.png" />
+    <None Remove="Resources\Images\Rank Images\Platinum III.png" />
+    <None Remove="Resources\Images\Rank Images\Radiant.png" />
+    <None Remove="Resources\Images\Rank Images\Silver I.png" />
+    <None Remove="Resources\Images\Rank Images\Silver II.png" />
+    <None Remove="Resources\Images\Rank Images\Silver III.png" />
+    <None Remove="Resources\Images\Rank Images\Unranked.png" />
+    <None Remove="Resources\Images\StoreItemBackground.png" />
+    <None Remove="Resources\Images\ValorantLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+
+    <Resource Include="Resources\Images\Agent Images\Icons\Astra.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Breach.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Brimstone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Chamber.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Cypher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Jett.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\KAYO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Killjoy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Neon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Omen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Phoenix.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Raze.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Reyna.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Sage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Skye.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Sova.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Viper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Agent Images\Icons\Yoru.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Icon-Wide.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\StoreItemBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\ValorantLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\NightMarketIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+
+    <Resource Include="Resources\Images\Rank Images\Unranked.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Iron I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Iron II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Iron III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Bronze I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Bronze II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Bronze III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Silver I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Silver II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Silver III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Gold I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Gold II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Gold III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Platinum I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Platinum II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Platinum III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Diamond I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Diamond II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Diamond III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Immortal I.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Immortal II.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Immortal III.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Rank Images\Radiant.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Images\Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Resources\Values\Colors\LightThemeColors.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,59 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="ApplicationIconWide" UriSource="../Images/Icon-Wide.png" />
+    <BitmapImage x:Key="ApplicationIcon" UriSource="../Images/Icon.png" />
+    <BitmapImage x:Key="NightMarketIcon" UriSource="../Images/NightMarketIcon.png" />
+    <BitmapImage x:Key="StoreBackground" UriSource="../Images/StoreItemBackground.png" />
+
+    <!-- Rank Images -->
+    <BitmapImage x:Key="UnrankedImage" UriSource="../Images/Rank Images/Unranked.png" />
+
+    <BitmapImage x:Key="Bronze1Image" UriSource="../Images/Rank Images/Bronze I.png" />
+    <BitmapImage x:Key="Bronze2Image" UriSource="../Images/Rank Images/Bronze II.png" />
+    <BitmapImage x:Key="Bronze3Image" UriSource="../Images/Rank Images/Bronze III.png" />
+
+    <BitmapImage x:Key="Silver1Image" UriSource="../Images/Rank Images/Silver I.png" />
+    <BitmapImage x:Key="Silver2Image" UriSource="../Images/Rank Images/Silver II.png" />
+    <BitmapImage x:Key="Silver3Image" UriSource="../Images/Rank Images/Silver III.png" />
+
+    <BitmapImage x:Key="Gold1Image" UriSource="../Images/Rank Images/Gold I.png" />
+    <BitmapImage x:Key="Gold2Image" UriSource="../Images/Rank Images/Gold II.png" />
+    <BitmapImage x:Key="Gold3Image" UriSource="../Images/Rank Images/Gold III.png" />
+
+    <BitmapImage x:Key="Platinum1Image" UriSource="../Images/Rank Images/Platinum I.png" />
+    <BitmapImage x:Key="Platinum2Image" UriSource="../Images/Rank Images/Platinum II.png" />
+    <BitmapImage x:Key="Platinum3Image" UriSource="../Images/Rank Images/Platinum III.png" />
+
+    <BitmapImage x:Key="Diamond1Image" UriSource="../Images/Rank Images/Diamond I.png" />
+    <BitmapImage x:Key="Diamond2Image" UriSource="../Images/Rank Images/Diamond II.png" />
+    <BitmapImage x:Key="Diamond3Image" UriSource="../Images/Rank Images/Diamond III.png" />
+
+    <BitmapImage x:Key="Immortal1Image" UriSource="../Images/Rank Images/Immortal I.png" />
+    <BitmapImage x:Key="Immortal2Image" UriSource="../Images/Rank Images/Immortal II.png" />
+    <BitmapImage x:Key="Immortal3Image" UriSource="../Images/Rank Images/Immortal III.png" />
+
+    <BitmapImage x:Key="RadiantImage" UriSource="../Images/Rank Images/Radiant.png" />
+
+    <!-- Agent Icons -->
+    <BitmapImage x:Key="AstraImage" UriSource="../Images/Agent Images/Icons/Astra.png" />
+    <BitmapImage x:Key="BreachImage" UriSource="../Images/Agent Images/Icons/Breach.png" />
+    <BitmapImage x:Key="BrimstoneImage" UriSource="../Images/Agent Images/Icons/Brimstone.png" />
+    <BitmapImage x:Key="ChamberImage" UriSource="../Images/Agent Images/Icons/Chamber.png" />
+    <BitmapImage x:Key="CypherImage" UriSource="../Images/Agent Images/Icons/Cypher.png" />
+    <BitmapImage x:Key="JettImage" UriSource="../Images/Agent Images/Icons/Jett.png" />
+    <BitmapImage x:Key="KAYOImage" UriSource="../Images/Agent Images/Icons/KAYO.png" />
+    <BitmapImage x:Key="KilljoyImage" UriSource="../Images/Agent Images/Icons/Killjoy.png" />
+    <BitmapImage x:Key="NeonImage" UriSource="../Images/Agent Images/Icons/Neon.png" />
+    <BitmapImage x:Key="OmenImage" UriSource="../Images/Agent Images/Icons/Omen.png" />
+    <BitmapImage x:Key="PhoenixImage" UriSource="../Images/Agent Images/Icons/Phoenix.png" />
+    <BitmapImage x:Key="RazeImage" UriSource="../Images/Agent Images/Icons/Raze.png" />
+    <BitmapImage x:Key="ReynaImage" UriSource="../Images/Agent Images/Icons/Reyna.png" />
+    <BitmapImage x:Key="SageImage" UriSource="../Images/Agent Images/Icons/Sage.png" />
+    <BitmapImage x:Key="SkyeImage" UriSource="../Images/Agent Images/Icons/Skye.png" />
+    <BitmapImage x:Key="SovaImage" UriSource="../Images/Agent Images/Icons/Sova.png" />
+    <BitmapImage x:Key="ViperImage" UriSource="../Images/Agent Images/Icons/Viper.png" />
+    <BitmapImage x:Key="YoruImage" UriSource="../Images/Agent Images/Icons/Yoru.png" />
+    
+</ResourceDictionary>

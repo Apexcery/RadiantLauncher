@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:Double x:Key="NavigationPanelButtonIconSize">40</system:Double>
+
+    <system:Double x:Key="LoginFormTextSize">16</system:Double>
+    <system:Double x:Key="LoginFormTitleTextSize">28</system:Double>
+    <system:Double x:Key="PlayFormTitleTextSize">18</system:Double>
+
+    <system:Double x:Key="RotatingStoreItemCostSize">16</system:Double>
+    <system:Double x:Key="RotatingStoreItemNameSize">20</system:Double>
+
+</ResourceDictionary>

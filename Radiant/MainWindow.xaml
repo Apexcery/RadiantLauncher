@@ -1,0 +1,196 @@
+﻿<Window
+    x:Class="Radiant.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:viewModels="clr-namespace:Radiant.ViewModels"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Width="1280"  Height="720"
+    MinWidth="1280" MinHeight="720"
+    MaxWidth="1280" MaxHeight="720"
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    AllowsTransparency="True"
+    WindowStartupLocation="CenterScreen"
+    Background="{DynamicResource Background}"
+    Icon="Icon.ico"
+    d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
+    <materialDesign:DialogHost
+        Identifier="MainDialogHost"
+        DialogTheme="Dark"
+        CloseOnClickAway="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Section -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100px" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- App Logo -->
+                <Grid
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Background="{DynamicResource Background}">
+                    <Image
+                        Width="75"
+                        Height="75"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="{StaticResource ApplicationIcon}" />
+                </Grid>
+
+                <!-- Navigation Bar -->
+                <Grid
+                    Grid.Row="1"
+                    Background="{DynamicResource Background}">
+                    <StackPanel
+                        Orientation="Vertical"
+                        VerticalAlignment="Top"
+                        Margin="0, 10">
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            IsChecked="True"
+                            GroupName="NavigationPanel"
+                            Command="{Binding HomeViewCommand, Mode=OneWay}"
+                            Tag="PlayOutline">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Home"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            GroupName="NavigationPanel"
+                            Command="{Binding StoreViewCommand, Mode=OneWay}"
+                            Tag="ShoppingCartOutline"
+                            IsEnabled="{Binding IsLoggedIn, Mode=OneWay}">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Store"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            GroupName="NavigationPanel"
+                            Command="{Binding CareerViewCommand, Mode=OneWay}"
+                            Tag="ClipboardClockOutline"
+                            IsEnabled="{Binding IsLoggedIn, Mode=OneWay}">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Career"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+
+                    <StackPanel
+                        Orientation="Vertical"
+                        Background="{DynamicResource Background}"
+                        VerticalAlignment="Bottom">
+                        <RadioButton
+                            Style="{StaticResource NavigationPanelButton}"
+                            GroupName="NavigationPanel"
+                            Command="{Binding SettingsViewCommand, Mode=OneWay}"
+                            Tag="SettingsOutline">
+                            <RadioButton.ToolTip>
+                                <ToolTip
+                                    Content="Settings"
+                                    Placement="Right"
+                                    VerticalOffset="25"
+                                    HorizontalOffset="-10" />
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <!-- Right Section -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50px" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Top Bar -->
+                <Grid
+                    x:Name="SystemBar"
+                    Grid.Row="0"
+                    Background="{DynamicResource Background}"
+                    MouseDown="SystemBar_OnMouseDown">
+
+                    <Grid
+                        HorizontalAlignment="Left"
+                        Margin="10, 0">
+                        <Image
+                            Width="75"
+                            Height="75"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Source="{StaticResource ApplicationIconWide}" />
+                    </Grid>
+
+                    <!-- Window Buttons -->
+                    <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10, 0">
+
+                        <Button
+                            Style="{Binding SystemButtonsStyle}"
+                            d:Style="{StaticResource SimpleSystemButton}"
+                            Background="{StaticResource MinimizeButtonBackground}"
+                            BorderBrush="{StaticResource MinimizeButtonBackgroundHover}"
+                            Tag="Minus"
+                            Command="{Binding MinimizeCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Button.ToolTip>
+                                <ToolTip
+                                Content="Minimize"
+                                Placement="Bottom"
+                                HorizontalOffset="-15" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button
+                            Style="{Binding SystemButtonsStyle}"
+                            d:Style="{StaticResource SimpleSystemButton}"
+                            Background="{StaticResource CloseButtonBackground}"
+                            BorderBrush="{StaticResource CloseButtonBackgroundHover}"
+                            Tag="Close"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                            <Button.ToolTip>
+                                <ToolTip
+                                    Content="Close"
+                                    Placement="Bottom"
+                                    HorizontalOffset="-10" />
+                            </Button.ToolTip>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Main Content -->
+                <ContentControl
+                    Grid.Row="1"
+                    Background="Transparent"
+                    Content="{Binding CurrentView}" />
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</Window>
