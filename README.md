@@ -1,5 +1,9 @@
-# ValorantLauncher
-A custom launcher for VALORANT with added features.
+![](./Docs/Images/Icon-Wide.png)
+
+### A custom launcher for VALORANT with added features.
+
+<br />
+<br />
 
 ## Features
 - Automatically log in with a saved username and password.
