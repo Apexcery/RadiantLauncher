@@ -22,6 +22,10 @@ A custom launcher for VALORANT with added features.
 ## Career
 
 ![Career](./Docs/Images/Career.png)
+
+## Settings
+
+![Settings](./Docs/Images/Settings.png)
 </details>
 
 <br />
