@@ -19,10 +19,10 @@
     <Color x:Key="ValorantRedDarkColor">#9f0110</Color>
 
     <!-- Match History Colors -->
-    <Color x:Key="MatchVictoryColor">#16E5b4</Color>
+    <Color x:Key="MatchVictoryColor">#14c99e</Color>
     <Color x:Key="MatchDefeatColor">#EF5351</Color>
 
-    <SolidColorBrush x:Key="MatchVictoryBrush" Color="#16E5b4" />
+    <SolidColorBrush x:Key="MatchVictoryBrush" Color="#14c99e" />
     <SolidColorBrush x:Key="MatchDefeatBrush" Color="#EF5351" />
 
     <!-- Color Themes -->

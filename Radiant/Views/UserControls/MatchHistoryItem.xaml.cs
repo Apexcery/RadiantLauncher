@@ -280,7 +280,7 @@ namespace Radiant.Views.UserControls
                 this.Background = new LinearGradientBrush(new GradientStopCollection
                 {
                     new((Color)Application.Current.TryFindResource("MatchDrawColor"), 0),
-                    new((Color)Application.Current.TryFindResource("BackgroundDarkColor"), 0.05)
+                    new((Color)Application.Current.TryFindResource("BackgroundColor"), 0.05)
                 }, new Point(0, 0), new Point(1, 1));
 
                 VictoryDefeatText = "Draw";
@@ -296,7 +296,7 @@ namespace Radiant.Views.UserControls
                     this.Background = new LinearGradientBrush(new GradientStopCollection
                     {
                         new((Color)Application.Current.TryFindResource("MatchVictoryColor"), 0),
-                        new((Color)Application.Current.TryFindResource("BackgroundDarkColor"), 0.05)
+                        new((Color)Application.Current.TryFindResource("BackgroundColor"), 0.05)
                     }, new Point(0, 0), new Point(1, 1));
 
                     VictoryDefeatText = "Victory";
@@ -311,7 +311,7 @@ namespace Radiant.Views.UserControls
                     this.Background = new LinearGradientBrush(new GradientStopCollection
                     {
                         new((Color)Application.Current.TryFindResource("MatchDefeatColor"), 0),
-                        new((Color)Application.Current.TryFindResource("BackgroundDarkColor"), 0.05)
+                        new((Color)Application.Current.TryFindResource("BackgroundColor"), 0.05)
                     }, new Point(0, 0), new Point(1, 1));
 
                     VictoryDefeatText = "Defeat";
