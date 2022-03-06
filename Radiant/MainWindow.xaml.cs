@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using AutoUpdaterDotNET;
 using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
 using Radiant.ViewModels;
@@ -11,6 +12,8 @@ namespace Radiant
         public MainWindow(MainViewModel mainViewModel)
         {
             this.DataContext = mainViewModel;
+
+            AutoUpdater.Start("https://raw.githubusercontent.com/Apexcery/RadiantLauncher/master/Radiant/Updates.xml");
 
             InitializeComponent();
         }
