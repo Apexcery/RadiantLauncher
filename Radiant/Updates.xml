@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <item>
-	<version>1.0.0.0</version>
-	<url>https://raw.githubusercontent.com/Apexcery/RadiantLauncher/master/Radiant/Versions/Radiant-v1.0.0.0.msi</url>
+	<version>1.0.0.1</version>
+	<url>https://raw.githubusercontent.com/Apexcery/RadiantLauncher/master/Radiant/Versions/Radiant-v1.0.0.1.msi</url>
 	<changelog>https://github.com/Apexcery/RadiantLauncher/releases</changelog>
 	<mandatory mode="2">true</mandatory>
 </item>
