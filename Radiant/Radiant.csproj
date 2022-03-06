@@ -7,6 +7,15 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <PackageIcon>Icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <SignAssembly>True</SignAssembly>
+    <Company>Radiant</Company>
+    <Authors>Apexcery</Authors>
+    <PackageProjectUrl>https://github.com/Apexcery/RadiantLauncher</PackageProjectUrl>
+    <Description>A custom launcher for VALORANT with added features.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Apexcery/RadiantLauncher</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>valorant;launcher</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -67,6 +76,10 @@
     <Content Include="Resources\Fonts\RobotoSlab\RobotoSlab-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <Resource Include="Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
