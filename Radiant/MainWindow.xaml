@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewModels="clr-namespace:Radiant.ViewModels"
     mc:Ignorable="d"
-    Title="MainWindow"
+    Title="Radiant"
     Width="1280"  Height="720"
     MinWidth="1280" MinHeight="720"
     MaxWidth="1280" MaxHeight="720"
@@ -17,7 +17,8 @@
     WindowStartupLocation="CenterScreen"
     Background="{DynamicResource Background}"
     Icon="Icon.ico"
-    d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}">
+    d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
+    FontFamily="{StaticResource RobotoSlabRegular}">
     <materialDesign:DialogHost
         Identifier="MainDialogHost"
         DialogTheme="Dark"
