@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Utils;
@@ -106,6 +107,19 @@ namespace Radiant.Views.Dialogues
 
         private void CloseDialog()
         {
+            try
+            {
+                if (DialogHost.IsDialogOpen("AddAccountDialogHost"))
+                {
+                    DialogHost.Close("AddAccountDialogHost");
+                    return;
+                }
+            }
+            catch
+            {
+                // ignored, if dialog host does not exist yet, an exception is thrown.
+            }
+
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow?.CloseDialogs();
         }

@@ -42,111 +42,114 @@ namespace Radiant.Models.Client
             }
         }
 
-        public YamlStream CreateFile()
+        public YamlStream CreateFile(UserData userData)
         {
             var settings = new YamlStream(
                 new YamlDocument(
                     new YamlMappingNode(
-                        new YamlScalarNode("riot-login"), new YamlMappingNode(
-                            new YamlScalarNode("persist"), new YamlMappingNode(
-                                new YamlScalarNode("session"), new YamlMappingNode(
-                                    new YamlScalarNode("cookies"), new YamlSequenceNode(
-                                        // TDID Cookie Section
-                                        new YamlMappingNode(
-                                            new YamlScalarNode("domain"),
-                                            new YamlScalarNode("auth.riotgames.com")
+                            new YamlScalarNode("riot-login"), new YamlMappingNode(
+                                new YamlScalarNode("persist"), new YamlMappingNode(
+                                    new YamlScalarNode("region"),
+                                    new YamlScalarNode($"{userData.RiotRegion}")
+                                    { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
+                                    new YamlScalarNode("session"), new YamlMappingNode(
+                                        new YamlScalarNode("cookies"), new YamlSequenceNode(
+                                            // TDID Cookie Section
+                                            new YamlMappingNode(
+                                                new YamlScalarNode("domain"),
+                                                new YamlScalarNode("auth.riotgames.com")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("httpOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("name"),
-                                            new YamlScalarNode("tdid")
+                                                new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("httpOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("name"),
+                                                new YamlScalarNode("tdid")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("path"),
-                                            new YamlScalarNode("/")
+                                                new YamlScalarNode("path"),
+                                                new YamlScalarNode("/")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("persistent"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("value"),
-                                            new YamlScalarNode($"{cookieValues.tdid}")
+                                                new YamlScalarNode("persistent"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("value"),
+                                                new YamlScalarNode($"{ cookieValues.tdid }")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }
-                                        ),
-                                        // SSID Cookie Section
-                                        new YamlMappingNode(
-                                            new YamlScalarNode("domain"),
-                                            new YamlScalarNode("auth.riotgames.com")
+                                            ),
+                                            // SSID Cookie Section
+                                            new YamlMappingNode(
+                                                new YamlScalarNode("domain"),
+                                                new YamlScalarNode("auth.riotgames.com")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("httpOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("name"),
-                                            new YamlScalarNode("ssid")
+                                                new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("httpOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("name"),
+                                                new YamlScalarNode("ssid")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("path"),
-                                            new YamlScalarNode("/")
+                                                new YamlScalarNode("path"),
+                                                new YamlScalarNode("/")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("persistent"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("value"),
-                                            new YamlScalarNode($"{cookieValues.ssid}")
+                                                new YamlScalarNode("persistent"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("value"),
+                                                new YamlScalarNode($"{cookieValues.ssid}")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }
-                                        ),
-                                        // clid Cookie Section
-                                        new YamlMappingNode(
-                                            new YamlScalarNode("domain"),
-                                            new YamlScalarNode("auth.riotgames.com")
+                                            ),
+                                            // clid Cookie Section
+                                            new YamlMappingNode(
+                                                new YamlScalarNode("domain"),
+                                                new YamlScalarNode("auth.riotgames.com")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("httpOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("name"),
-                                            new YamlScalarNode("clid")
+                                                new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("httpOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("name"),
+                                                new YamlScalarNode("clid")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("path"),
-                                            new YamlScalarNode("/")
+                                                new YamlScalarNode("path"),
+                                                new YamlScalarNode("/")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("persistent"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("value"),
-                                            new YamlScalarNode("ue1")
+                                                new YamlScalarNode("persistent"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("value"),
+                                                new YamlScalarNode("ue1")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }
-                                        ),
-                                        // sub Cookie Section
-                                        new YamlMappingNode(
-                                            new YamlScalarNode("domain"),
-                                            new YamlScalarNode("auth.riotgames.com")
+                                            ),
+                                            // sub Cookie Section
+                                            new YamlMappingNode(
+                                                new YamlScalarNode("domain"),
+                                                new YamlScalarNode("auth.riotgames.com")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("httpOnly"), new YamlScalarNode("false"),
-                                            new YamlScalarNode("name"),
-                                            new YamlScalarNode("sub")
+                                                new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("httpOnly"), new YamlScalarNode("false"),
+                                                new YamlScalarNode("name"),
+                                                new YamlScalarNode("sub")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("path"),
-                                            new YamlScalarNode("/")
+                                                new YamlScalarNode("path"),
+                                                new YamlScalarNode("/")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("persistent"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("value"),
-                                            new YamlScalarNode($"{cookieValues.sub}")
+                                                new YamlScalarNode("persistent"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("value"),
+                                                new YamlScalarNode($"{cookieValues.sub}")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }
-                                        ),
-                                        // csid Cookie Section
-                                        new YamlMappingNode(
-                                            new YamlScalarNode("domain"),
-                                            new YamlScalarNode("auth.riotgames.com")
+                                            ),
+                                            // csid Cookie Section
+                                            new YamlMappingNode(
+                                                new YamlScalarNode("domain"),
+                                                new YamlScalarNode("auth.riotgames.com")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("httpOnly"), new YamlScalarNode("false"),
-                                            new YamlScalarNode("name"),
-                                            new YamlScalarNode("csid")
+                                                new YamlScalarNode("hostOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("httpOnly"), new YamlScalarNode("false"),
+                                                new YamlScalarNode("name"),
+                                                new YamlScalarNode("csid")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("path"),
-                                            new YamlScalarNode("/")
+                                                new YamlScalarNode("path"),
+                                                new YamlScalarNode("/")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted },
-                                            new YamlScalarNode("persistent"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
-                                            new YamlScalarNode("value"),
-                                            new YamlScalarNode($"{cookieValues.csid}")
+                                                new YamlScalarNode("persistent"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("secureOnly"), new YamlScalarNode("true"),
+                                                new YamlScalarNode("value"),
+                                                new YamlScalarNode($"{cookieValues.csid}")
                                                 { Style = YamlDotNet.Core.ScalarStyle.DoubleQuoted }
-                                        )
-                                    )))))));
+                                            )
+                                        )))))));
 
             return settings;
         }

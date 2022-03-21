@@ -32,7 +32,8 @@ namespace Radiant
                 if (Directory.Exists(folderPath) && File.Exists(filePath))
                 {
                     var existingConfig = JsonConvert.DeserializeObject<AppConfig>(File.ReadAllText(filePath));
-                    appConfig = existingConfig;
+                    if (existingConfig != null)
+                        appConfig = existingConfig;
                 }
             }
 

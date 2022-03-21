@@ -16,6 +16,7 @@
         <Setter Property="FontWeight" Value="Black" />
         <Setter Property="FontSize" Value="{StaticResource LoginFormTextSize}" />
         <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundDark}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -83,6 +84,7 @@
         <Setter Property="FontFamily" Value="{StaticResource RobotoSlabBold}" />
         <Setter Property="FontWeight" Value="Black" />
         <Setter Property="FontSize" Value="{StaticResource LoginFormTextSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundDark}" />
         <Setter Property="utils:PasswordBoxHelper.Attach" Value="True" />
         <Setter Property="utils:PasswordBoxHelper.Password" Value="{Binding Password, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Setter Property="Template">
@@ -98,7 +100,6 @@
                         Background="{StaticResource TextBoxBackgroundValorant}"
                         BorderThickness="2"
                         BorderBrush="Transparent">
-                        <!-- TODO: Figure out how to style a password box. -->
                         <Grid>
                             <ScrollViewer
                                 x:Name="PART_ContentHost"

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Cache;
@@ -92,8 +93,6 @@ namespace Radiant.ViewModels
         private PlayerStore _playerStore;
         private StoreOffers _storeOffers;
 
-        private NightMarket _nightMarket;
-
         public StoreViewModel(UserData userData, AppConfig appConfig, IStoreService storeService)
         {
             UserData = userData;
@@ -165,16 +164,16 @@ namespace Radiant.ViewModels
             BundleName = bundleInfo.BundleDisplayName;
             BundleCost = $"{bundlePrice:n0}";
 
-            _nightMarket = _playerStore.NightMarket;
+            var nightMarket = _playerStore.NightMarket;
 
-            IsNightMarketAvailable = _nightMarket?.NightMarketOffers?.Count > 0;
+            IsNightMarketAvailable = nightMarket?.NightMarketOffers?.Count > 0;
 
             if (!IsNightMarketAvailable)
                 return;
 
             var offers = _storeOffers.Offers;
 
-            foreach (var offer in _nightMarket.NightMarketOffers)
+            foreach (var offer in nightMarket?.NightMarketOffers ?? new List<NightMarket.NightMarketOffer>())
             {
                 var rewards = offers.FirstOrDefault(x => x.OfferID == offer.Offer.OfferID)?.Rewards;
                 if (rewards == null)

@@ -54,7 +54,7 @@ namespace Radiant.ViewModels
                         }
                     }
                     Application.Current.Resources.MergedDictionaries.Add(dict);
-                    await SaveConfig();
+                    await _appConfig.SaveToFile();
                 }
             }
         }
@@ -77,27 +77,8 @@ namespace Radiant.ViewModels
                             break;
                     }
                     _appConfig.Settings.SystemButtonsType = systemButtonsType;
-                    await SaveConfig();
+                    await _appConfig.SaveToFile();
                 }
-            }
-        }
-
-        private async Task SaveConfig()
-        {
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
-            var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
-
-            if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
-            {
-                var folderPath = Path.Combine(localAppData, applicationName);
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
-                
-                var filePath = Path.Combine(folderPath, configFileName);
-
-                var appConfigAsText = JsonConvert.SerializeObject(_appConfig, Formatting.Indented);
-                await File.WriteAllTextAsync(filePath, appConfigAsText);
             }
         }
     }

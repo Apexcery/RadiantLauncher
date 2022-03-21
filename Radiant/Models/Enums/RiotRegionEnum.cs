@@ -3,7 +3,7 @@
     public enum RiotRegionEnum
     {
         NA,
-        EU,
+        EUW,
         BR,
         AP,
         LATAM,

@@ -33,25 +33,24 @@ namespace Radiant.Services
             _apiUris = ApiURIs.URIs;
         }
 
-        public async Task<bool> Login(string username, string password)
+        public async Task<Account> Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Invalid username or password"});
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls11;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             var authInitCookieData = new AuthInitCookieData();
             var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"));
             if (!initResponse.IsSuccessStatusCode)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in." });
+                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", initResponse.ReasonPhrase });
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
             if (initResponse.Headers.Contains("Set-Cookie"))
@@ -74,9 +73,9 @@ namespace Radiant.Services
                 var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"));
                 if (!response.IsSuccessStatusCode)
                 {
-                    var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in." });
+                    var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", response.ReasonPhrase });
                     await DialogHost.Show(dialog, "MainDialogHost");
-                    return false;
+                    return null;
                 }
 
                 if (response.Headers.Contains("Set-Cookie"))
@@ -91,7 +90,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", $"Error: {authResponse.Error}"});
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
             if (authResponse.Type.Equals("multifactor"))
@@ -101,9 +100,9 @@ namespace Radiant.Services
 
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in."});
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", authResponse.Error });
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
             var regex = new Regex(Regex.Escape("#"));
@@ -116,7 +115,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Access or ID Token was invalid."});
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
             _userData.TokenData = new UserData.TokenDataObject
@@ -132,7 +131,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Entitlement Token was invalid."});
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
             _userData.TokenData.EntitlementToken = entitlementToken;
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-Entitlements-JWT", entitlementToken);
@@ -142,7 +141,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve user data." });
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
             var region = await GetUserRegion();
@@ -150,7 +149,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Failed to retrieve user region."});
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
             _userData.RiotRegion = region.Value;
 
@@ -159,10 +158,18 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve client headers." });
                 await DialogHost.Show(dialog, "MainDialogHost");
-                return false;
+                return null;
             }
 
-            return true;
+            var account = new Account
+            {
+                Username = username,
+                Password = password,
+                DisplayName = _userData.RiotUserData.AccountInfo.GameName,
+                Tag = _userData.RiotUserData.AccountInfo.TagLine
+            };
+
+            return account;
         }
 
         private async Task<AuthResponse> Show2StepAuthDialog(string email)
@@ -200,7 +207,6 @@ namespace Radiant.Services
             {
                 var tb = (TextBox)sender;
                 var cursorPos = tb.CaretIndex;
-                var regex = new Regex("[^0-9]+");
                 var fullText = tb.Text;
                 var cleanedText = Regex.Replace(fullText, "[^0-9]+", "");
                 tb.Text = cleanedText;
@@ -318,7 +324,7 @@ namespace Radiant.Services
                         GlzUrl = "https://glz-eu-1.eu.a.pvp.net",
                         PdUrl = "https://pd.eu.a.pvp.net"
                     };
-                    return RiotRegionEnum.EU;
+                    return RiotRegionEnum.EUW;
                 case "kr":
                     _userData.RiotUrl = new()
                     {

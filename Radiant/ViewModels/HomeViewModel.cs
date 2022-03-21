@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using MaterialDesignThemes.Wpf;
+
 using Newtonsoft.Json;
+
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.Client;
@@ -19,11 +24,9 @@ namespace Radiant.ViewModels
         private readonly IAuthService _authService;
         private UserData _userData;
         private readonly AppConfig _appConfig;
-
-        public RelayCommand<object> LoginCommand { get; }
-        public RelayCommand<object> LogoutCommand { get; }
+        
         public RelayCommand<object> PlayCommand { get; }
-        public RelayCommand<object> LoginAutomaticallyCommand { get; }
+        public RelayCommand<object> AddAccountCommand { get; }
 
         private bool _logInFormVisible = true;
         public bool LogInFormVisible
@@ -36,13 +39,13 @@ namespace Radiant.ViewModels
             }
         }
 
-        private bool _playFormVisible = false;
-        public bool PlayFormVisible
+        private bool _isLoggedIn = false;
+        public bool IsLoggedIn
         {
-            get => _playFormVisible;
+            get => _isLoggedIn;
             set
             {
-                _playFormVisible = value;
+                _isLoggedIn = value;
                 OnPropertyChanged();
             }
         }
@@ -57,7 +60,7 @@ namespace Radiant.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         private string _username = "";
         public string UsernameText
         {
@@ -71,7 +74,7 @@ namespace Radiant.ViewModels
                 }
             }
         }
-        
+
         private string _gameName = "";
         public string GameNameText
         {
@@ -82,18 +85,42 @@ namespace Radiant.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        private bool _loginAutomatically = false;
-        public bool LoginAutomatically
+        
+        private ObservableCollection<Account> _accounts = new();
+        public ObservableCollection<Account> Accounts
         {
-            get => _loginAutomatically;
+            get => _accounts;
             set
             {
-                _loginAutomatically = value;
+                _accounts = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasAccounts));
+            }
+        }
+
+        private Account _selectedAccount;
+        public Account SelectedAccount
+        {
+            get => _selectedAccount;
+            set
+            {
+                _selectedAccount = value;
                 OnPropertyChanged();
             }
         }
 
+        public bool HasAccounts => Accounts.Any();
+
+        private bool _isAccountAddingAllowed;
+        public bool IsAccountAddingAllowed
+        {
+            get => _isAccountAddingAllowed;
+            set
+            {
+                _isAccountAddingAllowed = value;
+                OnPropertyChanged();
+            }
+        }
 
         private MainViewModel _mainViewModel;
 
@@ -102,45 +129,131 @@ namespace Radiant.ViewModels
             _authService = authService;
             _userData = userData;
             _appConfig = appConfig;
+            
+            PlayCommand = new(async _ => await Play());
 
-            LoginCommand = new RelayCommand<object>(async o => await LoginWithWindowData(o));
-            LogoutCommand = new RelayCommand<object>(async o => await Logout(o));
-            PlayCommand = new RelayCommand<object>(async _ => await Play());
-
-            LoginAutomaticallyCommand = new RelayCommand<object>(async _ => await LoginAutomaticallyCheck());
+            AddAccountCommand = new(async _ => await AddAccount());
         }
 
-        private async Task LoginAutomaticallyCheck()
+        public async Task ChangeAccount(object o)
         {
-            var loginFormVisible = LogInFormVisible;
+            if (o == null || !IsLoggedIn)
+                return;
 
-            if (_loginAutomatically && loginFormVisible)
+            var account = (Account)((ComboBox)o).SelectedItem;
+            
+            if ((_userData.RiotUserData?.AccountInfo?.GameName.Equals(account.DisplayName, StringComparison.InvariantCulture) ?? false) &&
+                (_userData.RiotUserData?.AccountInfo?.TagLine.Equals(account.Tag, StringComparison.InvariantCulture) ?? false))
             {
-                var mainWindow = Application.Current.MainWindow;
-                if (mainWindow == null)
-                    return;
-
-                var dialog = new PopupDialog(_appConfig, "Are you sure?",
-                    new []{"Checking this box to log in automatically will save your username and password to this PC.",
-                    "Do not do this if this is a shared computer."});
-                await DialogHost.Show(dialog, "MainDialogHost");
+                return;
             }
+
+            var loginSuccess = await Login(account.Username, account.Password);
+            if (loginSuccess)
+            {
+                SelectedAccount = account;
+                OnPropertyChanged(nameof(Accounts));
+                OnPropertyChanged(nameof(HasAccounts));
+            }
+        }
+
+        public async Task RemoveAccount(object o)
+        {
+            if (o is ComboBoxItem obj)
+            {
+                var acc = obj.Content as Account;
+
+                Accounts.Remove(acc);
+                _appConfig.Accounts.Clear();
+                foreach (var account in Accounts)
+                {
+                    _appConfig.Accounts.Add(account);
+                }
+
+                await _appConfig.SaveToFile();
+
+                if ((_userData.RiotUserData?.AccountInfo.GameName.Equals(acc?.DisplayName, StringComparison.InvariantCulture) ?? false) &&
+                    (_userData.RiotUserData?.AccountInfo.TagLine.Equals(acc?.Tag, StringComparison.InvariantCulture) ?? false))
+                {
+                    Logout();
+                }
+
+                if (Accounts.Any())
+                {
+                    var accToLogin = Accounts.First();
+                    var loginSuccess = await Login(accToLogin.Username, accToLogin.Password);
+                    if (loginSuccess)
+                        SelectedAccount = accToLogin;
+                }
+
+                OnPropertyChanged(nameof(Accounts));
+                OnPropertyChanged(nameof(HasAccounts));
+            }
+        }
+
+        public async Task PopulateAccountList()
+        {
+            foreach (var acc in _appConfig.Accounts)
+                if (!Accounts.Any(x =>
+                        x.Username.Equals(acc.Username, StringComparison.InvariantCulture) &&
+                        x.Password.Equals(acc.Password, StringComparison.InvariantCulture)))
+                {
+                    Accounts.Add(acc);
+                }
+
+            OnPropertyChanged(nameof(Accounts));
+            OnPropertyChanged(nameof(HasAccounts));
+            
+            if (_appConfig.Accounts.Any())
+            {
+                if (_userData.RiotUserData != null)
+                {
+                    SelectedAccount = Accounts.FirstOrDefault(x =>
+                        x.DisplayName.Equals(_userData.RiotUserData.AccountInfo.GameName, StringComparison.InvariantCulture) &&
+                        x.Tag.Equals(_userData.RiotUserData.AccountInfo.TagLine, StringComparison.InvariantCulture));
+                }
+                else
+                {
+                    SelectedAccount = _appConfig.Accounts.First();
+                }
+            }
+
+            IsAccountAddingAllowed = _appConfig.Accounts.Count < 5;
+
+            if (SelectedAccount != null && !IsLoggedIn)
+            {
+                var loginSuccess = await Login(SelectedAccount.Username, SelectedAccount.Password);
+                if (loginSuccess)
+                {
+                    OnPropertyChanged(nameof(Accounts));
+                    OnPropertyChanged(nameof(HasAccounts));
+                }
+            }
+        }
+
+        private async Task AddAccount()
+        {
+            var dialog = new AddAccountDialog(_appConfig, this, _userData);
+            await DialogHost.Show(dialog, "MainDialogHost");
+            await PopulateAccountList();
         }
 
         private async Task Play()
         {
-            var clientPath = "";
-            var riotClientExists = CheckForRiotClient(out clientPath);
+            var riotClientExists = CheckForRiotClient(out var clientPath);
             if (!riotClientExists)
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Riot Client not detected, is VALORANT installed?"});
+                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Riot Client not detected, is VALORANT installed?" });
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return;
             }
 
             await AuthenticateRiotClient();
 
-            var riotClient = new ProcessStartInfo(clientPath, " --launch-product=valorant --launch-patchline=live");
+            var riotClient = new ProcessStartInfo(clientPath, " --launch-product=valorant --launch-patchline=live")
+            {
+                UseShellExecute = true
+            };
             Process.Start(riotClient);
 
             Application.Current.Shutdown();
@@ -150,18 +263,25 @@ namespace Radiant.ViewModels
         {
             var riotGamesSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotGamesPrivateSettings.yaml");
             var riotClientSettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Data", "RiotClientPrivateSettings.yaml");
+            var riotClientConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Riot Games", "Riot Client", "Config", "RiotClientSettings.yaml");
 
             var clientGameSettings = new ClientGameModel(_userData);
             var clientPrivateSettings = new ClientPrivateModel(_userData);
+            var clientConfigSettings = new ClientConfigSettingsModel();
 
             await using (TextWriter writer = File.CreateText(riotGamesSettingsPath))
             {
-                clientGameSettings.CreateFile().Save(writer, false);
+                clientGameSettings.CreateFile(_userData).Save(writer, false);
             }
 
             await using (TextWriter writer = File.CreateText(riotClientSettingsPath))
             {
                 clientPrivateSettings.CreateFile().Save(writer, false);
+            }
+
+            await using (TextWriter writer = File.CreateText(riotClientConfigPath))
+            {
+                clientConfigSettings.CreateSettings(_userData).Save(writer, false);
             }
         }
 
@@ -177,109 +297,43 @@ namespace Radiant.ViewModels
             }
 
             var config = JsonConvert.DeserializeObject<RiotClientInstalls>(File.ReadAllText(Path.Combine(defaultPath, defaultFileName)));
-            
+
             clientPath = config.RcDefault;
 
             return true;
         }
 
-        private async Task Logout(object obj)
+        private void Logout()
         {
-            var passwordBox = (PasswordBox)obj;
             _userData = _userData.Clear();
             GameNameText = "";
             UsernameText = "";
-            passwordBox.Clear();
-            passwordBox.SecurePassword.Clear();
-            PasswordBoxHelper.SetPassword(passwordBox, "");
-            PlayFormVisible = false;
+            IsLoggedIn = false;
             LogInFormVisible = true;
-
-            // Clear saved login details
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
-            var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
-
-            if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
-            {
-                var folderPath = Path.Combine(localAppData, applicationName);
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
-                
-                var filePath = Path.Combine(folderPath, configFileName);
-
-                _appConfig.LoginAutomatically = LoginAutomatically;
-                _appConfig.LoginDetails.Username = "";
-                _appConfig.LoginDetails.Password = "";
-
-                var appConfigAsText = JsonConvert.SerializeObject(_appConfig, Formatting.Indented);
-                await File.WriteAllTextAsync(filePath, appConfigAsText);
-            }
 
             _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
             if (_mainViewModel != null)
                 _mainViewModel.IsLoggedIn = false;
         }
 
-        public async Task LoginWithSavedData()
-        {
-            // Login automatically
-            if (_appConfig.LoginAutomatically && _appConfig.LoginDetails.IsValid())
-            {
-                await Login(_appConfig.LoginDetails.Username, _appConfig.LoginDetails.Password);
-            }
-        }
-
-        private async Task LoginWithWindowData(object obj)
-        {
-            var passwordBox = (PasswordBox)obj;
-            var username = UsernameText;
-            var password = passwordBox.Password;
-
-            var loginSuccess = await Login(username, password);
-            if (loginSuccess)
-            {
-                // Save login details
-                var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
-                var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
-
-                if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
-                {
-                    var folderPath = Path.Combine(localAppData, applicationName);
-                    if (!Directory.Exists(folderPath))
-                        Directory.CreateDirectory(folderPath);
-                    
-                    var filePath = Path.Combine(folderPath, configFileName);
-
-                    _appConfig.LoginAutomatically = LoginAutomatically;
-                    _appConfig.LoginDetails.Username = LoginAutomatically ? username : "";
-                    _appConfig.LoginDetails.Password = LoginAutomatically ? password : "";
-
-                    var appConfigAsText = JsonConvert.SerializeObject(_appConfig, Formatting.Indented);
-                    await File.WriteAllTextAsync(filePath, appConfigAsText);
-                }
-            }
-        }
-
-        private async Task<bool> Login(string username, string password)
+        public async Task<bool> Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Invalid Username or Password."});
+                var dialog = new PopupDialog(_appConfig, "Error", new[] { "Invalid Username or Password." });
                 await DialogHost.Show(dialog, "MainDialogHost");
                 return false;
             }
-            
+
             LoadingVisible = true;
             LogInFormVisible = false;
 
-            var logInSuccess = await _authService.Login(username, password);
-            if (logInSuccess)
+            Logout();
+            var logInSuccessAccount = await _authService.Login(username, password);
+            if (logInSuccessAccount != null)
             {
-                // Change partial view
-                GameNameText = _userData.RiotUserData.AccountInfo.GameName;
-                PlayFormVisible = true;
+                GameNameText = logInSuccessAccount.FullDisplayName;
+                IsLoggedIn = true;
 
                 _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
                 if (_mainViewModel != null)
@@ -291,8 +345,9 @@ namespace Radiant.ViewModels
             }
 
             LoadingVisible = false;
+            LogInFormVisible = true;
 
-            return logInSuccess;
+            return logInSuccessAccount != null;
         }
     }
 }

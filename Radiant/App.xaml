@@ -25,6 +25,7 @@
                 <!-- Styles -->
                 <ResourceDictionary Source="Resources/Styles/NavigationPanelButton.xaml" />
                 <ResourceDictionary Source="Resources/Styles/LoginFormTextBox.xaml" />
+                <ResourceDictionary Source="Resources/Styles/LoginFormComboBox.xaml" />
 
                 <!-- Settings Styles -->
                 <ResourceDictionary Source="Resources/Styles/Settings/SystemButtons/ColoredSystemButton.xaml" />

@@ -55,14 +55,6 @@ namespace Radiant.ViewModels
             this.MinimizeCommand = new(this.MinimizeApplication);
             this.CloseCommand = new(this.CloseApplication);
 
-            CurrentView = homeViewModel;
-
-            HomeViewCommand = ChangeView(homeViewModel);
-            StoreViewCommand = ChangeView(storeViewModel);
-            CareerViewCommand = ChangeView(careerViewModel);
-
-            SettingsViewCommand = ChangeView(settingsViewModel);
-
             switch (appConfig.Settings.SystemButtonsType)
             {
                 case SystemButtonsType.Colored:
@@ -84,6 +76,14 @@ namespace Radiant.ViewModels
                     break;
             }
             Application.Current.Resources.MergedDictionaries.Add(dict);
+
+            CurrentView = homeViewModel;
+
+            HomeViewCommand = ChangeView(homeViewModel);
+            StoreViewCommand = ChangeView(storeViewModel);
+            CareerViewCommand = ChangeView(careerViewModel);
+
+            SettingsViewCommand = ChangeView(settingsViewModel);
         }
 
         private RelayCommand<object> ChangeView(object vm)

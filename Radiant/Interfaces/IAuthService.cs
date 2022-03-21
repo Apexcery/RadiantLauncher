@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using Radiant.Models;
 
 namespace Radiant.Interfaces
 {
     public interface IAuthService
     {
-        Task<bool> Login(string username, string password);
+        Task<Account> Login(string username, string password);
     }
 }
