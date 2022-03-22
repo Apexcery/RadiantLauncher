@@ -4,12 +4,12 @@
 
 <br />
 
-## [Download Latest](https://github.com/Apexcery/RadiantLauncher/releases/download/v1.0.0/Radiant.msi)
+## [Download Latest](https://github.com/Apexcery/RadiantLauncher/releases/download/v1.0.0.2/Radiant-v1.0.0.2.msi)
 
 <br />
 
 ## Features
-- Automatically log in with a saved username and password.
+- Have up to 5 accounts saved at a time to switch between at will.
 - View the store (including rotating items and night market when available).
 - View your ranks from previous acts.
 - View your match history.

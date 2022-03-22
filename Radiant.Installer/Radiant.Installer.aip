@@ -57,10 +57,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/Apexcery/RadiantLauncher/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Apexcery"/>
-    <ROW Property="ProductCode" Value="1033:{08CECDF5-6F91-4CC9-8D68-E6254A63F796} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{ED43EE2F-4396-4C8E-BCD1-F22C7509B2F0} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Radiant"/>
-    <ROW Property="ProductVersion" Value="1.0.0.1"/>
+    <ROW Property="ProductVersion" Value="1.0.0.2"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{5474B724-1EE8-461F-928D-D5BE9CD5B917}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -268,7 +268,7 @@
     <ATTRIBUTE name="UsedTheme" value="classic"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
-    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="769" ActionProperty="OLDPRODUCTS"/>
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
