@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,6 +96,7 @@ namespace Radiant.Views.Dialogues
 
             IsLoadingVisible = true;
 
+            _homeViewModel.Logout();
             var loginSuccess = await _homeViewModel.Login(username, password, true);
 
             if (loginSuccess)

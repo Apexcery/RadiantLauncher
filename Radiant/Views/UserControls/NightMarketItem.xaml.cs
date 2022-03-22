@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Cache;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -10,11 +11,13 @@ namespace Radiant.Views.UserControls
 {
     public partial class NightMarketItem : UserControl
     {
+        private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly IStoreService _storeService;
         private readonly string _itemId;
 
-        public NightMarketItem(IStoreService storeService, string itemId)
+        public NightMarketItem(CancellationTokenSource cancellationTokenSource, IStoreService storeService, string itemId)
         {
+            _cancellationTokenSource = cancellationTokenSource;
             _storeService = storeService;
             _itemId = itemId;
 
@@ -27,9 +30,9 @@ namespace Radiant.Views.UserControls
         {
             TxtItemName.Width = Grid.ActualWidth / 2;
             TxtItemName.MaxWidth = Grid.ActualWidth / 2;
-
-            var skinInfo = await _storeService.GetSkinInformation(_itemId);
-            var skinPrice = await _storeService.GetSkinPrice(_itemId);
+            
+            var skinInfo = await _storeService.GetSkinInformation(_cancellationTokenSource.Token, _itemId);
+            var skinPrice = await _storeService.GetSkinPrice(_cancellationTokenSource.Token, _itemId);
 
             var uri = skinInfo.DisplayIcon;
             if (skinInfo.Chromas.Any())

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Cache;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -93,6 +94,8 @@ namespace Radiant.ViewModels
         private PlayerStore _playerStore;
         private StoreOffers _storeOffers;
 
+        public CancellationTokenSource CancellationTokenSource = new();
+        
         public StoreViewModel(UserData userData, AppConfig appConfig, IStoreService storeService)
         {
             UserData = userData;
@@ -131,8 +134,17 @@ namespace Radiant.ViewModels
                 return;
             }
 
-            _playerStore = await _storeService.GetPlayerStore();
-            _storeOffers = await _storeService.GetStoreOffers();
+            if (CancellationTokenSource.IsCancellationRequested)
+            {
+                CancellationTokenSource = new();
+            }
+
+            try
+            {
+                _playerStore = await _storeService.GetPlayerStore(CancellationTokenSource.Token);
+                _storeOffers = await _storeService.GetStoreOffers(CancellationTokenSource.Token);
+            }
+            catch (TaskCanceledException taskCanceledException) { }
 
             await PopulateStoreView();
         }
@@ -142,14 +154,23 @@ namespace Radiant.ViewModels
             var rotatingStoreItems = _playerStore.RotatingStore.SingleItemOffers;
             foreach (var item in rotatingStoreItems)
             {
-                var skinControl = new RotatingStoreItem(_storeService, item);
+                var skinControl = new RotatingStoreItem(CancellationTokenSource.CreateLinkedTokenSource(CancellationTokenSource.Token), _storeService, item);
                 RotatingStoreItems.Add(skinControl);
             }
 
             var currentBundle = _playerStore.FeaturedBundle.Bundle;
             var bundleId = currentBundle.DataAssetID;
-            var bundleInfo = await _storeService.GetBundleInformation(bundleId);
-            
+
+            BundleInformation bundleInfo = null;
+            try
+            {
+                bundleInfo = await _storeService.GetBundleInformation(CancellationTokenSource.Token, bundleId);
+            }
+            catch (TaskCanceledException taskCanceledException) { }
+
+            if (bundleInfo is null)
+                return;
+
             var bundlePrice = 0;
             foreach (var item in currentBundle.BundleItems)
             {
@@ -181,7 +202,7 @@ namespace Radiant.ViewModels
 
                 foreach (var item in rewards)
                 {
-                    var tile = new NightMarketItem(_storeService, item.ItemID)
+                    var tile = new NightMarketItem(CancellationTokenSource.CreateLinkedTokenSource(CancellationTokenSource.Token), _storeService, item.ItemID)
                     {
                         MaxWidth = 200
                     };

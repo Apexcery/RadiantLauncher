@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using MaterialDesignThemes.Wpf;
 using Radiant.Extensions;
@@ -20,7 +21,7 @@ namespace Radiant.Services
             _appConfig = appConfig;
         }
 
-        public async Task<PlayerStore> GetPlayerStore()
+        public async Task<PlayerStore> GetPlayerStore(CancellationToken cancellationToken)
         {
             if (_userData.RiotUserData?.Puuid == null || _userData.RiotUrl?.PdUrl == null)
             {
@@ -30,7 +31,7 @@ namespace Radiant.Services
             }
 
             var baseAddress = _userData.RiotUrl.PdUrl;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/store/v2/storefront/{_userData.RiotUserData.Puuid}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/store/v2/storefront/{_userData.RiotUserData.Puuid}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get player's store.", response.ReasonPhrase});
@@ -38,11 +39,11 @@ namespace Radiant.Services
                 return null;
             }
 
-            var playerStore = await response.Content.ReadAsJsonAsync<PlayerStore>();
+            var playerStore = await response.Content.ReadAsJsonAsync<PlayerStore>(cancellationToken);
             return playerStore;
         }
 
-        public async Task<StoreOffers> GetStoreOffers()
+        public async Task<StoreOffers> GetStoreOffers(CancellationToken cancellationToken)
         {
             if (_userData.RiotUrl?.PdUrl == null)
             {
@@ -54,7 +55,7 @@ namespace Radiant.Services
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls11;
 
             var baseAddress = _userData.RiotUrl.PdUrl;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/store/v1/offers/");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/store/v1/offers/", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get store offers.", response.ReasonPhrase});
@@ -62,14 +63,14 @@ namespace Radiant.Services
                 return null;
             }
 
-            var storeOffers = await response.Content.ReadAsJsonAsync<StoreOffers>();
+            var storeOffers = await response.Content.ReadAsJsonAsync<StoreOffers>(cancellationToken);
             return storeOffers;
         }
 
-        public async Task<SkinInformation> GetSkinInformation(string itemId)
+        public async Task<SkinInformation> GetSkinInformation(CancellationToken cancellationToken, string itemId)
         {
             var baseAddress = ApiURIs.URIs["SkinUri"].OriginalString;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve skin data for ID:", itemId, response.ReasonPhrase});
@@ -77,14 +78,14 @@ namespace Radiant.Services
                 return null;
             }
 
-            var skinInfo = await response.Content.ReadAsJsonAsync<SkinInformation>();
+            var skinInfo = await response.Content.ReadAsJsonAsync<SkinInformation>(cancellationToken);
             return skinInfo;
         }
 
-        public async Task<int> GetSkinPrice(string itemId)
+        public async Task<int> GetSkinPrice(CancellationToken cancellationToken, string itemId)
         {
             var baseAddress = ApiURIs.URIs["OfferUri"].OriginalString;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve skin price for ID:", itemId, response.ReasonPhrase});
@@ -92,14 +93,14 @@ namespace Radiant.Services
                 return 99999;
             }
 
-            var price = await response.Content.ReadAsJsonAsync<SkinCost>();
+            var price = await response.Content.ReadAsJsonAsync<SkinCost>(cancellationToken);
             return price.Cost.ValorantPointCost;
         }
 
-        public async Task<BundleInformation> GetBundleInformation(string bundleId)
+        public async Task<BundleInformation> GetBundleInformation(CancellationToken cancellationToken, string bundleId)
         {
             var baseAddress = ApiURIs.URIs["BundleUri"].OriginalString;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/{bundleId}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/{bundleId}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve bundle data for ID:", bundleId, response.ReasonPhrase});
@@ -107,7 +108,7 @@ namespace Radiant.Services
                 return null;
             }
 
-            var bundleInfo = await response.Content.ReadAsJsonAsync<BundleInformation>();
+            var bundleInfo = await response.Content.ReadAsJsonAsync<BundleInformation>(cancellationToken);
             return bundleInfo;
         }
     }

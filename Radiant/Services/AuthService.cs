@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,7 +34,7 @@ namespace Radiant.Services
             _apiUris = ApiURIs.URIs;
         }
 
-        public async Task<Account> Login(string username, string password, bool isAddingAccount)
+        public async Task<Account> Login(CancellationToken cancellationToken, string username, string password, bool isAddingAccount = false)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
@@ -45,7 +46,7 @@ namespace Radiant.Services
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             var authInitCookieData = new AuthInitCookieData();
-            var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"));
+            var initResponse = await _userData.Client.PostAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authInitCookieData), Encoding.UTF8, "application/json"), cancellationToken);
             if (!initResponse.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", initResponse.ReasonPhrase });
@@ -58,7 +59,7 @@ namespace Radiant.Services
                 AddClientCookies(initResponse.Headers.GetValues("Set-Cookie"));
             }
 
-            var authResponse = await initResponse.Content.ReadAsJsonAsync<AuthResponse>();
+            var authResponse = await initResponse.Content.ReadAsJsonAsync<AuthResponse>(cancellationToken);
 
             if (authResponse.Type.Equals("auth", StringComparison.OrdinalIgnoreCase))
             {
@@ -70,7 +71,7 @@ namespace Radiant.Services
                     Remember = "true"
                 };
 
-                var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"));
+                var response = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(JsonConvert.SerializeObject(authData), Encoding.UTF8, "application/json"), cancellationToken);
                 if (!response.IsSuccessStatusCode)
                 {
                     var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", response.ReasonPhrase });
@@ -83,7 +84,7 @@ namespace Radiant.Services
                     AddClientCookies(response.Headers.GetValues("Set-Cookie"));
                 }
 
-                authResponse = await response.Content.ReadAsJsonAsync<AuthResponse>();
+                authResponse = await response.Content.ReadAsJsonAsync<AuthResponse>(cancellationToken);
             }
 
             if (!string.IsNullOrEmpty(authResponse.Error))
@@ -95,7 +96,7 @@ namespace Radiant.Services
 
             if (authResponse.Type.Equals("multifactor"))
             {
-                authResponse = await Show2StepAuthDialog(authResponse.Multifactor.Email, isAddingAccount);
+                authResponse = await Show2StepAuthDialog(cancellationToken, authResponse.Multifactor.Email, isAddingAccount);
             }
 
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
@@ -126,7 +127,7 @@ namespace Radiant.Services
 
             _userData.Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
 
-            var entitlementToken = await GetEntitlementToken();
+            var entitlementToken = await GetEntitlementToken(cancellationToken);
             if (string.IsNullOrEmpty(entitlementToken))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Entitlement Token was invalid."});
@@ -136,7 +137,7 @@ namespace Radiant.Services
             _userData.TokenData.EntitlementToken = entitlementToken;
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-Entitlements-JWT", entitlementToken);
 
-            _userData.RiotUserData = await GetUserData();
+            _userData.RiotUserData = await GetUserData(cancellationToken);
             if (_userData.RiotUserData == null)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve user data." });
@@ -144,7 +145,7 @@ namespace Radiant.Services
                 return null;
             }
 
-            var region = await GetUserRegion();
+            var region = await GetUserRegion(cancellationToken);
             if (region == null)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Failed to retrieve user region."});
@@ -153,7 +154,7 @@ namespace Radiant.Services
             }
             _userData.RiotRegion = region.Value;
 
-            var addHeaderSuccess = await AddClientHeaders();
+            var addHeaderSuccess = await AddClientHeaders(cancellationToken);
             if (!addHeaderSuccess)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve client headers." });
@@ -172,7 +173,7 @@ namespace Radiant.Services
             return account;
         }
 
-        private async Task<AuthResponse> Show2StepAuthDialog(string email, bool isAddingAccount)
+        private async Task<AuthResponse> Show2StepAuthDialog(CancellationToken cancellationToken, string email, bool isAddingAccount)
         {
             var authCode = "";
             AuthResponse authResponse = null;
@@ -223,7 +224,7 @@ namespace Radiant.Services
                     Code = authCode
                 };
                 var mfaDataAsJson = JsonConvert.SerializeObject(mfaData);
-                var mfaResponse = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(mfaDataAsJson, Encoding.UTF8, "application/json"));
+                var mfaResponse = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(mfaDataAsJson, Encoding.UTF8, "application/json"), cancellationToken);
                 if (!mfaResponse.IsSuccessStatusCode)
                 {
                     var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Could not verify 2fa code." });
@@ -237,7 +238,7 @@ namespace Radiant.Services
                     AddClientCookies(mfaResponse.Headers.GetValues("Set-Cookie"));
                 }
 
-                authResponse = await mfaResponse.Content.ReadAsJsonAsync<AuthResponse>();
+                authResponse = await mfaResponse.Content.ReadAsJsonAsync<AuthResponse>(cancellationToken);
                 DialogHost.Close(isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
             };
 
@@ -271,20 +272,20 @@ namespace Radiant.Services
             }
         }
 
-        private async Task<bool> AddClientHeaders()
+        private async Task<bool> AddClientHeaders(CancellationToken cancellationToken)
         {
-            var response = await _userData.Client.GetAsync(_apiUris["ClientVersionUri"]);
+            var response = await _userData.Client.GetAsync(_apiUris["ClientVersionUri"], cancellationToken);
             if (!response.IsSuccessStatusCode)
                 return false;
 
-            var versions = await response.Content.ReadAsJsonAsync<RiotClientVersions>();
+            var versions = await response.Content.ReadAsJsonAsync<RiotClientVersions>(cancellationToken);
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-ClientVersion", versions.Data.RiotClientVersion);
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-ClientPlatform", "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9");
 
             return true;
         }
 
-        private async Task<RiotRegionEnum?> GetUserRegion(string region = null)
+        private async Task<RiotRegionEnum?> GetUserRegion(CancellationToken cancellationToken, string region = null)
         {
             var liveRegion = "";
             if (region is null)
@@ -293,7 +294,7 @@ namespace Radiant.Services
                 {
                     id_token = _userData.TokenData.IdToken
                 };
-                var response = await _userData.Client.PutAsync(_apiUris["UserRegionUri"], new StringContent(JsonConvert.SerializeObject(token)));
+                var response = await _userData.Client.PutAsync(_apiUris["UserRegionUri"], new StringContent(JsonConvert.SerializeObject(token)), cancellationToken);
                 if (response.Headers.Contains("Set-Cookie"))
                 {
                     AddClientCookies(response.Headers.GetValues("Set-Cookie"));
@@ -301,7 +302,7 @@ namespace Radiant.Services
                 if (!response.IsSuccessStatusCode)
                     return null;
 
-                var regionData = await response.Content.ReadAsJsonAsync<RegionResponse>();
+                var regionData = await response.Content.ReadAsJsonAsync<RegionResponse>(cancellationToken);
                 liveRegion = regionData.Affinities["live"];
             }
             else
@@ -358,9 +359,9 @@ namespace Radiant.Services
             return RiotRegionEnum.AP;
         }
 
-        private async Task<UserData.RiotUserDataObject> GetUserData()
+        private async Task<UserData.RiotUserDataObject> GetUserData(CancellationToken cancellationToken)
         {
-            var response = await _userData.Client.GetAsync(_apiUris["UserInfoUri"]);
+            var response = await _userData.Client.GetAsync(_apiUris["UserInfoUri"], cancellationToken);
             if (response.Headers.Contains("Set-Cookie"))
             {
                 AddClientCookies(response.Headers.GetValues("Set-Cookie"));
@@ -368,12 +369,12 @@ namespace Radiant.Services
             if (!response.IsSuccessStatusCode)
                 return null;
 
-            return await response.Content.ReadAsJsonAsync<UserData.RiotUserDataObject>();
+            return await response.Content.ReadAsJsonAsync<UserData.RiotUserDataObject>(cancellationToken);
         }
 
-        private async Task<string> GetEntitlementToken()
+        private async Task<string> GetEntitlementToken(CancellationToken cancellationToken)
         {
-            var response = await _userData.Client.PostAsync(_apiUris["EntitlementUri"], new StringContent("", Encoding.UTF8, "application/json"));
+            var response = await _userData.Client.PostAsync(_apiUris["EntitlementUri"], new StringContent("", Encoding.UTF8, "application/json"), cancellationToken);
 
             if (response.Headers.Contains("Set-Cookie"))
             {
@@ -382,7 +383,7 @@ namespace Radiant.Services
 
             if (!response.IsSuccessStatusCode)
                 return null;
-            var token = JsonConvert.DeserializeObject<EntitlementResponse>(await response.Content.ReadAsStringAsync())?.EntitlementsToken;
+            var token = JsonConvert.DeserializeObject<EntitlementResponse>(await response.Content.ReadAsStringAsync(cancellationToken))?.EntitlementsToken;
             
             return token;
         }

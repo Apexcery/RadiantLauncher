@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:viewModels="clr-namespace:Radiant.ViewModels"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d"
     Title="Radiant"
     Width="1280"  Height="720"
@@ -23,6 +24,11 @@
         Identifier="MainDialogHost"
         DialogTheme="Dark"
         CloseOnClickAway="True">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="DialogClosing">
+                <i:InvokeCommandAction Command="{Binding CancelRequestsCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100px" />

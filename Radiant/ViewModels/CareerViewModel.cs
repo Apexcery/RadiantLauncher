@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,6 +94,8 @@ namespace Radiant.ViewModels
             }
         }
 
+        public CancellationTokenSource CancellationTokenSource = new();
+
         public CareerViewModel(ICareerService careerService, UserData userData)
         {
             _careerService = careerService;
@@ -117,15 +120,27 @@ namespace Radiant.ViewModels
             if (RankHistoryItems.Any())
                 return;
 
-            var rankInfoTask = _careerService.GetPlayerRankInfo();
-            var playerRankUpdatesTask = _careerService.GetPlayerRankUpdates(10, "competitive");
-            var playerMatchHistoryTask = _careerService.GetPlayerMatchHistory(10);
+            if (CancellationTokenSource.IsCancellationRequested)
+            {
+                CancellationTokenSource = new();
+            }
 
-            await Task.WhenAll(rankInfoTask, playerRankUpdatesTask, playerMatchHistoryTask);
+            var rankInfoTask = _careerService.GetPlayerRankInfo(CancellationTokenSource.Token);
+            var playerRankUpdatesTask = _careerService.GetPlayerRankUpdates(CancellationTokenSource.Token, 10, "competitive");
+            var playerMatchHistoryTask = _careerService.GetPlayerMatchHistory(CancellationTokenSource.Token, 10);
 
-            var rankInfo = await rankInfoTask;
-            var playerRankUpdates = await playerRankUpdatesTask;
-            var playerMatchHistory = await playerMatchHistoryTask;
+            PlayerRankInfo rankInfo = null;
+            PlayerRankUpdates playerRankUpdates = null;
+            PlayerMatchHistory playerMatchHistory = null;
+            try
+            {
+                await Task.WhenAll(rankInfoTask, playerRankUpdatesTask, playerMatchHistoryTask);
+
+                rankInfo = await rankInfoTask;
+                playerRankUpdates = await playerRankUpdatesTask;
+                playerMatchHistory = await playerMatchHistoryTask;
+            }
+            catch (TaskCanceledException taskCanceledException) { }
 
             if (rankInfo == null || playerRankUpdates == null || playerMatchHistory == null)
                 return;
@@ -216,8 +231,17 @@ namespace Radiant.ViewModels
 
         private async Task PopulateMatchHistory(PlayerMatchHistory playerMatchHistory, PlayerRankUpdates playerRankUpdates)
         {
-            var matchDataTasks = playerMatchHistory.Matches.Select(match => _careerService.GetMatchData(match.MatchID)).ToList();
-            var matchDataResults = await Task.WhenAll(matchDataTasks);
+            var matchDataTasks = playerMatchHistory.Matches.Select(match => _careerService.GetMatchData(CancellationTokenSource.Token, match.MatchID)).ToList();
+            MatchData[] matchDataResults = null;
+            try
+            {
+                matchDataResults = await Task.WhenAll(matchDataTasks);
+            }
+            catch (TaskCanceledException taskCanceledException) { }
+
+            if (matchDataResults is null)
+                return;
+
             foreach (var matchData in matchDataResults)
             {
                 var matchingRankUpdate = playerRankUpdates.Matches.FirstOrDefault(x => x.MatchID.Equals(matchData.MatchInfo.MatchId));

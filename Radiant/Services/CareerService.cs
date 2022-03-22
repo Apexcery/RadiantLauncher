@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using MaterialDesignThemes.Wpf;
 using Radiant.Extensions;
 using Radiant.Interfaces;
@@ -19,7 +20,7 @@ namespace Radiant.Services
             _appConfig = appConfig;
         }
 
-        public async Task<PlayerRankInfo> GetPlayerRankInfo()
+        public async Task<PlayerRankInfo> GetPlayerRankInfo(CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
@@ -29,7 +30,7 @@ namespace Radiant.Services
             }
 
             var baseAddress = _userData.RiotUrl.PdUrl;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/mmr/v1/players/{_userData.RiotUserData.Puuid}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/mmr/v1/players/{_userData.RiotUserData.Puuid}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get player's career rank.", response.ReasonPhrase});
@@ -37,11 +38,11 @@ namespace Radiant.Services
                 return null;
             }
 
-            var playerRankInfo = await response.Content.ReadAsJsonAsync<PlayerRankInfo>();
+            var playerRankInfo = await response.Content.ReadAsJsonAsync<PlayerRankInfo>(cancellationToken);
             return playerRankInfo;
         }
 
-        public async Task<PlayerRankUpdates> GetPlayerRankUpdates(int amount = 15, string queue = null)
+        public async Task<PlayerRankUpdates> GetPlayerRankUpdates(CancellationToken cancellationToken, int amount = 15, string queue = null)
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
@@ -54,7 +55,7 @@ namespace Radiant.Services
             var requestUrl = $"{baseAddress}/mmr/v1/players/{_userData.RiotUserData.Puuid}/competitiveupdates?startIndex=0&endIndex={amount}";
             if (!string.IsNullOrEmpty(queue))
                 requestUrl += $"&queue={queue}";
-            var response = await _userData.Client.GetAsync(requestUrl);
+            var response = await _userData.Client.GetAsync(requestUrl, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get player's rank updates.", response.ReasonPhrase});
@@ -62,11 +63,11 @@ namespace Radiant.Services
                 return null;
             }
 
-            var playerRankInfo = await response.Content.ReadAsJsonAsync<PlayerRankUpdates>();
+            var playerRankInfo = await response.Content.ReadAsJsonAsync<PlayerRankUpdates>(cancellationToken);
             return playerRankInfo;
         }
 
-        public async Task<PlayerMatchHistory> GetPlayerMatchHistory(int amount = 15, string queue = null)
+        public async Task<PlayerMatchHistory> GetPlayerMatchHistory(CancellationToken cancellationToken, int amount = 15, string queue = null)
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
@@ -80,7 +81,7 @@ namespace Radiant.Services
             if (!string.IsNullOrEmpty(queue))
                 requestUrl += $"&queue={queue}";
 
-            var response = await _userData.Client.GetAsync($"{requestUrl}");
+            var response = await _userData.Client.GetAsync($"{requestUrl}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get player's match history.", response.ReasonPhrase});
@@ -88,11 +89,11 @@ namespace Radiant.Services
                 return null;
             }
 
-            var playerMatchHistory = await response.Content.ReadAsJsonAsync<PlayerMatchHistory>();
+            var playerMatchHistory = await response.Content.ReadAsJsonAsync<PlayerMatchHistory>(cancellationToken);
             return playerMatchHistory;
         }
 
-        public async Task<MatchData> GetMatchData(string matchId)
+        public async Task<MatchData> GetMatchData(CancellationToken cancellationToken, string matchId)
         {
             if (string.IsNullOrEmpty(_userData.RiotUrl?.PdUrl) || string.IsNullOrEmpty(_userData.RiotUserData.Puuid))
             {
@@ -102,7 +103,7 @@ namespace Radiant.Services
             }
 
             var baseAddress = _userData.RiotUrl.PdUrl;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/match-details/v1/matches/{matchId}");
+            var response = await _userData.Client.GetAsync($"{baseAddress}/match-details/v1/matches/{matchId}", cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to get match details for match ID:", matchId, response.ReasonPhrase});
@@ -110,7 +111,7 @@ namespace Radiant.Services
                 return null;
             }
 
-            var matchData = await response.Content.ReadAsJsonAsync<MatchData>();
+            var matchData = await response.Content.ReadAsJsonAsync<MatchData>(cancellationToken);
             return matchData;
         }
     }

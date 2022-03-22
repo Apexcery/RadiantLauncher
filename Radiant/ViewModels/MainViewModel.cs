@@ -10,6 +10,7 @@ namespace Radiant.ViewModels
     {
         public RelayCommand<IMinimizable> MinimizeCommand { get; }
         public RelayCommand<ICloseable> CloseCommand { get; }
+        public RelayCommand<object> CancelRequestsCommand { get; }
 
         private object _currentView;
         public object CurrentView
@@ -84,6 +85,29 @@ namespace Radiant.ViewModels
             CareerViewCommand = ChangeView(careerViewModel);
 
             SettingsViewCommand = ChangeView(settingsViewModel);
+
+            CancelRequestsCommand = new(_ => CancelRequests(homeViewModel, storeViewModel, careerViewModel));
+        }
+
+        private void CancelRequests(HomeViewModel homeViewModel, StoreViewModel storeViewModel, CareerViewModel careerViewModel)
+        {
+            if (!homeViewModel.CancellationTokenSource.IsCancellationRequested)
+            {
+                homeViewModel.CancellationTokenSource.Cancel();
+                homeViewModel.CancellationTokenSource.Dispose();
+            }
+
+            if (!storeViewModel.CancellationTokenSource.IsCancellationRequested)
+            {
+                storeViewModel.CancellationTokenSource.Cancel();
+                storeViewModel.CancellationTokenSource.Dispose();
+            }
+
+            if (!careerViewModel.CancellationTokenSource.IsCancellationRequested)
+            {
+                careerViewModel.CancellationTokenSource.Cancel();
+                careerViewModel.CancellationTokenSource.Dispose();
+            }
         }
 
         private RelayCommand<object> ChangeView(object vm)

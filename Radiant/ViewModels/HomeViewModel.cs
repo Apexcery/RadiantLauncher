@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -124,6 +125,8 @@ namespace Radiant.ViewModels
 
         private MainViewModel _mainViewModel;
 
+        public CancellationTokenSource CancellationTokenSource = new();
+
         public HomeViewModel(IAuthService authService, UserData userData, AppConfig appConfig)
         {
             _authService = authService;
@@ -148,12 +151,22 @@ namespace Radiant.ViewModels
                 return;
             }
 
+            if (IsLoggedIn)
+                Logout();
+            
             var loginSuccess = await Login(account.Username, account.Password);
             if (loginSuccess)
             {
                 SelectedAccount = account;
                 OnPropertyChanged(nameof(Accounts));
                 OnPropertyChanged(nameof(HasAccounts));
+            }
+            else
+            {
+                if (!IsLoggedIn && Accounts.Any())
+                {
+                    await Login(Accounts.First().Username, Accounts.First().Password);
+                }
             }
         }
 
@@ -172,8 +185,8 @@ namespace Radiant.ViewModels
 
                 await _appConfig.SaveToFile();
 
-                if ((_userData.RiotUserData?.AccountInfo.GameName.Equals(acc?.DisplayName, StringComparison.InvariantCulture) ?? false) &&
-                    (_userData.RiotUserData?.AccountInfo.TagLine.Equals(acc?.Tag, StringComparison.InvariantCulture) ?? false))
+                if (IsLoggedIn && (_userData.RiotUserData?.AccountInfo.GameName.Equals(acc?.DisplayName, StringComparison.InvariantCulture) ?? false) &&
+                                  (_userData.RiotUserData?.AccountInfo.TagLine.Equals(acc?.Tag, StringComparison.InvariantCulture) ?? false))
                 {
                     Logout();
                 }
@@ -184,6 +197,13 @@ namespace Radiant.ViewModels
                     var loginSuccess = await Login(accToLogin.Username, accToLogin.Password);
                     if (loginSuccess)
                         SelectedAccount = accToLogin;
+                    else
+                    {
+                        if (!IsLoggedIn && Accounts.Any())
+                        {
+                            await Login(Accounts.First().Username, Accounts.First().Password);
+                        }
+                    }
                 }
 
                 OnPropertyChanged(nameof(Accounts));
@@ -227,6 +247,13 @@ namespace Radiant.ViewModels
                 {
                     OnPropertyChanged(nameof(Accounts));
                     OnPropertyChanged(nameof(HasAccounts));
+                }
+                else
+                {
+                    if (!IsLoggedIn && Accounts.Any())
+                    {
+                        await Login(Accounts.First().Username, Accounts.First().Password);
+                    }
                 }
             }
         }
@@ -303,7 +330,7 @@ namespace Radiant.ViewModels
             return true;
         }
 
-        private void Logout()
+        public void Logout()
         {
             _userData = _userData.Clear();
             GameNameText = "";
@@ -332,7 +359,17 @@ namespace Radiant.ViewModels
             }
 
             Logout();
-            var logInSuccessAccount = await _authService.Login(username, password, isAddingAccount);
+            Account logInSuccessAccount = null;
+            try
+            {
+                if (CancellationTokenSource.IsCancellationRequested)
+                {
+                    CancellationTokenSource = new();
+                }
+                logInSuccessAccount = await _authService.Login(CancellationTokenSource.Token, username, password, isAddingAccount);
+            }
+            catch (TaskCanceledException taskCanceledException) { }
+
             if (logInSuccessAccount != null)
             {
                 GameNameText = logInSuccessAccount.FullDisplayName;
