@@ -81,8 +81,8 @@ namespace Radiant.Views.Dialogues
                 await DialogHost.Show(dialog, "AddAccountDialogHost");
                 return;
             }
-
-            var loginSuccess = await _homeViewModel.Login(username, password);
+            
+            var loginSuccess = await _homeViewModel.Login(username, password, true);
 
             if (loginSuccess)
             {
@@ -97,11 +97,6 @@ namespace Radiant.Views.Dialogues
                 await _appConfig.SaveToFile();
 
                 CloseDialog();
-            }
-            else
-            {
-                var dialog = new PopupDialog(_appConfig, "Failed to login.", new[] { "Failed to login.", "Make sure your username and password are correct." });
-                await DialogHost.Show(dialog, "AddAccountDialogHost");
             }
         }
 

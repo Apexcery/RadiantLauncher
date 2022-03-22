@@ -316,12 +316,12 @@ namespace Radiant.ViewModels
                 _mainViewModel.IsLoggedIn = false;
         }
 
-        public async Task<bool> Login(string username, string password)
+        public async Task<bool> Login(string username, string password, bool isAddingAccount = false)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Invalid Username or Password." });
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return false;
             }
 
@@ -329,7 +329,7 @@ namespace Radiant.ViewModels
             LogInFormVisible = false;
 
             Logout();
-            var logInSuccessAccount = await _authService.Login(username, password);
+            var logInSuccessAccount = await _authService.Login(username, password, isAddingAccount);
             if (logInSuccessAccount != null)
             {
                 GameNameText = logInSuccessAccount.FullDisplayName;

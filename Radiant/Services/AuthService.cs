@@ -33,12 +33,12 @@ namespace Radiant.Services
             _apiUris = ApiURIs.URIs;
         }
 
-        public async Task<Account> Login(string username, string password)
+        public async Task<Account> Login(string username, string password, bool isAddingAccount)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Invalid username or password"});
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
@@ -49,7 +49,7 @@ namespace Radiant.Services
             if (!initResponse.IsSuccessStatusCode)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", initResponse.ReasonPhrase });
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
@@ -74,7 +74,7 @@ namespace Radiant.Services
                 if (!response.IsSuccessStatusCode)
                 {
                     var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", response.ReasonPhrase });
-                    await DialogHost.Show(dialog, "MainDialogHost");
+                    await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                     return null;
                 }
 
@@ -88,20 +88,20 @@ namespace Radiant.Services
 
             if (!string.IsNullOrEmpty(authResponse.Error))
             {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", $"Error: {authResponse.Error}"});
-                await DialogHost.Show(dialog, "MainDialogHost");
+                var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Error: Username or Password was incorrect."});
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
             if (authResponse.Type.Equals("multifactor"))
             {
-                authResponse = await Show2StepAuthDialog(authResponse.Multifactor.Email);
+                authResponse = await Show2StepAuthDialog(authResponse.Multifactor.Email, isAddingAccount);
             }
 
             if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", authResponse.Error });
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
@@ -114,7 +114,7 @@ namespace Radiant.Services
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(idToken))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Access or ID Token was invalid."});
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
@@ -130,7 +130,7 @@ namespace Radiant.Services
             if (string.IsNullOrEmpty(entitlementToken))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Entitlement Token was invalid."});
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
             _userData.TokenData.EntitlementToken = entitlementToken;
@@ -140,7 +140,7 @@ namespace Radiant.Services
             if (_userData.RiotUserData == null)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve user data." });
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
@@ -148,7 +148,7 @@ namespace Radiant.Services
             if (region == null)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Failed to retrieve user region."});
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
             _userData.RiotRegion = region.Value;
@@ -157,7 +157,7 @@ namespace Radiant.Services
             if (!addHeaderSuccess)
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve client headers." });
-                await DialogHost.Show(dialog, "MainDialogHost");
+                await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                 return null;
             }
 
@@ -172,7 +172,7 @@ namespace Radiant.Services
             return account;
         }
 
-        private async Task<AuthResponse> Show2StepAuthDialog(string email)
+        private async Task<AuthResponse> Show2StepAuthDialog(string email, bool isAddingAccount)
         {
             var authCode = "";
             AuthResponse authResponse = null;
@@ -227,8 +227,8 @@ namespace Radiant.Services
                 if (!mfaResponse.IsSuccessStatusCode)
                 {
                     var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Could not verify 2fa code." });
-                    DialogHost.Close("MainDialogHost");
-                    await DialogHost.Show(dialog, "MainDialogHost");
+                    DialogHost.Close(isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
+                    await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
                     return;
                 }
 
@@ -238,7 +238,7 @@ namespace Radiant.Services
                 }
 
                 authResponse = await mfaResponse.Content.ReadAsJsonAsync<AuthResponse>();
-                DialogHost.Close("MainDialogHost");
+                DialogHost.Close(isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
             };
 
             var grid = new Grid
@@ -258,7 +258,7 @@ namespace Radiant.Services
             };
             
             var dialog = new PopupDialog(_appConfig, "2-Step Auth", new[] { $"Enter the code that was sent to: {email}" }, new[] { grid });
-            await DialogHost.Show(dialog, "MainDialogHost");
+            await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
 
             return authResponse;
         }
