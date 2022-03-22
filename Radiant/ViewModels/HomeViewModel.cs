@@ -325,8 +325,11 @@ namespace Radiant.ViewModels
                 return false;
             }
 
-            LoadingVisible = true;
-            LogInFormVisible = false;
+            if (!isAddingAccount)
+            {
+                LoadingVisible = true;
+                LogInFormVisible = false;
+            }
 
             Logout();
             var logInSuccessAccount = await _authService.Login(username, password, isAddingAccount);
@@ -344,8 +347,11 @@ namespace Radiant.ViewModels
                 LogInFormVisible = true;
             }
 
-            LoadingVisible = false;
-            LogInFormVisible = true;
+            if (!isAddingAccount)
+            {
+                LoadingVisible = false;
+                LogInFormVisible = true;
+            }
 
             return logInSuccessAccount != null;
         }

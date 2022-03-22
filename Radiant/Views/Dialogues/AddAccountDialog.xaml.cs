@@ -42,6 +42,17 @@ namespace Radiant.Views.Dialogues
             }
         }
 
+        private bool _isLoadingVisible;
+        public bool IsLoadingVisible
+        {
+            get => _isLoadingVisible;
+            set
+            {
+                _isLoadingVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
         public AddAccountDialog(AppConfig appConfig, HomeViewModel homeViewModel, UserData userData)
         {
             this.DataContext = this;
@@ -81,7 +92,9 @@ namespace Radiant.Views.Dialogues
                 await DialogHost.Show(dialog, "AddAccountDialogHost");
                 return;
             }
-            
+
+            IsLoadingVisible = true;
+
             var loginSuccess = await _homeViewModel.Login(username, password, true);
 
             if (loginSuccess)
@@ -96,8 +109,12 @@ namespace Radiant.Views.Dialogues
 
                 await _appConfig.SaveToFile();
 
+                IsLoadingVisible = false;
+
                 CloseDialog();
             }
+
+            IsLoadingVisible = false;
         }
 
         public void CloseDialog()

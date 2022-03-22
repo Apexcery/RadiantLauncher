@@ -12,6 +12,7 @@
     d:DataContext="{d:DesignInstance Type=viewModels:HomeViewModel}">
     <UserControl.Resources>
         <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Hidden"/>
+        <materialDesign:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterInverted" TrueValue="Hidden" FalseValue="Visible"/>
     </UserControl.Resources>
 
     <Grid>
@@ -87,7 +88,14 @@
                             Background="{StaticResource ValorantRed}"
                             BorderBrush="Transparent"
                             BorderThickness="0"
-                            materialDesign:ButtonAssist.CornerRadius="5" />
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            ToolTipService.ShowOnDisabled="True">
+                            <Button.ToolTip>
+                                <ToolTip
+                                    Content="Maximum number of accounts have been added."
+                                    Visibility="{Binding IsAccountAddingAllowed, Converter={StaticResource BooleanToVisibilityConverterInverted}}"/>
+                            </Button.ToolTip>
+                        </Button>
                     </StackPanel>
 
                     <Grid
@@ -123,16 +131,19 @@
 
             <!-- Loading Spinner -->
             <Grid
-                d:Visibility="Hidden"
+                d:Visibility="Visible"
                 Visibility="{Binding LoadingVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                HorizontalAlignment="Center"
-                Width="250px">
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="{StaticResource ValorantWhite}">
                 
                 <ProgressBar
                     Style="{DynamicResource MaterialDesignCircularProgressBar}"
                     Width="50"
                     Height="50"
                     IsIndeterminate="True"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
                     Foreground="{StaticResource ValorantRed}" />
             </Grid>
         </Grid>
