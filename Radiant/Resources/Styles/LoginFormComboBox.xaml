@@ -140,6 +140,7 @@
         <Setter Property="FontWeight" Value="Black" />
         <Setter Property="FontSize" Value="{StaticResource LoginFormTextSize}" />
         <Setter Property="Foreground" Value="{DynamicResource Background}"/>
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -176,6 +177,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorant}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TextBoxBackgroundValorantDim}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource TextBoxBackgroundValorantDim}"/>
