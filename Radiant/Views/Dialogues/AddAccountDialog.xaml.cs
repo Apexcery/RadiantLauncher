@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 using Radiant.ViewModels;
 
@@ -68,12 +69,12 @@ namespace Radiant.Views.Dialogues
 
             InitializeComponent();
 
-            switch (_appConfig.Settings.SystemButtonsType)
+            switch (_appConfig.Settings.SystemButtons)
             {
-                case SystemButtonsType.Colored:
+                case SystemButtons.Colored:
                     SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
                     break;
-                case SystemButtonsType.Simple:
+                case SystemButtons.Simple:
                     SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
                     break;
             }

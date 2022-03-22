@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Models.Client;
 using Radiant.Utils;
 using Radiant.Views.Dialogues;

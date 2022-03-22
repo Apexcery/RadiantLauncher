@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 
 namespace Radiant.ViewModels
@@ -28,7 +29,7 @@ namespace Radiant.ViewModels
 
         private async Task ChangeColorTheme(string value)
         {
-            if (Enum.TryParse(value, true, out ColorThemeType colorThemeType) && Enum.IsDefined(typeof(ColorThemeType), colorThemeType))
+            if (Enum.TryParse(value, true, out ColorTheme colorThemeType) && Enum.IsDefined(typeof(ColorTheme), colorThemeType))
             {
                 var mainWindow = Application.Current.MainWindow;
                 var mainVm = (MainViewModel)mainWindow?.DataContext;
@@ -37,14 +38,14 @@ namespace Radiant.ViewModels
                     var dict = new ResourceDictionary();
                     switch (colorThemeType)
                     {
-                        case ColorThemeType.Dark:
+                        case ColorTheme.Dark:
                             dict.Source = new("Resources/Values/Colors/DarkThemecolors.xaml", UriKind.Relative);
                             break;
-                        case ColorThemeType.Light:
+                        case ColorTheme.Light:
                             dict.Source = new("Resources/Values/Colors/LightThemecolors.xaml", UriKind.Relative);
                             break;
                     }
-                    _appConfig.Settings.ColorThemeType = colorThemeType;
+                    _appConfig.Settings.ColorTheme = colorThemeType;
                     for (var i = Application.Current.Resources.MergedDictionaries.Count - 1; i > 0; i--)
                     {
                         var currentDict = Application.Current.Resources.MergedDictionaries[i];
@@ -61,7 +62,7 @@ namespace Radiant.ViewModels
 
         private async Task ChangeSystemButtons(string value)
         {
-            if (Enum.TryParse(value, true, out SystemButtonsType systemButtonsType) && Enum.IsDefined(typeof(SystemButtonsType), systemButtonsType))
+            if (Enum.TryParse(value, true, out SystemButtons systemButtonsType) && Enum.IsDefined(typeof(SystemButtons), systemButtonsType))
             {
                 var mainWindow = Application.Current.MainWindow;
                 var mainVm = (MainViewModel)mainWindow?.DataContext;
@@ -69,14 +70,14 @@ namespace Radiant.ViewModels
                 {
                     switch (systemButtonsType)
                     {
-                        case SystemButtonsType.Colored:
+                        case SystemButtons.Colored:
                             mainVm.SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
                             break;
-                        case SystemButtonsType.Simple:
+                        case SystemButtons.Simple:
                             mainVm.SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
                             break;
                     }
-                    _appConfig.Settings.SystemButtonsType = systemButtonsType;
+                    _appConfig.Settings.SystemButtons = systemButtonsType;
                     await _appConfig.SaveToFile();
                 }
             }

@@ -6,6 +6,7 @@ using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 
 namespace Radiant.Views.Dialogues
@@ -68,12 +69,12 @@ namespace Radiant.Views.Dialogues
 
             DialogTitle = title;
 
-            switch (appConfig.Settings.SystemButtonsType)
+            switch (appConfig.Settings.SystemButtons)
             {
-                case SystemButtonsType.Colored:
+                case SystemButtons.Colored:
                     SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
                     break;
-                case SystemButtonsType.Simple:
+                case SystemButtons.Simple:
                     SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
                     break;
             }

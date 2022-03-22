@@ -6,14 +6,10 @@ using System.Windows;
 using Newtonsoft.Json;
 using Radiant.Utils;
 
-namespace Radiant.Models
+namespace Radiant.Models.AppConfigs
 {
     public class AppConfig
     {
-        public bool LoginAutomatically { get; set; } = false;
-
-        public LoginDetails LoginDetails { get; set; } = new();
-
         public Settings Settings { get; set; } = new();
 
         public List<Account> Accounts { get; set; } = new();
@@ -37,29 +33,13 @@ namespace Radiant.Models
             }
         }
     }
-
-    public class LoginDetails
-    {
-        public string Username { get; set; } = "";
-
-        public string Password { get; set; } = "";
-
-        public bool IsValid()
-        {
-            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
-                return true;
-
-            return false;
-        }
-    }
-
     public class Settings
     {
         [JsonConverter(typeof(TolerantEnumConverter))]
-        public SystemButtonsType SystemButtonsType { get; set; } = SystemButtonsType.Colored;
+        public SystemButtons SystemButtons { get; set; } = SystemButtons.Colored;
         
         [JsonConverter(typeof(TolerantEnumConverter))]
-        public ColorThemeType ColorThemeType { get; set; } = ColorThemeType.Dark;
+        public ColorTheme ColorTheme { get; set; } = ColorTheme.Dark;
     }
     
     public class Account
@@ -73,13 +53,13 @@ namespace Radiant.Models
         public string FullDisplayName => DisplayName + "#" + Tag;
     }
 
-    public enum SystemButtonsType
+    public enum SystemButtons
     {
         Colored,
         Simple
     }
 
-    public enum ColorThemeType
+    public enum ColorTheme
     {
         Dark,
         Light

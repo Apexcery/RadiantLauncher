@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Services;
 using Radiant.ViewModels;
 using Radiant.Views.ContentViews;
@@ -31,6 +32,28 @@ namespace Radiant
 
                 if (Directory.Exists(folderPath) && File.Exists(filePath))
                 {
+                    var hasOldConfig = true;
+                    AppConfigOld20220322 oldConfig = null;
+                    try
+                    {
+                        oldConfig = JsonConvert.DeserializeObject<AppConfigOld20220322>(File.ReadAllText(filePath),
+                            new JsonSerializerSettings
+                            {
+                                MissingMemberHandling = MissingMemberHandling.Error,
+
+                            });
+                    }
+                    catch (JsonSerializationException ex)
+                    {
+                        hasOldConfig = false;
+                    }
+
+                    if (hasOldConfig)
+                    {
+                        File.Delete(filePath);
+                        File.WriteAllText(filePath, JsonConvert.SerializeObject(appConfig, Formatting.Indented));
+                    }
+
                     var existingConfig = JsonConvert.DeserializeObject<AppConfig>(File.ReadAllText(filePath));
                     if (existingConfig != null)
                         appConfig = existingConfig;

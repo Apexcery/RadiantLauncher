@@ -2,6 +2,7 @@
 using System.Windows;
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 
 namespace Radiant.ViewModels
@@ -56,23 +57,23 @@ namespace Radiant.ViewModels
             this.MinimizeCommand = new(this.MinimizeApplication);
             this.CloseCommand = new(this.CloseApplication);
 
-            switch (appConfig.Settings.SystemButtonsType)
+            switch (appConfig.Settings.SystemButtons)
             {
-                case SystemButtonsType.Colored:
+                case SystemButtons.Colored:
                     SystemButtonsStyle = Application.Current.TryFindResource("ColoredSystemButton") as Style;
                     break;
-                case SystemButtonsType.Simple:
+                case SystemButtons.Simple:
                     SystemButtonsStyle = Application.Current.TryFindResource("SimpleSystemButton") as Style;
                     break;
             }
 
             var dict = new ResourceDictionary();
-            switch (appConfig.Settings.ColorThemeType)
+            switch (appConfig.Settings.ColorTheme)
             {
-                case ColorThemeType.Dark:
+                case ColorTheme.Dark:
                     dict.Source = new("Resources/Values/Colors/DarkThemecolors.xaml", UriKind.Relative);
                     break;
-                case ColorThemeType.Light:
+                case ColorTheme.Light:
                     dict.Source = new("Resources/Values/Colors/LightThemecolors.xaml", UriKind.Relative);
                     break;
             }

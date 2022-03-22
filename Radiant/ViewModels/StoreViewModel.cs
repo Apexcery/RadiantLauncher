@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.AppConfigs;
 using Radiant.Models.Store;
 using Radiant.Utils;
 using Radiant.Views.Dialogues;
