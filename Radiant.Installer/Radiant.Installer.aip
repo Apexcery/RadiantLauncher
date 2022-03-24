@@ -101,10 +101,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/Apexcery/RadiantLauncher/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Apexcery"/>
-    <ROW Property="ProductCode" Value="1033:{BCC1F6D1-81B1-4756-A096-32A874A30862} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{A16F2A62-DF09-419E-B252-C9440CF21D1A} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Radiant"/>
-    <ROW Property="ProductVersion" Value="1.0.0.2"/>
+    <ROW Property="ProductVersion" Value="1.0.0.3"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{5474B724-1EE8-461F-928D-D5BE9CD5B917}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -147,31 +147,31 @@
     <ROW Directory="zhtw_Dir" Directory_Parent="Radiant_Dir" DefaultDir="zh-tw"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Radiant.exe" ComponentId="{22991B9A-37FE-4CAF-A251-E7B4A67A3BDB}" Directory_="Radiant_Dir" Attributes="256" KeyPath="Radiant.exe"/>
-    <ROW Component="APPDIR" ComponentId="{467A1B48-F64F-48A2-A7F3-86625080AC74}" Directory_="APPDIR" Attributes="0"/>
-    <ROW Component="ProductInformation" ComponentId="{ED95CFAA-724C-4C51-9249-0302BC1862C0}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="Radiant_PrimaryOutput" ComponentId="{C5DE3316-B2D1-45DF-97FE-CCBAEAAA217A}" Directory_="Radiant_Dir" Attributes="0" KeyPath="LiveCharts.Wpf.dll"/>
-    <ROW Component="Radiant_PublishOutput_Resources_Fonts_RobotoSlab" ComponentId="{B5EC8204-EFAE-4C60-8CEE-0F9BB2EA4381}" Directory_="RobotoSlab_Dir" Attributes="0" KeyPath="RobotoSlabBold.ttf" Type="0"/>
-    <ROW Component="Radiant_PublishOutput_ar" ComponentId="{3413639E-C401-410C-A593-3D79D74BE2D9}" Directory_="ar_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll"/>
-    <ROW Component="Radiant_PublishOutput_cs" ComponentId="{61462601-0745-456D-90EB-2D831FD33190}" Directory_="cs_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_1"/>
-    <ROW Component="Radiant_PublishOutput_da" ComponentId="{86B53BBE-CE30-4250-AD41-564CF795F037}" Directory_="da_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_2"/>
-    <ROW Component="Radiant_PublishOutput_de" ComponentId="{2E4A92E5-AB1C-428D-9DA6-EF71D9EDED51}" Directory_="de_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_3"/>
-    <ROW Component="Radiant_PublishOutput_es" ComponentId="{277A551B-97BC-4322-A6DD-0E14F3010C69}" Directory_="es_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_4"/>
-    <ROW Component="Radiant_PublishOutput_fr" ComponentId="{69C4C2B1-E005-4FD3-B4A6-C307AB6EE5EF}" Directory_="fr_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_5"/>
-    <ROW Component="Radiant_PublishOutput_it" ComponentId="{E7E43F0F-3003-42AB-B2CE-9FB42DDEEF61}" Directory_="it_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_6"/>
-    <ROW Component="Radiant_PublishOutput_jaJP" ComponentId="{473BB8A1-3A6B-415B-A546-461EF8BCCA71}" Directory_="jaJP_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_7"/>
-    <ROW Component="Radiant_PublishOutput_ko" ComponentId="{03938677-EC0B-4DCD-909E-ED2CE6AA2A56}" Directory_="ko_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_8"/>
-    <ROW Component="Radiant_PublishOutput_nl" ComponentId="{92D85374-2DB6-4670-8E9F-37F979B28E76}" Directory_="nl_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_9"/>
-    <ROW Component="Radiant_PublishOutput_pl" ComponentId="{515D876D-52E3-4CA8-B94B-0C843A8BFDCA}" Directory_="pl_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_10"/>
-    <ROW Component="Radiant_PublishOutput_pt" ComponentId="{9B59AA6C-B4AA-48A8-B097-A568D2A97AD0}" Directory_="pt_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_11"/>
-    <ROW Component="Radiant_PublishOutput_ptBR" ComponentId="{1579324B-2F53-4032-891F-841177894E14}" Directory_="ptBR_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_12"/>
-    <ROW Component="Radiant_PublishOutput_ru" ComponentId="{259C78F6-AB2C-41A1-BA59-AA735E3BEA58}" Directory_="ru_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_13"/>
-    <ROW Component="Radiant_PublishOutput_sk" ComponentId="{2F7DF8E5-66C1-4897-90A8-DA77FB939614}" Directory_="sk_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_14"/>
-    <ROW Component="Radiant_PublishOutput_sv" ComponentId="{A15E6C82-1208-4E94-9405-89862B755C2D}" Directory_="sv_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_15"/>
-    <ROW Component="Radiant_PublishOutput_th" ComponentId="{97823A1A-6B5F-427F-8CBE-6E0C2BA89E17}" Directory_="th_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_16"/>
-    <ROW Component="Radiant_PublishOutput_tr" ComponentId="{0AE975C2-7F24-4D2E-B4DD-EC30A944ADDA}" Directory_="tr_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_17"/>
-    <ROW Component="Radiant_PublishOutput_zh" ComponentId="{7E322116-4444-48E0-983A-5ACF4DEE35B9}" Directory_="zh_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_18"/>
-    <ROW Component="Radiant_PublishOutput_zhtw" ComponentId="{2EE02EFA-DDAD-4A69-83E3-F4C763B49984}" Directory_="zhtw_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_19"/>
+    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Radiant.exe" ComponentId="{5DD4318A-419A-4A13-8369-8A9C5E03C691}" Directory_="Radiant_Dir" Attributes="256" KeyPath="Radiant.exe"/>
+    <ROW Component="APPDIR" ComponentId="{393CC06B-F066-44A8-9E75-509BE690A9CD}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="ProductInformation" ComponentId="{D2FF34C1-B5A1-4C4A-A7D9-048325B00C3A}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="Radiant_PrimaryOutput" ComponentId="{87AFE04E-B9AD-45F0-809A-41EBDB7495B8}" Directory_="Radiant_Dir" Attributes="0" KeyPath="LiveCharts.Wpf.dll"/>
+    <ROW Component="Radiant_PublishOutput_Resources_Fonts_RobotoSlab" ComponentId="{E81B677B-1A90-4198-A338-16D2D970BF78}" Directory_="RobotoSlab_Dir" Attributes="0" KeyPath="RobotoSlabBold.ttf" Type="0"/>
+    <ROW Component="Radiant_PublishOutput_ar" ComponentId="{3E18D2D2-183D-4C88-89B2-AFD421C9D618}" Directory_="ar_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll"/>
+    <ROW Component="Radiant_PublishOutput_cs" ComponentId="{C4A3C6AD-090E-4C06-9BFA-3E00D84A4F68}" Directory_="cs_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_1"/>
+    <ROW Component="Radiant_PublishOutput_da" ComponentId="{3069FE0B-01AB-4DAC-93C1-0E4233734C0C}" Directory_="da_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_2"/>
+    <ROW Component="Radiant_PublishOutput_de" ComponentId="{57D63EE9-90C9-4CC1-8B49-245428A4926D}" Directory_="de_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_3"/>
+    <ROW Component="Radiant_PublishOutput_es" ComponentId="{DFF81019-AE01-498C-AAE0-DB6FE1AD13FC}" Directory_="es_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_4"/>
+    <ROW Component="Radiant_PublishOutput_fr" ComponentId="{1E391FB3-D765-4472-96F2-7A7FAD2A0A1D}" Directory_="fr_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_5"/>
+    <ROW Component="Radiant_PublishOutput_it" ComponentId="{27F6DA9F-487D-485B-8801-DBE91E86B157}" Directory_="it_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_6"/>
+    <ROW Component="Radiant_PublishOutput_jaJP" ComponentId="{043E67A0-E621-4568-8FEA-CA4CA43FE979}" Directory_="jaJP_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_7"/>
+    <ROW Component="Radiant_PublishOutput_ko" ComponentId="{709FD6D9-8521-418A-85F7-10E7243B096E}" Directory_="ko_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_8"/>
+    <ROW Component="Radiant_PublishOutput_nl" ComponentId="{38771D3E-C4B6-4204-8E5E-3024D615BF8D}" Directory_="nl_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_9"/>
+    <ROW Component="Radiant_PublishOutput_pl" ComponentId="{7A3BA1C9-15C7-4707-9652-9CD4277003BF}" Directory_="pl_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_10"/>
+    <ROW Component="Radiant_PublishOutput_pt" ComponentId="{A52C2D28-6AF2-404A-8B26-54D121AD9FE2}" Directory_="pt_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_11"/>
+    <ROW Component="Radiant_PublishOutput_ptBR" ComponentId="{8A97A35C-AF64-4696-AECD-2C691699B6AE}" Directory_="ptBR_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_12"/>
+    <ROW Component="Radiant_PublishOutput_ru" ComponentId="{B03D1497-272B-4560-94ED-C8AE430827CC}" Directory_="ru_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_13"/>
+    <ROW Component="Radiant_PublishOutput_sk" ComponentId="{1E6DE3FA-E400-4E47-AAA0-6265741491DE}" Directory_="sk_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_14"/>
+    <ROW Component="Radiant_PublishOutput_sv" ComponentId="{1CDB11C8-84CD-4523-A9F8-3A0FE6369E79}" Directory_="sv_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_15"/>
+    <ROW Component="Radiant_PublishOutput_th" ComponentId="{1ADB3CF4-6570-4762-9164-5AABB6547723}" Directory_="th_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_16"/>
+    <ROW Component="Radiant_PublishOutput_tr" ComponentId="{4ACB019A-1818-4C1E-8C56-5ABEBB8FBAB4}" Directory_="tr_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_17"/>
+    <ROW Component="Radiant_PublishOutput_zh" ComponentId="{EAA591A3-3338-4C5A-8D9E-51583F3A8D31}" Directory_="zh_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_18"/>
+    <ROW Component="Radiant_PublishOutput_zhtw" ComponentId="{D31C24FC-E096-4A51-AD2D-63E9AF34D636}" Directory_="zhtw_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_19"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
