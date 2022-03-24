@@ -140,7 +140,7 @@ namespace Radiant.ViewModels
                 playerRankUpdates = await playerRankUpdatesTask;
                 playerMatchHistory = await playerMatchHistoryTask;
             }
-            catch (TaskCanceledException taskCanceledException) { }
+            catch (TaskCanceledException) { }
 
             if (rankInfo == null || playerRankUpdates == null || playerMatchHistory == null)
                 return;
@@ -237,7 +237,7 @@ namespace Radiant.ViewModels
             {
                 matchDataResults = await Task.WhenAll(matchDataTasks);
             }
-            catch (TaskCanceledException taskCanceledException) { }
+            catch (TaskCanceledException) { }
 
             if (matchDataResults is null)
                 return;

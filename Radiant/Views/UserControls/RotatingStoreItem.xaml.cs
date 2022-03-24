@@ -40,7 +40,7 @@ namespace Radiant.Views.UserControls
                 skinInfo = await _storeService.GetSkinInformation(_cancellationTokenSource.Token, _itemId);
                 skinPrice = await _storeService.GetSkinPrice(_cancellationTokenSource.Token, _itemId);
             }
-            catch (TaskCanceledException taskCanceledException) { }
+            catch (TaskCanceledException) { }
 
             if (skinInfo is null || skinPrice == -1)
                 return;

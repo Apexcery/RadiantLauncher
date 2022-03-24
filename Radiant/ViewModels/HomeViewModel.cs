@@ -369,7 +369,7 @@ namespace Radiant.ViewModels
                 }
                 logInSuccessAccount = await _authService.Login(CancellationTokenSource.Token, username, password, isAddingAccount);
             }
-            catch (TaskCanceledException taskCanceledException) { }
+            catch (TaskCanceledException) { }
 
             if (logInSuccessAccount != null)
             {

@@ -145,7 +145,7 @@ namespace Radiant.ViewModels
                 _playerStore = await _storeService.GetPlayerStore(CancellationTokenSource.Token);
                 _storeOffers = await _storeService.GetStoreOffers(CancellationTokenSource.Token);
             }
-            catch (TaskCanceledException taskCanceledException) { }
+            catch (TaskCanceledException) { }
 
             await PopulateStoreView();
         }
@@ -167,7 +167,7 @@ namespace Radiant.ViewModels
             {
                 bundleInfo = await _storeService.GetBundleInformation(CancellationTokenSource.Token, bundleId);
             }
-            catch (TaskCanceledException taskCanceledException) { }
+            catch (TaskCanceledException) { }
 
             if (bundleInfo is null)
                 return;

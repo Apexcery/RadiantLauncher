@@ -4,6 +4,27 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_CURRENT_YEAR" Value="2022" ValueLocId="-"/>
     <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_SCREEN_RESOLUTION_X;AI_DETECTED_SCREEN_RESOLUTION_Y"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\ar"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_1" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_10" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_11" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\pt"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_12" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_13" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_14" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\sk"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_15" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\sv"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_16" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\th"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_17" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_18" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\zh"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_19" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\zh-tw"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_2" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\da"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_3" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_4" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_5" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_6" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_7" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\ja-JP"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_8" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_9" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish\nl"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.Wpf.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MaterialDesignColors.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
@@ -15,6 +36,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Xaml.Behaviors.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Radiant.deps.json" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Radiant.dll_1" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
@@ -25,6 +47,27 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Diagnostics.DiagnosticSource.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_YamlDotNet.dll" Value="H:\Users\glees\Documents\Development\Personal\RadiantLauncher\Radiant\bin\Release\net5.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.dll" Value="AutoUpdater.NET.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_1" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_10" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_11" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_12" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_13" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_14" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_15" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_16" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_17" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_18" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_19" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_2" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_3" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_4" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_5" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_6" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_7" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_8" Value="AutoUpdater.NET.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_9" Value="AutoUpdater.NET.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_LiveCharts.Wpf.dll" Value="LiveCharts.Wpf.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_LiveCharts.dll" Value="LiveCharts.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_MaterialDesignColors.dll" Value="MaterialDesignColors.dll"/>
@@ -36,6 +79,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll" Value="Microsoft.Extensions.Logging.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll" Value="Microsoft.Extensions.Options.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="Microsoft.Extensions.Primitives.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll" Value="Microsoft.Xaml.Behaviors.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Radiant.deps.json" Value="Radiant.deps.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Radiant.dll_1" Value="Radiant.dll"/>
@@ -57,7 +101,7 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/Apexcery/RadiantLauncher/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Apexcery"/>
-    <ROW Property="ProductCode" Value="1033:{ED43EE2F-4396-4C8E-BCD1-F22C7509B2F0} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{BCC1F6D1-81B1-4756-A096-32A874A30862} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Radiant"/>
     <ROW Property="ProductVersion" Value="1.0.0.2"/>
@@ -81,13 +125,53 @@
     <ROW Directory="Resources_Dir" Directory_Parent="Radiant_Dir" DefaultDir="RESOUR~1|Resources"/>
     <ROW Directory="RobotoSlab_Dir" Directory_Parent="Fonts_Dir" DefaultDir="ROBOTO~1|RobotoSlab"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="ar_Dir" Directory_Parent="Radiant_Dir" DefaultDir="ar"/>
+    <ROW Directory="cs_Dir" Directory_Parent="Radiant_Dir" DefaultDir="cs"/>
+    <ROW Directory="da_Dir" Directory_Parent="Radiant_Dir" DefaultDir="da"/>
+    <ROW Directory="de_Dir" Directory_Parent="Radiant_Dir" DefaultDir="de"/>
+    <ROW Directory="es_Dir" Directory_Parent="Radiant_Dir" DefaultDir="es"/>
+    <ROW Directory="fr_Dir" Directory_Parent="Radiant_Dir" DefaultDir="fr"/>
+    <ROW Directory="it_Dir" Directory_Parent="Radiant_Dir" DefaultDir="it"/>
+    <ROW Directory="jaJP_Dir" Directory_Parent="Radiant_Dir" DefaultDir="ja-JP"/>
+    <ROW Directory="ko_Dir" Directory_Parent="Radiant_Dir" DefaultDir="ko"/>
+    <ROW Directory="nl_Dir" Directory_Parent="Radiant_Dir" DefaultDir="nl"/>
+    <ROW Directory="pl_Dir" Directory_Parent="Radiant_Dir" DefaultDir="pl"/>
+    <ROW Directory="ptBR_Dir" Directory_Parent="Radiant_Dir" DefaultDir="pt-BR"/>
+    <ROW Directory="pt_Dir" Directory_Parent="Radiant_Dir" DefaultDir="pt"/>
+    <ROW Directory="ru_Dir" Directory_Parent="Radiant_Dir" DefaultDir="ru"/>
+    <ROW Directory="sk_Dir" Directory_Parent="Radiant_Dir" DefaultDir="sk"/>
+    <ROW Directory="sv_Dir" Directory_Parent="Radiant_Dir" DefaultDir="sv"/>
+    <ROW Directory="th_Dir" Directory_Parent="Radiant_Dir" DefaultDir="th"/>
+    <ROW Directory="tr_Dir" Directory_Parent="Radiant_Dir" DefaultDir="tr"/>
+    <ROW Directory="zh_Dir" Directory_Parent="Radiant_Dir" DefaultDir="zh"/>
+    <ROW Directory="zhtw_Dir" Directory_Parent="Radiant_Dir" DefaultDir="zh-tw"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Radiant.exe" ComponentId="{467523B7-3242-4042-A17E-920EDAA87ECA}" Directory_="Radiant_Dir" Attributes="256" KeyPath="Radiant.exe"/>
-    <ROW Component="APPDIR" ComponentId="{9F12E4AA-0066-487C-B9D3-C0898FF791CA}" Directory_="APPDIR" Attributes="0"/>
-    <ROW Component="ProductInformation" ComponentId="{528440CB-C2AA-4CCE-A8B5-DE8D953E2EEC}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="Radiant_PrimaryOutput" ComponentId="{6A622EB7-0A0A-4F09-8A3D-B5C2E63C0AAA}" Directory_="Radiant_Dir" Attributes="0" KeyPath="Radiant.dll_1"/>
-    <ROW Component="Radiant_PublishOutput_Resources_Fonts_RobotoSlab" ComponentId="{A5B2CCC6-0A14-4F2F-A506-F9E2671D7B04}" Directory_="RobotoSlab_Dir" Attributes="0" KeyPath="RobotoSlabBold.ttf" Type="0"/>
+    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Radiant.exe" ComponentId="{22991B9A-37FE-4CAF-A251-E7B4A67A3BDB}" Directory_="Radiant_Dir" Attributes="256" KeyPath="Radiant.exe"/>
+    <ROW Component="APPDIR" ComponentId="{467A1B48-F64F-48A2-A7F3-86625080AC74}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="ProductInformation" ComponentId="{ED95CFAA-724C-4C51-9249-0302BC1862C0}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="Radiant_PrimaryOutput" ComponentId="{C5DE3316-B2D1-45DF-97FE-CCBAEAAA217A}" Directory_="Radiant_Dir" Attributes="0" KeyPath="LiveCharts.Wpf.dll"/>
+    <ROW Component="Radiant_PublishOutput_Resources_Fonts_RobotoSlab" ComponentId="{B5EC8204-EFAE-4C60-8CEE-0F9BB2EA4381}" Directory_="RobotoSlab_Dir" Attributes="0" KeyPath="RobotoSlabBold.ttf" Type="0"/>
+    <ROW Component="Radiant_PublishOutput_ar" ComponentId="{3413639E-C401-410C-A593-3D79D74BE2D9}" Directory_="ar_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll"/>
+    <ROW Component="Radiant_PublishOutput_cs" ComponentId="{61462601-0745-456D-90EB-2D831FD33190}" Directory_="cs_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_1"/>
+    <ROW Component="Radiant_PublishOutput_da" ComponentId="{86B53BBE-CE30-4250-AD41-564CF795F037}" Directory_="da_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_2"/>
+    <ROW Component="Radiant_PublishOutput_de" ComponentId="{2E4A92E5-AB1C-428D-9DA6-EF71D9EDED51}" Directory_="de_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_3"/>
+    <ROW Component="Radiant_PublishOutput_es" ComponentId="{277A551B-97BC-4322-A6DD-0E14F3010C69}" Directory_="es_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_4"/>
+    <ROW Component="Radiant_PublishOutput_fr" ComponentId="{69C4C2B1-E005-4FD3-B4A6-C307AB6EE5EF}" Directory_="fr_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_5"/>
+    <ROW Component="Radiant_PublishOutput_it" ComponentId="{E7E43F0F-3003-42AB-B2CE-9FB42DDEEF61}" Directory_="it_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_6"/>
+    <ROW Component="Radiant_PublishOutput_jaJP" ComponentId="{473BB8A1-3A6B-415B-A546-461EF8BCCA71}" Directory_="jaJP_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_7"/>
+    <ROW Component="Radiant_PublishOutput_ko" ComponentId="{03938677-EC0B-4DCD-909E-ED2CE6AA2A56}" Directory_="ko_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_8"/>
+    <ROW Component="Radiant_PublishOutput_nl" ComponentId="{92D85374-2DB6-4670-8E9F-37F979B28E76}" Directory_="nl_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_9"/>
+    <ROW Component="Radiant_PublishOutput_pl" ComponentId="{515D876D-52E3-4CA8-B94B-0C843A8BFDCA}" Directory_="pl_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_10"/>
+    <ROW Component="Radiant_PublishOutput_pt" ComponentId="{9B59AA6C-B4AA-48A8-B097-A568D2A97AD0}" Directory_="pt_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_11"/>
+    <ROW Component="Radiant_PublishOutput_ptBR" ComponentId="{1579324B-2F53-4032-891F-841177894E14}" Directory_="ptBR_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_12"/>
+    <ROW Component="Radiant_PublishOutput_ru" ComponentId="{259C78F6-AB2C-41A1-BA59-AA735E3BEA58}" Directory_="ru_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_13"/>
+    <ROW Component="Radiant_PublishOutput_sk" ComponentId="{2F7DF8E5-66C1-4897-90A8-DA77FB939614}" Directory_="sk_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_14"/>
+    <ROW Component="Radiant_PublishOutput_sv" ComponentId="{A15E6C82-1208-4E94-9405-89862B755C2D}" Directory_="sv_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_15"/>
+    <ROW Component="Radiant_PublishOutput_th" ComponentId="{97823A1A-6B5F-427F-8CBE-6E0C2BA89E17}" Directory_="th_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_16"/>
+    <ROW Component="Radiant_PublishOutput_tr" ComponentId="{0AE975C2-7F24-4D2E-B4DD-EC30A944ADDA}" Directory_="tr_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_17"/>
+    <ROW Component="Radiant_PublishOutput_zh" ComponentId="{7E322116-4444-48E0-983A-5ACF4DEE35B9}" Directory_="zh_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_18"/>
+    <ROW Component="Radiant_PublishOutput_zhtw" ComponentId="{2EE02EFA-DDAD-4A69-83E3-F4C763B49984}" Directory_="zhtw_Dir" Attributes="0" KeyPath="AutoUpdater.NET.resources.dll_19"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
@@ -115,8 +199,51 @@
     <ROW File="YamlDotNet.dll" Component_="Radiant_PrimaryOutput" FileName="YAMLDO~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_YamlDotNet.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_YamlDotNet.dll&gt;" SelfReg="false"/>
     <ROW File="RobotoSlabBold.ttf" Component_="Radiant_PublishOutput_Resources_Fonts_RobotoSlab" FileName="ROBOTO~2.TTF|[|AI_PROPPATH_FILENAME_PERBUILD_RobotoSlabBold.ttf]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_RobotoSlabBold.ttf&gt;" SelfReg="false"/>
     <ROW File="RobotoSlabRegular.ttf" Component_="Radiant_PublishOutput_Resources_Fonts_RobotoSlab" FileName="ROBOTO~3.TTF|[|AI_PROPPATH_FILENAME_PERBUILD_RobotoSlabRegular.ttf]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_RobotoSlabRegular.ttf&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.dll" Component_="Radiant_PrimaryOutput" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Xaml.Behaviors.dll" Component_="Radiant_PrimaryOutput" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Xaml.Behaviors.dll&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll" Component_="Radiant_PublishOutput_ar" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_1" Component_="Radiant_PublishOutput_cs" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_1&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_2" Component_="Radiant_PublishOutput_da" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_2]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_2&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_3" Component_="Radiant_PublishOutput_de" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_3]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_3&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_4" Component_="Radiant_PublishOutput_es" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_4]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_4&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_5" Component_="Radiant_PublishOutput_fr" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_5]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_5&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_6" Component_="Radiant_PublishOutput_it" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_6]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_6&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_7" Component_="Radiant_PublishOutput_jaJP" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_7]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_7&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_8" Component_="Radiant_PublishOutput_ko" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_8]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_8&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_9" Component_="Radiant_PublishOutput_nl" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_9]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_9&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_10" Component_="Radiant_PublishOutput_pl" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_10]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_10&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_11" Component_="Radiant_PublishOutput_pt" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_11]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_11&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_12" Component_="Radiant_PublishOutput_ptBR" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_12]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_12&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_13" Component_="Radiant_PublishOutput_ru" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_13]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_13&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_14" Component_="Radiant_PublishOutput_sk" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_14]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_14&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_15" Component_="Radiant_PublishOutput_sv" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_15]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_15&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_16" Component_="Radiant_PublishOutput_th" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_16]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_16&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_17" Component_="Radiant_PublishOutput_tr" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_17]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_17&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_18" Component_="Radiant_PublishOutput_zh" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_18]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_18&gt;" SelfReg="false"/>
+    <ROW File="AutoUpdater.NET.resources.dll_19" Component_="Radiant_PublishOutput_zhtw" FileName="AUTOUP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_19]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_19&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_10" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_10]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_10]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_11" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_11]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_11]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_12" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_12]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_12]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_13" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_13]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_13]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_14" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_14]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_14]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_15" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_15]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_15]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_16" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_16]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_16]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_17" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_17]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_17]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_18" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_18]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_18]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_19" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_19]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_19]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_3" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_3]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_4" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_4]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_4]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_5" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_5]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_5]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_6" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_6]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_6]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_7" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_7]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_7]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_8" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_8]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_8]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AutoUpdater.NET.resources.dll_9" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoUpdater.NET.resources.dll_9]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoUpdater.NET.resources.dll_9]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_LiveCharts.Wpf.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_LiveCharts.Wpf.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_LiveCharts.Wpf.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_LiveCharts.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_LiveCharts.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_LiveCharts.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_MaterialDesignColors.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_MaterialDesignColors.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_MaterialDesignColors.dll]" Type="2" Content="0"/>
@@ -128,6 +255,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Options.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Primitives.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Xaml.Behaviors.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Xaml.Behaviors.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Radiant.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_Radiant.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_Radiant.deps.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Radiant.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_Radiant.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_Radiant.dll_1]" Type="2" Content="0"/>
@@ -224,6 +352,26 @@
     <ROW Feature_="MainFeature" Component_="Radiant_PrimaryOutput"/>
     <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_Resources_Fonts_RobotoSlab"/>
     <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_Radiant.exe"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_ar"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_cs"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_da"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_de"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_es"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_fr"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_it"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_jaJP"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_ko"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_nl"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_pl"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_pt"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_ptBR"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_ru"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_sk"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_sv"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_th"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_tr"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_zh"/>
+    <ROW Feature_="MainFeature" Component_="Radiant_PublishOutput_zhtw"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="Icon.exe" SourcePath="Icon.ico" Index="0"/>
@@ -293,5 +441,27 @@
     <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="YamlDotNet.dll"/>
     <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="RobotoSlabBold.ttf"/>
     <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="RobotoSlabRegular.ttf"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.dll"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="Microsoft.Xaml.Behaviors.dll"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_1"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_2"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_3"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_4"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_5"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_6"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_7"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_8"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_9"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_10"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_11"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_12"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_13"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_14"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_15"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_16"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_17"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_18"/>
+    <ROW ProjectId="{c5f38c58-f070-429d-a3bd-4052e8a731ca}" ProjectName="Radiant" OutputGroup="PublishOutput" OutputFile="AutoUpdater.NET.resources.dll_19"/>
   </COMPONENT>
 </DOCUMENT>
