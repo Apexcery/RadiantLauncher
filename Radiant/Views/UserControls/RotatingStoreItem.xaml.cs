@@ -47,9 +47,7 @@ namespace Radiant.Views.UserControls
 
             var uri = skinInfo.DisplayIcon;
             if (skinInfo.Levels.Any(x => !string.IsNullOrEmpty(x.DisplayIcon)))
-                uri = skinInfo.Levels.Last(x => !string.IsNullOrEmpty(x.DisplayIcon)).DisplayIcon;
-            if (string.IsNullOrEmpty(uri) && skinInfo.Chromas.Any(x => !string.IsNullOrEmpty(x.DisplayIcon)))
-                uri = skinInfo.Chromas.Last(x => !string.IsNullOrEmpty(x.DisplayIcon)).DisplayIcon;
+                uri = skinInfo.Levels.First(x => !string.IsNullOrEmpty(x.DisplayIcon)).DisplayIcon;
             if (string.IsNullOrEmpty(uri))
                 uri = skinInfo.DisplayIcon;
 
