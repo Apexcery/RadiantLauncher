@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
+using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.AppConfigs;
@@ -53,6 +54,17 @@ namespace Radiant.ViewModels
             set
             {
                 _bundleCost = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ImageSource _bundleCurrencyIcon;
+        public ImageSource BundleCurrencyIcon
+        {
+            get => _bundleCurrencyIcon;
+            set
+            {
+                _bundleCurrencyIcon = value;
                 OnPropertyChanged();
             }
         }
@@ -155,19 +167,21 @@ namespace Radiant.ViewModels
             var rotatingStoreItems = _playerStore.RotatingStore.SingleItemOffers;
             foreach (var item in rotatingStoreItems)
             {
-                var skinControl = new RotatingStoreItem(CancellationTokenSource.CreateLinkedTokenSource(CancellationTokenSource.Token), _storeService, item);
+                var offer = _storeOffers.Offers.FirstOrDefault(x => x.Rewards.Any(y => y.ItemID == item));
+                var skinControl = new RotatingStoreItem(item, offer);
                 RotatingStoreItems.Add(skinControl);
             }
 
             var currentBundle = _playerStore.FeaturedBundle.Bundle;
+            var bundleCurrencyId = currentBundle.CurrencyID;
+            var currency = ValorantConstants.CurrencyById[bundleCurrencyId];
+            BundleCurrencyIcon = new BitmapImage(new Uri(currency.DisplayIcon), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
+            {
+                CacheOption = BitmapCacheOption.OnDemand
+            };
             var bundleId = currentBundle.DataAssetID;
 
-            BundleInformation bundleInfo = null;
-            try
-            {
-                bundleInfo = await _storeService.GetBundleInformation(CancellationTokenSource.Token, bundleId);
-            }
-            catch (TaskCanceledException) { }
+            var bundleInfo = ValorantConstants.BundleById[bundleId];
 
             if (bundleInfo is null)
                 return;
@@ -178,12 +192,12 @@ namespace Radiant.ViewModels
                 bundlePrice += item.DiscountedPrice;
             }
 
-            BundleImageSource = new BitmapImage(new Uri(bundleInfo.BundleDisplayIcon), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
+            BundleImageSource = new BitmapImage(new Uri(bundleInfo.DisplayIcon), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
             {
-                CacheOption = BitmapCacheOption.OnLoad
+                CacheOption = BitmapCacheOption.OnDemand
             };
 
-            BundleName = bundleInfo.BundleDisplayName;
+            BundleName = bundleInfo.DisplayName;
             BundleCost = $"{bundlePrice:n0}";
 
             var nightMarket = _playerStore.NightMarket;
@@ -203,7 +217,7 @@ namespace Radiant.ViewModels
 
                 foreach (var item in rewards)
                 {
-                    var tile = new NightMarketItem(CancellationTokenSource.CreateLinkedTokenSource(CancellationTokenSource.Token), _storeService, item.ItemID)
+                    var tile = new NightMarketItem(item.ItemID, offer)
                     {
                         MaxWidth = 200
                     };

@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Cache;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Radiant.Interfaces;
+using Radiant.Constants;
+using Radiant.Models.Store;
+using Radiant.Utils;
 
 namespace Radiant.Views.UserControls
 {
-    public partial class NightMarketItem : UserControl
+    public partial class NightMarketItem : ObservableUserControl
     {
-        private readonly CancellationTokenSource _cancellationTokenSource;
-        private readonly IStoreService _storeService;
         private readonly string _itemId;
+        private readonly NightMarket.NightMarketOffer _offer;
 
-        public NightMarketItem(CancellationTokenSource cancellationTokenSource, IStoreService storeService, string itemId)
+        private ImageSource _itemCurrencyIcon;
+        public ImageSource ItemCurrencyIcon
         {
-            _cancellationTokenSource = cancellationTokenSource;
-            _storeService = storeService;
+            get => _itemCurrencyIcon;
+            set
+            {
+                _itemCurrencyIcon = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public NightMarketItem(string itemId, NightMarket.NightMarketOffer offer)
+        {
             _itemId = itemId;
+            _offer = offer;
 
             InitializeComponent();
 
@@ -30,25 +40,30 @@ namespace Radiant.Views.UserControls
         {
             TxtItemName.Width = Grid.ActualWidth / 2;
             TxtItemName.MaxWidth = Grid.ActualWidth / 2;
-            
-            var skinInfo = await _storeService.GetSkinInformation(_cancellationTokenSource.Token, _itemId);
-            var skinPrice = await _storeService.GetSkinPrice(_cancellationTokenSource.Token, _itemId);
+
+            var skinInfo = ValorantConstants.Skins.FirstOrDefault(x => x.Levels.Any(y => y.Id == _itemId));
+            var skinPrice = _offer.DiscountCosts.ValorantPointCost;
+
+            if (skinInfo is null || skinPrice == -1)
+                return;
 
             var uri = skinInfo.DisplayIcon;
-            if (skinInfo.Chromas.Any())
-            {
-                uri = skinInfo.Chromas.Last().DisplayIcon;
-            }
+            if (string.IsNullOrEmpty(uri))
+                uri = skinInfo.Levels.First().DisplayIcon;
 
             if (!string.IsNullOrEmpty(uri))
             {
                 ItemImage.Source = new BitmapImage(new Uri(uri), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
                 {
-                    CacheOption = BitmapCacheOption.OnLoad
+                    CacheOption = BitmapCacheOption.OnDemand
                 };
             }
             TxtItemName.Text = skinInfo.DisplayName;
             TxtItemCost.Text = $"{skinPrice:n0}";
+            ItemCurrencyIcon = new BitmapImage(new Uri(ValorantConstants.CurrencyByName["VP"].DisplayIcon), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
+            {
+                CacheOption = BitmapCacheOption.OnDemand
+            };
         }
     }
 }

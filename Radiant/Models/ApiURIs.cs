@@ -24,20 +24,32 @@ namespace Radiant.Models
                 new Uri("https://riot-geo.pas.si.riotgames.com/pas/v1/product/valorant")
             },
             {
-                "ClientVersionUri",
-                new Uri("https://valorant-api.com/v1/version")
-            },
-            {
                 "SkinUri",
-                new Uri("https://assist.rumblemike.com/Skins")
+                new Uri("https://valorant-api.com/v1/weapons/skins")
             },
             {
-                "OfferUri",
-                new Uri("https://assist.rumblemike.com/Offers")
+                "AgentUri",
+                new Uri("https://valorant-api.com/v1/agents?isPlayableCharacter=true")
+            },
+            {
+                "SeasonUri",
+                new Uri("https://valorant-api.com/v1/seasons")
+            },
+            {
+                "MapUri",
+                new Uri("https://valorant-api.com/v1/maps")
             },
             {
                 "BundleUri",
-                new Uri("https://assist.rumblemike.com/Bundle")
+                new Uri("https://valorant-api.com/v1/bundles")
+            },
+            {
+                "CurrencyUri",
+                new Uri("https://valorant-api.com/v1/currencies")
+            },
+            {
+                "ClientVersionUri",
+                new Uri("https://valorant-api.com/v1/version")
             }
         };
     }

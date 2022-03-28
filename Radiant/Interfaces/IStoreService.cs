@@ -8,10 +8,5 @@ namespace Radiant.Interfaces
     {
         Task<PlayerStore> GetPlayerStore(CancellationToken cancellationToken);
         Task<StoreOffers> GetStoreOffers(CancellationToken cancellationToken);
-
-        Task<SkinInformation> GetSkinInformation(CancellationToken cancellationToken, string itemId);
-        Task<int> GetSkinPrice(CancellationToken cancellationToken, string itemId);
-
-        Task<BundleInformation> GetBundleInformation(CancellationToken cancellationToken, string bundleId);
     }
 }

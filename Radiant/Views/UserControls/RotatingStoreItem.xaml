@@ -45,7 +45,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center">
                     <Image
-                        Source="{StaticResource ValorantPointsIcon}"
+                        Source="{Binding ItemCurrencyIcon}"
                         VerticalAlignment="Center"
                         Width="16"
                         Height="16" />

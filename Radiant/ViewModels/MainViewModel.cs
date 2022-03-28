@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using Radiant.Interfaces;
-using Radiant.Models;
 using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 

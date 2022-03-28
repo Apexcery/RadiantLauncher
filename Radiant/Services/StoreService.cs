@@ -67,50 +67,5 @@ namespace Radiant.Services
             var storeOffers = await response.Content.ReadAsJsonAsync<StoreOffers>(cancellationToken);
             return storeOffers;
         }
-
-        public async Task<SkinInformation> GetSkinInformation(CancellationToken cancellationToken, string itemId)
-        {
-            var baseAddress = ApiURIs.URIs["SkinUri"].OriginalString;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}", cancellationToken);
-            if (!response.IsSuccessStatusCode)
-            {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve skin data for ID:", itemId, response.ReasonPhrase});
-                await DialogHost.Show(dialog, "MainDialogHost");
-                return null;
-            }
-
-            var skinInfo = await response.Content.ReadAsJsonAsync<SkinInformation>(cancellationToken);
-            return skinInfo;
-        }
-
-        public async Task<int> GetSkinPrice(CancellationToken cancellationToken, string itemId)
-        {
-            var baseAddress = ApiURIs.URIs["OfferUri"].OriginalString;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/{itemId}", cancellationToken);
-            if (!response.IsSuccessStatusCode)
-            {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve skin price for ID:", itemId, response.ReasonPhrase});
-                await DialogHost.Show(dialog, "MainDialogHost");
-                return 99999;
-            }
-
-            var price = await response.Content.ReadAsJsonAsync<SkinCost>(cancellationToken);
-            return price.Cost.ValorantPointCost;
-        }
-
-        public async Task<BundleInformation> GetBundleInformation(CancellationToken cancellationToken, string bundleId)
-        {
-            var baseAddress = ApiURIs.URIs["BundleUri"].OriginalString;
-            var response = await _userData.Client.GetAsync($"{baseAddress}/{bundleId}", cancellationToken);
-            if (!response.IsSuccessStatusCode)
-            {
-                var dialog = new PopupDialog(_appConfig, "Error", new []{"Could not retrieve bundle data for ID:", bundleId, response.ReasonPhrase});
-                await DialogHost.Show(dialog, "MainDialogHost");
-                return null;
-            }
-
-            var bundleInfo = await response.Content.ReadAsJsonAsync<BundleInformation>(cancellationToken);
-            return bundleInfo;
-        }
     }
 }

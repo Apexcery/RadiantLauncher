@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net.Cache;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Radiant.Constants;
 using Radiant.Models;
 using Radiant.Models.Career;
 using Radiant.Utils;
-using Radiant.Utils.Extensions;
 
 namespace Radiant.Views.UserControls
 {
@@ -201,17 +202,20 @@ namespace Radiant.Views.UserControls
 
             var playersTeam = currentPlayer.TeamId;
             var agentId = currentPlayer.CharacterId;
-            var agentName = ValorantConstants.AgentNameById[agentId];
-            var cleanedAgentName = agentName.ReplaceAll(new[] { "/", ".", ",", ":", ";", "'", "\"", "\\", "@", "#", "~", "!", "?" }, "");
-            AgentIcon = (ImageSource)Application.Current.TryFindResource($"{cleanedAgentName}Image");
+            var agent = ValorantConstants.AgentById[agentId];
+            AgentIcon = new BitmapImage(new Uri(agent.DisplayIcon), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
+            {
+                CacheOption = BitmapCacheOption.OnDemand
+            };
             AgentIconTooltip = new ToolTip
             {
-                Content = agentName,
-                Placement = PlacementMode.Right
+                Content = agent.DisplayName,
+                Placement = PlacementMode.Right,
+                VerticalOffset = 20,
             };
 
             var mapAssetPath = _match.MatchInfo.MapId;
-            var mapName = ValorantConstants.Maps.FirstOrDefault(x => x.AssetPath.Equals(mapAssetPath))?.Name ?? "Map Name";
+            var mapName = ValorantConstants.MapByUrl[mapAssetPath]?.DisplayName ?? "Map Name";
             MapName = mapName;
 
             var textInfo = CultureInfo.CurrentCulture.TextInfo;

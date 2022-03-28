@@ -24,11 +24,15 @@
             Grid.Row="0">
 
             <!-- Bundle Image -->
-            <Image
-                Source="{Binding BundleImageSource}"
-                Stretch="UniformToFill"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+            <Grid
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Image
+                    Source="{Binding BundleImageSource}"
+                    Stretch="UniformToFill"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+            </Grid>
 
             <!-- Bundle Name -->
             <StackPanel
@@ -77,7 +81,7 @@
                 HorizontalAlignment="Right"
                 Margin="25">
                 <Image
-                    Source="{StaticResource ValorantPointsIcon}"
+                    Source="{Binding BundleCurrencyIcon}"
                     VerticalAlignment="Center"
                     Width="32"
                     Height="32"

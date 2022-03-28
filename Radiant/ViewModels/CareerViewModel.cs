@@ -11,6 +11,7 @@ using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.Career;
+using Radiant.Models.Valorant;
 using Radiant.Utils;
 using Radiant.Views.UserControls;
 
@@ -152,7 +153,8 @@ namespace Radiant.ViewModels
 
         private void SetRankHistoryIcons(PlayerRankInfo rankInfo)
         {
-            var currentSeasonName = ValorantConstants.SeasonNameById[rankInfo.LatestCompetitiveUpdate.SeasonID];
+            var currentSeason = ValorantConstants.SeasonById[rankInfo.LatestCompetitiveUpdate.SeasonID];
+            var currentSeasonFullName = Seasons.GetSeasonFullName(currentSeason.Id, ValorantConstants.SeasonById.Values);
 
             var previousActTiers = new Dictionary<string, int>
             {
@@ -171,13 +173,13 @@ namespace Radiant.ViewModels
                 var rankImage = new Image
                 {
                     Source = Application.Current.TryFindResource(rankResourceName) as ImageSource,
-                    Width = actName.Equals(currentSeasonName) ? 75 : 50,
-                    Height = actName.Equals(currentSeasonName) ? 75 : 50
+                    Width = actName.Equals(currentSeasonFullName) ? 75 : 50,
+                    Height = actName.Equals(currentSeasonFullName) ? 75 : 50
                 };
 
                 var rankHistoryName = new TextBlock
                 {
-                    Text = $"{(actName.Equals(currentSeasonName) ? "[Current Act]" : actName)}",
+                    Text = $"{(actName.Equals(currentSeasonFullName) ? "[Current Act]" : actName)}",
                     Foreground = (SolidColorBrush)Application.Current.TryFindResource("Text"),
                     FontSize = (double)Application.Current.TryFindResource("LoginFormTextSize"),
                     HorizontalAlignment = HorizontalAlignment.Center,

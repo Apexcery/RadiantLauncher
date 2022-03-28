@@ -35,7 +35,7 @@
             VerticalAlignment="Stretch">
             <Image
                 x:Name="AgentImage"
-                Source="{Binding AgentIcon, FallbackValue={StaticResource JettImage}}"
+                Source="{Binding AgentIcon}"
                 ToolTip="{Binding AgentIconTooltip, FallbackValue=Agent Icon}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"

@@ -35,25 +35,5 @@
     <BitmapImage x:Key="Immortal3Image" UriSource="../Images/Rank Images/Immortal III.png" />
 
     <BitmapImage x:Key="RadiantImage" UriSource="../Images/Rank Images/Radiant.png" />
-
-    <!-- Agent Icons -->
-    <BitmapImage x:Key="AstraImage" UriSource="../Images/Agent Images/Icons/Astra.png" />
-    <BitmapImage x:Key="BreachImage" UriSource="../Images/Agent Images/Icons/Breach.png" />
-    <BitmapImage x:Key="BrimstoneImage" UriSource="../Images/Agent Images/Icons/Brimstone.png" />
-    <BitmapImage x:Key="ChamberImage" UriSource="../Images/Agent Images/Icons/Chamber.png" />
-    <BitmapImage x:Key="CypherImage" UriSource="../Images/Agent Images/Icons/Cypher.png" />
-    <BitmapImage x:Key="JettImage" UriSource="../Images/Agent Images/Icons/Jett.png" />
-    <BitmapImage x:Key="KAYOImage" UriSource="../Images/Agent Images/Icons/KAYO.png" />
-    <BitmapImage x:Key="KilljoyImage" UriSource="../Images/Agent Images/Icons/Killjoy.png" />
-    <BitmapImage x:Key="NeonImage" UriSource="../Images/Agent Images/Icons/Neon.png" />
-    <BitmapImage x:Key="OmenImage" UriSource="../Images/Agent Images/Icons/Omen.png" />
-    <BitmapImage x:Key="PhoenixImage" UriSource="../Images/Agent Images/Icons/Phoenix.png" />
-    <BitmapImage x:Key="RazeImage" UriSource="../Images/Agent Images/Icons/Raze.png" />
-    <BitmapImage x:Key="ReynaImage" UriSource="../Images/Agent Images/Icons/Reyna.png" />
-    <BitmapImage x:Key="SageImage" UriSource="../Images/Agent Images/Icons/Sage.png" />
-    <BitmapImage x:Key="SkyeImage" UriSource="../Images/Agent Images/Icons/Skye.png" />
-    <BitmapImage x:Key="SovaImage" UriSource="../Images/Agent Images/Icons/Sova.png" />
-    <BitmapImage x:Key="ViperImage" UriSource="../Images/Agent Images/Icons/Viper.png" />
-    <BitmapImage x:Key="YoruImage" UriSource="../Images/Agent Images/Icons/Yoru.png" />
     
 </ResourceDictionary>

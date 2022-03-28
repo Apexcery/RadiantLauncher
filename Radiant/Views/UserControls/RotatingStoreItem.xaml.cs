@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Cache;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Radiant.Interfaces;
+using Radiant.Constants;
 using Radiant.Models.Store;
 using Radiant.Utils;
 
@@ -13,53 +12,60 @@ namespace Radiant.Views.UserControls
 {
     public partial class RotatingStoreItem : ObservableUserControl
     {
-        private readonly CancellationTokenSource _cancellationTokenSource;
-        private readonly IStoreService _storeService;
         private readonly string _itemId;
+        private readonly StoreOffers.Offer _offer;
 
-        public RotatingStoreItem(CancellationTokenSource cancellationTokenSource, IStoreService storeService, string itemId)
+        private ImageSource _itemCurrencyIcon;
+        public ImageSource ItemCurrencyIcon
         {
-            _cancellationTokenSource = cancellationTokenSource;
-            _storeService = storeService;
+            get => _itemCurrencyIcon;
+            set
+            {
+                _itemCurrencyIcon = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RotatingStoreItem(string itemId, StoreOffers.Offer offer)
+        {
             _itemId = itemId;
+            _offer = offer;
+
+            this.DataContext = this;
 
             InitializeComponent();
             
             Loaded += OnLoaded;
         }
 
-        private async void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             TxtItemName.Width = Grid.ActualWidth / 2;
             TxtItemName.MaxWidth = Grid.ActualWidth / 2;
-
-            SkinInformation skinInfo = null;
-            var skinPrice = -1;
-            try
-            {
-                skinInfo = await _storeService.GetSkinInformation(_cancellationTokenSource.Token, _itemId);
-                skinPrice = await _storeService.GetSkinPrice(_cancellationTokenSource.Token, _itemId);
-            }
-            catch (TaskCanceledException) { }
+            
+            var skinInfo = ValorantConstants.Skins.FirstOrDefault(x => x.Levels.Any(y => y.Id == _itemId));
+            var skinPrice = _offer.Cost.ValorantPointCost;
 
             if (skinInfo is null || skinPrice == -1)
                 return;
 
             var uri = skinInfo.DisplayIcon;
-            if (skinInfo.Levels.Any(x => !string.IsNullOrEmpty(x.DisplayIcon)))
-                uri = skinInfo.Levels.First(x => !string.IsNullOrEmpty(x.DisplayIcon)).DisplayIcon;
             if (string.IsNullOrEmpty(uri))
-                uri = skinInfo.DisplayIcon;
+                uri = skinInfo.Levels.First().DisplayIcon;
 
             if (!string.IsNullOrEmpty(uri))
             {
                 ItemImage.Source = new BitmapImage(new Uri(uri), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
                 {
-                    CacheOption = BitmapCacheOption.OnLoad
+                    CacheOption = BitmapCacheOption.OnDemand
                 };
             }
             TxtItemName.Text = skinInfo.DisplayName;
             TxtItemCost.Text = $"{skinPrice:n0}";
+            ItemCurrencyIcon = new BitmapImage(new Uri(ValorantConstants.CurrencyByName["VP"].DisplayIcon), new RequestCachePolicy(RequestCacheLevel.CacheIfAvailable))
+            {
+                CacheOption = BitmapCacheOption.OnDemand
+            };
         }
     }
 }

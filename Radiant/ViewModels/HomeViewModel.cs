@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 
 using Newtonsoft.Json;
-
+using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Models.AppConfigs;
@@ -368,6 +368,7 @@ namespace Radiant.ViewModels
                     CancellationTokenSource = new();
                 }
                 logInSuccessAccount = await _authService.Login(CancellationTokenSource.Token, username, password, isAddingAccount);
+                await ValorantConstants.Init();
             }
             catch (TaskCanceledException) { }
 
