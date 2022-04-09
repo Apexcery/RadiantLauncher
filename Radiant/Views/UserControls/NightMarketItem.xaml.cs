@@ -28,6 +28,8 @@ namespace Radiant.Views.UserControls
 
         public NightMarketItem(string itemId, NightMarket.NightMarketOffer offer)
         {
+            this.DataContext = this;
+
             _itemId = itemId;
             _offer = offer;
 
