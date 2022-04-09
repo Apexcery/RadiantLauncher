@@ -61,14 +61,20 @@ namespace Radiant.Constants
             foreach (var agent in agents.AgentData)
             {
                 var agentId = agent.Id;
-                AgentById.Add(agentId, agent);
+                if (AgentById.ContainsKey(agentId))
+                    AgentById[agentId] = agent;
+                else
+                    AgentById.Add(agentId, agent);
             }
 
             var seasons = await GetValorantData<Seasons>(httpClient, ApiURIs.URIs["SeasonUri"], cancellationTokenSource.Token);
             foreach (var season in seasons.SeasonData)
             {
                 var seasonId = season.Id;
-                SeasonById.Add(seasonId, season);
+                if (SeasonById.ContainsKey(seasonId))
+                    SeasonById[seasonId] = season;
+                else
+                    SeasonById.Add(seasonId, season);
             }
 
             var maps = await GetValorantData<Maps>(httpClient, ApiURIs.URIs["MapUri"], cancellationTokenSource.Token);
@@ -76,15 +82,26 @@ namespace Radiant.Constants
             {
                 var mapId = map.Id;
                 var mapUrl = map.MapUrl;
-                MapById.Add(mapId, map);
-                MapByUrl.Add(mapUrl, map);
+                
+                if (MapById.ContainsKey(mapId))
+                    MapById[mapId] = map;
+                else
+                    MapById.Add(mapId, map);
+                
+                if (MapByUrl.ContainsKey(mapUrl))
+                    MapByUrl[mapUrl] = map;
+                else
+                    MapByUrl.Add(mapUrl, map);
             }
 
             var bundles = await GetValorantData<Bundles>(httpClient, ApiURIs.URIs["BundleUri"], cancellationTokenSource.Token);
             foreach (var bundle in bundles.BundleData)
             {
                 var bundleId = bundle.Id;
-                BundleById.Add(bundleId, bundle);
+                if (BundleById.ContainsKey(bundleId))
+                    BundleById[bundleId] = bundle;
+                else
+                    BundleById.Add(bundleId, bundle);
             }
             
             var currencies = await GetValorantData<Currencies>(httpClient, ApiURIs.URIs["CurrencyUri"], cancellationTokenSource.Token);
@@ -92,14 +109,23 @@ namespace Radiant.Constants
             {
                 var currencyId = currency.Id;
                 var currencyName = currency.DisplayName;
-                CurrencyById.Add(currencyId, currency);
-                CurrencyByName.Add(currencyName, currency);
+                
+                if (CurrencyById.ContainsKey(currencyId))
+                    CurrencyById[currencyId] = currency;
+                else
+                    CurrencyById.Add(currencyId, currency);
+
+                if (CurrencyByName.ContainsKey(currencyName))
+                    CurrencyByName[currencyName] = currency;
+                else
+                    CurrencyByName.Add(currencyName, currency);
             }
 
             var skins = await GetValorantData<Skins>(httpClient, ApiURIs.URIs["SkinUri"], cancellationTokenSource.Token);
             foreach (var skin in skins.SkinData)
             {
-                Skins.Add(skin);
+                if (!Skins.Contains(skin))
+                    Skins.Add(skin);
             }
         }
 
