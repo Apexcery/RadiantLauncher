@@ -58,13 +58,32 @@ namespace Radiant.Views.Dialogues
             }
         }
 
-        public PopupDialog(AppConfig appConfig, string title, IEnumerable<string> messages, IEnumerable<FrameworkElement> elements = null)
+        public enum Size
+        {
+            Normal,
+            Large
+        }
+
+        public PopupDialog(AppConfig appConfig, string title, IEnumerable<string> messages, IEnumerable<FrameworkElement> elements = null, Size size = Size.Normal)
         {
             CloseCommand = new(_ => CloseDialog());
 
             this.DataContext = this;
 
             InitializeComponent();
+
+            switch (size)
+            {
+                case Size.Large:
+                    this.Width = 400;
+                    this.Height = 250;
+                    break;
+                case Size.Normal:
+                default:
+                    this.Width = 275;
+                    this.Height = 150;
+                    break;
+            }
 
             DialogTitle = title;
 
