@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
-using Radiant.Models.AppConfigs;
+using Radiant.Models;
 using Radiant.Utils;
 
 namespace Radiant.Views.Dialogues

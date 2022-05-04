@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows;
 using Radiant.Models;
-using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 
 namespace Radiant.ViewModels

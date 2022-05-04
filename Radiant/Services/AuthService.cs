@@ -14,9 +14,9 @@ using Newtonsoft.Json;
 using Radiant.Extensions;
 using Radiant.Interfaces;
 using Radiant.Models;
-using Radiant.Models.AppConfigs;
 using Radiant.Models.Auth;
 using Radiant.Models.Enums;
+using Radiant.ViewModels;
 using Radiant.Views.Dialogues;
 
 namespace Radiant.Services
@@ -35,13 +35,13 @@ namespace Radiant.Services
             _apiUris = ApiURIs.URIs;
         }
 
-        public async Task<Account> Login(CancellationToken cancellationToken, string username, string password, bool isAddingAccount = false)
+        public async Task Login(CancellationToken cancellationToken, string username, string password, bool isAddingAccount = false)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Invalid username or password"});
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -52,7 +52,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", initResponse.ReasonPhrase });
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             if (initResponse.Headers.Contains("Set-Cookie"))
@@ -77,7 +77,7 @@ namespace Radiant.Services
                 {
                     var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", response.ReasonPhrase });
                     await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                    return null;
+                    return;
                 }
 
                 if (response.Headers.Contains("Set-Cookie"))
@@ -92,32 +92,33 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Error: Username or Password was incorrect."});
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             if (authResponse.Type.Equals("multifactor"))
             {
-                authResponse = await Show2StepAuthDialog(cancellationToken, authResponse.Multifactor.Email, isAddingAccount);
+                await FinishLoginWithTwoStepAuth(cancellationToken, authResponse.Multifactor.Email, username, password, isAddingAccount);
+                return;
             }
 
-            if (string.IsNullOrEmpty(authResponse.Response?.Parameters.Uri))
+            if (string.IsNullOrEmpty(authResponse?.Response?.Parameters.Uri))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", authResponse.Error });
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             var regex = new Regex(Regex.Escape("#"));
             var newUri = regex.Replace(authResponse.Response.Parameters.Uri, "?", 1);
             var responseUri = new Uri(newUri);
-            var paramaters = responseUri.DecodeQueryParameters();
-            var accessToken = paramaters["access_token"];
-            var idToken = paramaters["id_token"];
+            var parameters = responseUri.DecodeQueryParameters();
+            var accessToken = parameters["access_token"];
+            var idToken = parameters["id_token"];
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(idToken))
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Access or ID Token was invalid."});
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             _userData.TokenData = new UserData.TokenDataObject
@@ -133,7 +134,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Entitlement Token was invalid."});
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
             _userData.TokenData.EntitlementToken = entitlementToken;
             _userData.Client.DefaultRequestHeaders.Add("X-Riot-Entitlements-JWT", entitlementToken);
@@ -143,7 +144,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve user data." });
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             var region = await GetUserRegion(cancellationToken);
@@ -151,7 +152,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new []{"Failed to log in.", "Failed to retrieve user region."});
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
             _userData.RiotRegion = region.Value;
 
@@ -160,7 +161,7 @@ namespace Radiant.Services
             {
                 var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Failed to retrieve client headers." });
                 await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                return null;
+                return;
             }
 
             var account = new Account
@@ -171,98 +172,13 @@ namespace Radiant.Services
                 Tag = _userData.RiotUserData.AccountInfo.TagLine
             };
 
-            return account;
+            HomeViewModel.LoggedInAccount = account;
         }
 
-        private async Task<AuthResponse> Show2StepAuthDialog(CancellationToken cancellationToken, string email, bool isAddingAccount)
+        private async Task FinishLoginWithTwoStepAuth(CancellationToken cancellationToken, string email, string username, string password, bool isAddingAccount)
         {
-            var authCode = "";
-            AuthResponse authResponse = null;
-
-            var textBox = new TextBox
-            {
-                Tag = "Code: ",
-                Text = "",
-                Style = Application.Current.TryFindResource("LoginFormTextBox") as Style,
-                Foreground = Brushes.Black,
-                FontFamily = Application.Current.TryFindResource("RobotoSlabBold") as FontFamily,
-                MaxLength = 6
-            };
-            HintAssist.SetHint(textBox, "Code:");
-            HintAssist.SetForeground(textBox, Application.Current.TryFindResource("BackgroundDark") as SolidColorBrush);
-            HintAssist.SetFontFamily(textBox, Application.Current.TryFindResource("RobotoSlabBold") as FontFamily);
-
-            var button = new Button
-            {
-                Content = "Submit",
-                Width = 100,
-                Height = 35,
-                IsDefault = true,
-                Background = Application.Current.TryFindResource("ValorantRed") as SolidColorBrush,
-                BorderBrush = Brushes.Transparent,
-                BorderThickness = new Thickness(0),
-                IsEnabled = false
-            };
-            ButtonAssist.SetCornerRadius(button, new CornerRadius(5));
-
-            textBox.TextChanged += (sender, e) =>
-            {
-                var tb = (TextBox)sender;
-                var cursorPos = tb.CaretIndex;
-                var fullText = tb.Text;
-                var cleanedText = Regex.Replace(fullText, "[^0-9]+", "");
-                tb.Text = cleanedText;
-                tb.CaretIndex = Math.Min(cursorPos, tb.Text.Length);
-                authCode = cleanedText;
-                button.IsEnabled = tb.Text.Length == 6;
-            };
-            button.Click += async (sender, e) =>
-            {
-                var button = (Button)sender;
-                button.IsEnabled = false;
-                var mfaData = new MFAData
-                {
-                    Code = authCode
-                };
-                var mfaDataAsJson = JsonConvert.SerializeObject(mfaData);
-                var mfaResponse = await _userData.Client.PutAsync(_apiUris["AuthUri"], new StringContent(mfaDataAsJson, Encoding.UTF8, "application/json"), cancellationToken);
-                if (!mfaResponse.IsSuccessStatusCode)
-                {
-                    var dialog = new PopupDialog(_appConfig, "Error", new[] { "Failed to log in.", "Could not verify 2fa code." });
-                    DialogHost.Close(isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                    await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-                    return;
-                }
-
-                if (mfaResponse.Headers.Contains("Set-Cookie"))
-                {
-                    AddClientCookies(mfaResponse.Headers.GetValues("Set-Cookie"));
-                }
-
-                authResponse = await mfaResponse.Content.ReadAsJsonAsync<AuthResponse>(cancellationToken);
-                DialogHost.Close(isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-            };
-
-            var grid = new Grid
-            {
-                Children =
-                {
-                    new StackPanel
-                    {
-                        Orientation = Orientation.Vertical,
-                        Children =
-                        {
-                            textBox,
-                            button
-                        }
-                    }
-                }
-            };
-            
-            var dialog = new PopupDialog(_appConfig, "2-Step Auth", new[] { $"Enter the code that was sent to: {email}" }, new[] { grid });
+            var dialog = new TwoStepAuthDialog(_appConfig, _userData, cancellationToken, email, username, password);
             await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
-
-            return authResponse;
         }
 
         private void AddClientCookies(IEnumerable<string> cookieHeaders)

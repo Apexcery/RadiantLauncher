@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using Radiant.Interfaces;
 using Radiant.Models;
-using Radiant.Models.AppConfigs;
 using Radiant.Utils;
 using Radiant.ViewModels;
 

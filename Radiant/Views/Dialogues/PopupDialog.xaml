@@ -6,21 +6,26 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:Radiant.Views.Dialogues"
     xmlns:utils="clr-namespace:Radiant.Utils"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DataContext="{d:DesignInstance Type=local:PopupDialog}"
     Width="275" Height="150"
     Background="{DynamicResource Background}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <materialDesign:DialogHost
+        Identifier="PopupDialogHost"
+        DialogTheme="Dark"
+        CloseOnClickAway="True">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <Grid
+            <Grid
             Grid.Row="0"
             Background="{DynamicResource BackgroundDark}">
-            
-            <TextBlock
+
+                <TextBlock
                 Text="{Binding DialogTitle}"
                 d:Text="Dialogue Title"
                 Foreground="{DynamicResource Text}"
@@ -31,7 +36,7 @@
                 HorizontalAlignment="Left"
                 Margin="10, 0"/>
 
-            <Button
+                <Button
                 Style="{Binding SystemButtonsStyle}"
                 d:Style="{StaticResource SimpleSystemButton}"
                 VerticalAlignment="Center"
@@ -41,48 +46,49 @@
                 Tag="Close"
                 Command="{Binding CloseCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-                <Button.ToolTip>
-                    <ToolTip
+                    <Button.ToolTip>
+                        <ToolTip
                         Content="Close"
                         Placement="Bottom"
                         HorizontalOffset="-10" />
-                </Button.ToolTip>
-            </Button>
-        </Grid>
+                    </Button.ToolTip>
+                </Button>
+            </Grid>
 
-        <Grid
+            <Grid
             Grid.Row="1">
 
-            <StackPanel
+                <StackPanel
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
-                <ItemsControl
+                    <ItemsControl
                     ItemsSource="{Binding MessageItems, UpdateSourceTrigger=Explicit}"
                     Margin="15">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
                                 Orientation="Vertical"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
 
-                <ItemsControl
+                    <ItemsControl
                     ItemsSource="{Binding FrameworkItems, UpdateSourceTrigger=Explicit}"
                     Margin="15">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel
                                 Orientation="Vertical"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
 
+            </Grid>
         </Grid>
-    </Grid>
+    </materialDesign:DialogHost>
 </utils:ObservableUserControl>

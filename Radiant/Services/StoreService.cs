@@ -5,7 +5,6 @@ using MaterialDesignThemes.Wpf;
 using Radiant.Extensions;
 using Radiant.Interfaces;
 using Radiant.Models;
-using Radiant.Models.AppConfigs;
 using Radiant.Models.Store;
 using Radiant.Views.Dialogues;
 

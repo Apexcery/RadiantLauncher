@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Radiant.Interfaces;
-using Radiant.Models.AppConfigs;
+using Radiant.Models;
 using Radiant.Utils;
 
 namespace Radiant.ViewModels

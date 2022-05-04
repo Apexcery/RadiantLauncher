@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using Radiant.Utils;
 
-namespace Radiant.Models.AppConfigs
+namespace Radiant.Models
 {
     public class AppConfig
     {
@@ -20,7 +22,7 @@ namespace Radiant.Models.AppConfigs
             var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
             var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
 
-            if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
+            if (!string.IsNullOrEmpty(localAppData) && !string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
             {
                 var folderPath = Path.Combine(localAppData, applicationName);
                 if (!Directory.Exists(folderPath))
@@ -42,7 +44,7 @@ namespace Radiant.Models.AppConfigs
         public ColorTheme ColorTheme { get; set; } = ColorTheme.Dark;
     }
     
-    public class Account
+    public class Account : INotifyPropertyChanged
     {
         public string Username { get; set; }
         public string Password { get; set; }
@@ -51,6 +53,13 @@ namespace Radiant.Models.AppConfigs
 
         [JsonIgnore]
         public string FullDisplayName => DisplayName + "#" + Tag;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public enum SystemButtons

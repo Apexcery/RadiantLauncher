@@ -11,7 +11,6 @@ using MaterialDesignThemes.Wpf;
 using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
-using Radiant.Models.AppConfigs;
 using Radiant.Models.Store;
 using Radiant.Utils;
 using Radiant.Views.Dialogues;

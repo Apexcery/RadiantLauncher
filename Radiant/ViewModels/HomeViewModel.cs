@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
-using Radiant.Models.AppConfigs;
 using Radiant.Models.Client;
 using Radiant.Utils;
 using Radiant.Views.Dialogues;
@@ -128,6 +127,8 @@ namespace Radiant.ViewModels
 
         public CancellationTokenSource CancellationTokenSource = new();
 
+        public static Account LoggedInAccount = null;
+
         public HomeViewModel(IAuthService authService, UserData userData, AppConfig appConfig)
         {
             _authService = authService;
@@ -141,13 +142,13 @@ namespace Radiant.ViewModels
 
         public async Task ChangeAccount(object o)
         {
-            if (o == null || !IsLoggedIn)
+            if (o == null)
                 return;
 
             var account = (Account)((ComboBox)o).SelectedItem;
             
-            if ((_userData.RiotUserData?.AccountInfo?.GameName.Equals(account.DisplayName, StringComparison.InvariantCulture) ?? false) &&
-                (_userData.RiotUserData?.AccountInfo?.TagLine.Equals(account.Tag, StringComparison.InvariantCulture) ?? false))
+            if ((_userData.RiotUserData?.AccountInfo?.GameName?.Equals(account.DisplayName, StringComparison.InvariantCulture) ?? false) &&
+                (_userData.RiotUserData?.AccountInfo?.TagLine?.Equals(account.Tag, StringComparison.InvariantCulture) ?? false))
             {
                 return;
             }
@@ -338,6 +339,7 @@ namespace Radiant.ViewModels
             UsernameText = "";
             IsLoggedIn = false;
             LogInFormVisible = true;
+            LoggedInAccount = null;
 
             _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
             if (_mainViewModel != null)
@@ -360,30 +362,73 @@ namespace Radiant.ViewModels
             }
 
             Logout();
-            Account logInSuccessAccount = null;
             try
             {
                 if (CancellationTokenSource.IsCancellationRequested)
                 {
                     CancellationTokenSource = new();
                 }
-                logInSuccessAccount = await _authService.Login(CancellationTokenSource.Token, username, password, isAddingAccount);
+                await _authService.Login(CancellationTokenSource.Token, username, password, isAddingAccount);
                 await ValorantConstants.Init();
             }
             catch (TaskCanceledException) { }
 
-            if (logInSuccessAccount != null)
+            _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
+            if (LoggedInAccount != null)
             {
-                GameNameText = logInSuccessAccount.FullDisplayName;
+                GameNameText = LoggedInAccount.FullDisplayName;
                 IsLoggedIn = true;
 
-                _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
                 if (_mainViewModel != null)
                     _mainViewModel.IsLoggedIn = true;
+                
+                ObservableCollection<Account> newList = null;
+                if (LoggedInAccount.DisplayName != _appConfig.Accounts.FirstOrDefault(x => x.Username == LoggedInAccount.Username)?.DisplayName)
+                {
+                    _appConfig.Accounts.First(x => x.Username == LoggedInAccount.Username).DisplayName = LoggedInAccount.DisplayName;
+
+                    var accountToUpdate = Accounts.First(x => x.Username == LoggedInAccount.Username);
+                    var accountsIndex = Accounts.IndexOf(accountToUpdate);
+                    accountToUpdate.DisplayName = LoggedInAccount.DisplayName;
+                    newList = Accounts;
+                    newList[accountsIndex] = accountToUpdate;
+                }
+                if (LoggedInAccount.Tag != _appConfig.Accounts.FirstOrDefault(x => x.Username == LoggedInAccount.Username)?.Tag)
+                {
+                    _appConfig.Accounts.First(x => x.Username == LoggedInAccount.Username).Tag = LoggedInAccount.Tag;
+
+                    var accountToUpdate = Accounts.First(x => x.Username == LoggedInAccount.Username);
+                    var accountsIndex = Accounts.IndexOf(accountToUpdate);
+                    accountToUpdate.Tag = LoggedInAccount.Tag;
+                    newList = Accounts;
+                    newList[accountsIndex] = accountToUpdate;
+                }
+
+                if (newList != null && newList.Any())
+                {
+                    Accounts = newList;
+                    OnPropertyChanged(nameof(Accounts));
+                    OnPropertyChanged(nameof(SelectedAccount));
+                    foreach (var acc in Accounts)
+                    {
+                        acc.OnPropertyChanged(nameof(acc.DisplayName));
+                        acc.OnPropertyChanged(nameof(acc.Tag));
+                        acc.OnPropertyChanged(nameof(acc.FullDisplayName));
+                    }
+                    
+                    await _appConfig.SaveToFile();
+                }
             }
             else
             {
+                GameNameText = string.Empty;
+                
                 LogInFormVisible = true;
+
+                IsLoggedIn = false;
+                
+                if (_mainViewModel != null)
+                    _mainViewModel.IsLoggedIn = false;
             }
 
             if (!isAddingAccount)
@@ -392,7 +437,7 @@ namespace Radiant.ViewModels
                 LogInFormVisible = true;
             }
 
-            return logInSuccessAccount != null;
+            return LoggedInAccount != null;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Radiant.Views.ContentViews
 
         private async void AccountsComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var isValid = this.IsLoaded && this.DataContext != null;
+            var isValid = this.IsLoaded && this.DataContext != null && ((ComboBox)sender).IsDropDownOpen;
             if (isValid)
             {
                 var vm = (HomeViewModel)DataContext;

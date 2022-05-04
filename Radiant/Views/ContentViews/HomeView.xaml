@@ -73,8 +73,8 @@
                             Width="200"
                             Margin="0, 15, 0, 5"
                             IsEnabled="{Binding HasAccounts}"
+                            ItemsSource="{Binding Accounts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding SelectedAccount}"
-                            ItemsSource="{Binding Accounts}"
                             DisplayMemberPath="FullDisplayName"
                             MaxDropDownHeight="175"
                             SelectionChanged="AccountsComboBox_OnSelectionChanged">
