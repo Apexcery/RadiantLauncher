@@ -110,7 +110,7 @@ namespace Radiant.Views.Dialogues
                         Tag = _userData.RiotUserData.AccountInfo.TagLine
                     });
 
-                    await _appConfig.SaveToFile();
+                    _appConfig.SaveToFile();
                 }
 
                 IsLoadingVisible = false;

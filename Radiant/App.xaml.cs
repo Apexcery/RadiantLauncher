@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -31,26 +32,35 @@ namespace Radiant
 
                 if (Directory.Exists(folderPath) && File.Exists(filePath))
                 {
-                    bool hasOldConfig;
                     try
                     {
                         appConfig = JsonConvert.DeserializeObject<AppConfig>(File.ReadAllText(filePath), new JsonSerializerSettings
                         {
                             MissingMemberHandling = MissingMemberHandling.Error
                         });
-                        hasOldConfig = false;
                     }
                     catch (JsonSerializationException)
                     {
-                        hasOldConfig = true;
+                        // Using an old version of the config file, or manual changes have been made that cannot be parsed.
                     }
-
-                    if (hasOldConfig)
+                    
+                    // Updates json config file to add/remove properties.
+                    File.Delete(filePath);
+                    using var fs = new FileStream(filePath, FileMode.CreateNew);
+                    fs.Write(new UTF8Encoding(true).GetBytes("// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n"));
+                    fs.Write(new UTF8Encoding(true).GetBytes(JsonConvert.SerializeObject(appConfig, Formatting.Indented)));
+                }
+                else
+                {
+                    if (!Directory.Exists(folderPath))
                     {
-                        File.Delete(filePath);
-                        File.Create(filePath);
-                        File.WriteAllText(filePath, "// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n");
-                        File.AppendAllText(filePath, JsonConvert.SerializeObject(appConfig, Formatting.Indented));
+                        Directory.CreateDirectory(folderPath);
+                    }
+                    if (!File.Exists(filePath))
+                    {
+                        using var fs = new FileStream(filePath, FileMode.CreateNew);
+                        fs.Write(new UTF8Encoding(true).GetBytes("// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n"));
+                        fs.Write(new UTF8Encoding(true).GetBytes(JsonConvert.SerializeObject(appConfig, Formatting.Indented)));
                     }
                 }
             }

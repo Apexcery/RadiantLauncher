@@ -52,7 +52,7 @@ namespace Radiant.ViewModels
                         }
                     }
                     Application.Current.Resources.MergedDictionaries.Add(dict);
-                    await _appConfig.SaveToFile();
+                    _appConfig.SaveToFile();
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace Radiant.ViewModels
                             break;
                     }
                     _appConfig.Settings.SystemButtons = systemButtonsType;
-                    await _appConfig.SaveToFile();
+                    _appConfig.SaveToFile();
                 }
             }
         }

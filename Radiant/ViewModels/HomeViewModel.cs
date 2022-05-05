@@ -185,7 +185,7 @@ namespace Radiant.ViewModels
                     _appConfig.Accounts.Add(account);
                 }
 
-                await _appConfig.SaveToFile();
+                _appConfig.SaveToFile();
 
                 if (IsLoggedIn && (_userData.RiotUserData?.AccountInfo.GameName.Equals(acc?.DisplayName, StringComparison.InvariantCulture) ?? false) &&
                                   (_userData.RiotUserData?.AccountInfo.TagLine.Equals(acc?.Tag, StringComparison.InvariantCulture) ?? false))
@@ -385,7 +385,7 @@ namespace Radiant.ViewModels
                 if (!_appConfig.Accounts.Any(x => x.Username.Equals(LoggedInAccount.Username, StringComparison.InvariantCulture))) // Add new account to list by checking if username exists.
                 {
                     _appConfig.Accounts.Add(LoggedInAccount);
-                    await _appConfig.SaveToFile();
+                    _appConfig.SaveToFile();
                 }
 
                 ObservableCollection<Account> newList = null;
@@ -422,7 +422,7 @@ namespace Radiant.ViewModels
                         acc.OnPropertyChanged(nameof(acc.FullDisplayName));
                     }
                     
-                    await _appConfig.SaveToFile();
+                    _appConfig.SaveToFile();
                 }
             }
             else

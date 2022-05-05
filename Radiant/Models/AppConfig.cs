@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
@@ -12,11 +13,13 @@ namespace Radiant.Models
 {
     public class AppConfig
     {
+        public Location Location { get; set; } = null;
+
         public Settings Settings { get; set; } = new();
 
         public List<Account> Accounts { get; set; } = new();
 
-        public async Task SaveToFile()
+        public void SaveToFile()
         {
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
@@ -32,11 +35,21 @@ namespace Radiant.Models
 
                 var appConfigAsText = JsonConvert.SerializeObject(this, Formatting.Indented);
 
-                await File.WriteAllTextAsync(filePath, "// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n");
-                await File.AppendAllTextAsync(filePath, appConfigAsText);
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
+                using var fs = new FileStream(filePath, FileMode.CreateNew);
+                fs.Write(new UTF8Encoding(true).GetBytes("// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n"));
+                fs.Write(new UTF8Encoding(true).GetBytes(appConfigAsText));
             }
         }
     }
+
+    public class Location
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+    }
+
     public class Settings
     {
         [JsonConverter(typeof(TolerantEnumConverter))]
