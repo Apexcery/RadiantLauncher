@@ -52,8 +52,15 @@ namespace Radiant.Constants
 
         public static readonly List<Skins.Skin> Skins = new();
 
+        private static DateTime? _lastInit;
+
         public static async Task Init()
         {
+            if (_lastInit.HasValue && _lastInit.Value.AddMinutes(5) > DateTime.UtcNow) // If initialized in the last 5 minutes, skip initialization
+                return;
+
+            _lastInit = DateTime.UtcNow;
+
             var cancellationTokenSource = new CancellationTokenSource();
             var httpClient = new HttpClient();
 
