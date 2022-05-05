@@ -6,6 +6,5 @@
     <system:String x:Key="ApplicationName">Radiant</system:String>
     <system:String x:Key="ConfigFileName">config.json</system:String>
 
-    <ImageSource x:Key="HomeBackgroundImage">https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3d9bf296c46d42d2/5ece177408ac190a51c69e59/Beta_Key_Art_VALORANT_Lightbox.jpg</ImageSource>
     <ImageSource x:Key="ValorantPointsIcon">https://media.valorant-api.com/currencies/85ad13f7-3d1b-5128-9eb2-7cd8ee0b5741/displayicon.png</ImageSource>
 </ResourceDictionary>

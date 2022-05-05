@@ -35,5 +35,5 @@
     <BitmapImage x:Key="Immortal3Image" UriSource="../Images/Rank Images/Immortal III.png" />
 
     <BitmapImage x:Key="RadiantImage" UriSource="../Images/Rank Images/Radiant.png" />
-    
+
 </ResourceDictionary>

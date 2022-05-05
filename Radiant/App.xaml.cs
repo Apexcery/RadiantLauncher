@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
 using Radiant.Services;
@@ -25,6 +27,7 @@ namespace Radiant
             var applicationName = Application.Current.TryFindResource("ApplicationName") as string;
             var configFileName = Application.Current.TryFindResource("ConfigFileName") as string;
 
+            // Load / Create Config file.
             if (!string.IsNullOrEmpty(applicationName) && !string.IsNullOrEmpty(configFileName))
             {
                 var folderPath = Path.Combine(localAppData, applicationName);
@@ -65,6 +68,7 @@ namespace Radiant
                 }
             }
 
+            // Remove pre-loaded color theme to instead rely on the theme specified in the config file.
             for (var i = Application.Current.Resources.MergedDictionaries.Count - 1; i > 0 ; i--)
             {
                 var dict = Application.Current.Resources.MergedDictionaries[i];
@@ -73,6 +77,8 @@ namespace Radiant
                     Application.Current.Resources.MergedDictionaries.RemoveAt(i);
                 }
             }
+
+            Task.Run(ValorantConstants.Init).Wait();
 
             services.AddSingleton(appConfig);
 

@@ -27,7 +27,7 @@
                 <Image
                     Stretch="UniformToFill"
                     HorizontalAlignment="Center"
-                    Source="{StaticResource HomeBackgroundImage}"
+                    Source="{Binding BackgroundImageSource}"
                     Margin="0, -15">
                     <Image.Effect>
                         <BlurEffect Radius="20" RenderingBias="Performance" />

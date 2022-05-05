@@ -7,7 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
 
 using Newtonsoft.Json;
@@ -22,6 +23,8 @@ namespace Radiant.ViewModels
 {
     public class HomeViewModel : Observable
     {
+        private static readonly Random _random = new Random();
+
         private readonly IAuthService _authService;
         private UserData _userData;
         private readonly AppConfig _appConfig;
@@ -123,6 +126,17 @@ namespace Radiant.ViewModels
             }
         }
 
+        private ImageSource _backgroundImageSource;
+        public ImageSource BackgroundImageSource
+        {
+            get => _backgroundImageSource;
+            set
+            {
+                _backgroundImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+
         private MainViewModel _mainViewModel;
 
         public CancellationTokenSource CancellationTokenSource = new();
@@ -138,6 +152,12 @@ namespace Radiant.ViewModels
             PlayCommand = new(async _ => await Play());
 
             AddAccountCommand = new(async _ => await AddAccount());
+            
+            if (!ValorantConstants.Maps.Any())
+                return;
+            var map = ValorantConstants.Maps[_random.Next(0, ValorantConstants.Maps.Count)];
+            var mapImage = map.Splash;
+            BackgroundImageSource = new BitmapImage(new(mapImage));
         }
 
         public async Task ChangeAccount(object o)

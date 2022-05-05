@@ -44,6 +44,7 @@ namespace Radiant.Constants
 
         public static readonly Dictionary<string, Maps.Map> MapById = new(StringComparer.InvariantCultureIgnoreCase);
         public static readonly Dictionary<string, Maps.Map> MapByUrl = new(StringComparer.InvariantCultureIgnoreCase);
+        public static readonly List<Maps.Map> Maps = new();
 
         public static readonly Dictionary<string, Bundles.Bundle> BundleById = new(StringComparer.InvariantCultureIgnoreCase);
         
@@ -99,6 +100,9 @@ namespace Radiant.Constants
                     MapByUrl[mapUrl] = map;
                 else
                     MapByUrl.Add(mapUrl, map);
+
+                if (!Maps.Contains(map))
+                    Maps.Add(map);
             }
 
             var bundles = await GetValorantData<Bundles>(httpClient, ApiURIs.URIs["BundleUri"], cancellationTokenSource.Token);
