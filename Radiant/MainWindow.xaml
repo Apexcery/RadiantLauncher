@@ -71,7 +71,7 @@
                             Tag="PlayOutline">
                             <RadioButton.ToolTip>
                                 <ToolTip
-                                    Content="Home"
+                                    Content="Play"
                                     Placement="Right"
                                     VerticalOffset="25"
                                     HorizontalOffset="-10" />

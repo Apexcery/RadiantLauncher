@@ -48,7 +48,9 @@ namespace Radiant
                     if (hasOldConfig)
                     {
                         File.Delete(filePath);
-                        File.WriteAllText(filePath, JsonConvert.SerializeObject(appConfig, Formatting.Indented));
+                        File.Create(filePath);
+                        File.WriteAllText(filePath, "// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n");
+                        File.AppendAllText(filePath, JsonConvert.SerializeObject(appConfig, Formatting.Indented));
                     }
                 }
             }

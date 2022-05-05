@@ -31,7 +31,9 @@ namespace Radiant.Models
                 var filePath = Path.Combine(folderPath, configFileName);
 
                 var appConfigAsText = JsonConvert.SerializeObject(this, Formatting.Indented);
-                await File.WriteAllTextAsync(filePath, appConfigAsText);
+
+                await File.WriteAllTextAsync(filePath, "// Any changes made to this file are your own responsibility and could lead to the app failing to run correctly.\n");
+                await File.AppendAllTextAsync(filePath, appConfigAsText);
             }
         }
     }
