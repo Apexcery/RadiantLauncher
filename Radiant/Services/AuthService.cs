@@ -174,7 +174,7 @@ namespace Radiant.Services
 
         private async Task FinishLoginWithTwoStepAuth(CancellationToken cancellationToken, string email, string username, string password, bool isAddingAccount)
         {
-            var dialog = new TwoStepAuthDialog(_appConfig, _userData, cancellationToken, email, username, password);
+            var dialog = new TwoStepAuthDialog(_appConfig, _userData, cancellationToken, isAddingAccount, email, username, password);
             await DialogHost.Show(dialog, isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
         }
 

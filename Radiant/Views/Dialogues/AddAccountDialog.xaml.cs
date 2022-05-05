@@ -100,15 +100,18 @@ namespace Radiant.Views.Dialogues
 
             if (loginSuccess)
             {
-                _appConfig.Accounts.Add(new Account
+                if (!_appConfig.Accounts.Any(x => x.Username.Equals(username, StringComparison.InvariantCulture)))
                 {
-                    Username = username,
-                    Password = password,
-                    DisplayName = _userData.RiotUserData.AccountInfo.GameName,
-                    Tag = _userData.RiotUserData.AccountInfo.TagLine
-                });
+                    _appConfig.Accounts.Add(new Account
+                    {
+                        Username = username,
+                        Password = password,
+                        DisplayName = _userData.RiotUserData.AccountInfo.GameName,
+                        Tag = _userData.RiotUserData.AccountInfo.TagLine
+                    });
 
-                await _appConfig.SaveToFile();
+                    await _appConfig.SaveToFile();
+                }
 
                 IsLoadingVisible = false;
 

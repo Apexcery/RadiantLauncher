@@ -60,6 +60,7 @@ namespace Radiant.Views.Dialogues
         private readonly AppConfig _appConfig;
         private readonly UserData _userData;
         private readonly CancellationToken _cancellationToken;
+        private readonly bool _isAddingAccount;
         private readonly Dictionary<string, Uri> _apiUris;
         
         private readonly string _username;
@@ -67,11 +68,12 @@ namespace Radiant.Views.Dialogues
 
         private bool loginSuccess = false;
 
-        public TwoStepAuthDialog(AppConfig appConfig, UserData userData, CancellationToken cancellationToken, string email, string username, string password)
+        public TwoStepAuthDialog(AppConfig appConfig, UserData userData, CancellationToken cancellationToken, bool isAddingAccount, string email, string username, string password)
         {
             _appConfig = appConfig;
             _userData = userData;
             _cancellationToken = cancellationToken;
+            _isAddingAccount = isAddingAccount;
             _username = username;
             _password = password;
             _apiUris = ApiURIs.URIs;
@@ -356,8 +358,17 @@ namespace Radiant.Views.Dialogues
         
         private void CloseDialog()
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow?.CloseDialogs();
+            try
+            {
+                if (DialogHost.IsDialogOpen(_isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost"))
+                {
+                    DialogHost.Close(_isAddingAccount ? "AddAccountDialogHost" : "MainDialogHost");
+                }
+            }
+            catch
+            {
+                // ignored, if dialog host does not exist yet, an exception is thrown.
+            }
         } 
     }
 }

@@ -381,9 +381,15 @@ namespace Radiant.ViewModels
 
                 if (_mainViewModel != null)
                     _mainViewModel.IsLoggedIn = true;
-                
+
+                if (!_appConfig.Accounts.Any(x => x.Username.Equals(LoggedInAccount.Username, StringComparison.InvariantCulture))) // Add new account to list by checking if username exists.
+                {
+                    _appConfig.Accounts.Add(LoggedInAccount);
+                    await _appConfig.SaveToFile();
+                }
+
                 ObservableCollection<Account> newList = null;
-                if (LoggedInAccount.DisplayName != _appConfig.Accounts.FirstOrDefault(x => x.Username == LoggedInAccount.Username)?.DisplayName)
+                if (LoggedInAccount.DisplayName != _appConfig.Accounts.FirstOrDefault(x => x.Username == LoggedInAccount.Username)?.DisplayName) // Update existing account if display name has changed.
                 {
                     _appConfig.Accounts.First(x => x.Username == LoggedInAccount.Username).DisplayName = LoggedInAccount.DisplayName;
 
@@ -393,7 +399,7 @@ namespace Radiant.ViewModels
                     newList = Accounts;
                     newList[accountsIndex] = accountToUpdate;
                 }
-                if (LoggedInAccount.Tag != _appConfig.Accounts.FirstOrDefault(x => x.Username == LoggedInAccount.Username)?.Tag)
+                if (LoggedInAccount.Tag != _appConfig.Accounts.FirstOrDefault(x => x.Username == LoggedInAccount.Username)?.Tag) // Update existing account if tag has changed.
                 {
                     _appConfig.Accounts.First(x => x.Username == LoggedInAccount.Username).Tag = LoggedInAccount.Tag;
 
@@ -404,7 +410,7 @@ namespace Radiant.ViewModels
                     newList[accountsIndex] = accountToUpdate;
                 }
 
-                if (newList != null && newList.Any())
+                if (newList != null && newList.Any()) // Update accounts list if changes have been made.
                 {
                     Accounts = newList;
                     OnPropertyChanged(nameof(Accounts));
