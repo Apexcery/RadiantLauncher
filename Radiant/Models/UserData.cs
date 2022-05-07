@@ -156,6 +156,11 @@ namespace Radiant.Models
             this.PlayerStore = new();
             this.StoreOffers = new();
 
+            this.PlayerRankInfo = new();
+            this.PlayerRankUpdates = new();
+            this.PlayerMatchHistory = new();
+            this.PlayerMatchHistoryData = new();
+
             this.Client = new HttpClient
             {
                 DefaultRequestHeaders =
