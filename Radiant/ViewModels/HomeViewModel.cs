@@ -15,7 +15,9 @@ using Newtonsoft.Json;
 using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
+using Radiant.Models.Career;
 using Radiant.Models.Client;
+using Radiant.Models.Store;
 using Radiant.Utils;
 using Radiant.Views.Dialogues;
 
@@ -26,6 +28,8 @@ namespace Radiant.ViewModels
         private static readonly Random _random = new Random();
 
         private readonly IAuthService _authService;
+        private readonly IStoreService _storeService;
+        private readonly ICareerService _careerService;
         private UserData _userData;
         private readonly AppConfig _appConfig;
         
@@ -143,9 +147,11 @@ namespace Radiant.ViewModels
 
         public static Account LoggedInAccount = null;
 
-        public HomeViewModel(IAuthService authService, UserData userData, AppConfig appConfig)
+        public HomeViewModel(IAuthService authService, IStoreService storeService, ICareerService careerService, UserData userData, AppConfig appConfig)
         {
             _authService = authService;
+            _storeService = storeService;
+            _careerService = careerService;
             _userData = userData;
             _appConfig = appConfig;
             
@@ -396,6 +402,37 @@ namespace Radiant.ViewModels
             _mainViewModel ??= Application.Current.MainWindow?.DataContext as MainViewModel;
             if (LoggedInAccount != null)
             {
+                var storeTasks = new Task[]
+                {
+                    _storeService.GetPlayerStore(CancellationTokenSource.Token),
+                    _storeService.GetStoreOffers(CancellationTokenSource.Token)
+                };
+                var careerTasks = new Task[]
+                {
+                    _careerService.GetPlayerRankInfo(CancellationTokenSource.Token),
+                    _careerService.GetPlayerRankUpdates(CancellationTokenSource.Token, 10, "competitive"),
+                    _careerService.GetPlayerMatchHistory(CancellationTokenSource.Token, 10)
+                };
+                var allTasks = storeTasks.Concat(careerTasks).ToList();
+                await Task.WhenAll(allTasks);
+
+                var playerStore = ((Task<PlayerStore>)allTasks[0]).Result;
+                var storeOffers = ((Task<StoreOffers>)allTasks[1]).Result;
+                var playerRankInfo = ((Task<PlayerRankInfo>)allTasks[2]).Result;
+                var playerRankUpdates = ((Task<PlayerRankUpdates>)allTasks[3]).Result;
+                var playerMatchHistory = ((Task<PlayerMatchHistory>)allTasks[4]).Result;
+                
+                var playerMatchHistoryDataTasks = playerMatchHistory.Matches.Select(match => _careerService.GetMatchData(CancellationTokenSource.Token, match.MatchID));
+                var playerMatchHistoryData = (await Task.WhenAll(playerMatchHistoryDataTasks)).ToList();
+                
+                _userData.PlayerStore = playerStore;
+                _userData.StoreOffers = storeOffers;
+
+                _userData.PlayerRankInfo = playerRankInfo;
+                _userData.PlayerRankUpdates = playerRankUpdates;
+                _userData.PlayerMatchHistory = playerMatchHistory;
+                _userData.PlayerMatchHistoryData = playerMatchHistoryData;
+
                 GameNameText = LoggedInAccount.FullDisplayName;
                 IsLoggedIn = true;
 

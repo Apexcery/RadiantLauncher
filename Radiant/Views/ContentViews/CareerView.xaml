@@ -101,7 +101,9 @@
                     HorizontalAlignment="Center"
                     MinWidth="450"
                     LegendLocation="Bottom"
-                    DataTooltip="{x:Null}">
+                    DataTooltip="{x:Null}"
+                    Hoverable="False"
+                    DisableAnimations="True">
                     <liveCharts:CartesianChart.ChartLegend>
                         <liveCharts:DefaultLegend MaxHeight="2" MinHeight="2" Height="2" />
                     </liveCharts:CartesianChart.ChartLegend>
@@ -112,7 +114,7 @@
                             Stroke="{DynamicResource Text}"
                             Fill="{StaticResource ValorantRedDark}"
                             DataLabels="True"
-                            PointGeometrySize="10"
+                            PointGeometry="{x:Null}"
                             PointForeground="{StaticResource ValorantRed}"
                             Foreground="{DynamicResource Text}"/>
                     </liveCharts:CartesianChart.Series>

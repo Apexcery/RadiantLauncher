@@ -49,9 +49,7 @@ namespace Radiant.Views.UserControls
             if (skinInfo is null || skinPrice == -1)
                 return;
 
-            var uri = skinInfo.DisplayIcon;
-            if (string.IsNullOrEmpty(uri))
-                uri = skinInfo.Levels.First().DisplayIcon;
+            var uri = skinInfo.Levels.FirstOrDefault()?.DisplayIcon ?? skinInfo.DisplayIcon;
 
             if (!string.IsNullOrEmpty(uri))
             {

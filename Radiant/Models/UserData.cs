@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Radiant.Models.Career;
 using Radiant.Models.Enums;
+using Radiant.Models.Store;
 
 namespace Radiant.Models
 {
@@ -10,11 +13,18 @@ namespace Radiant.Models
     {
         public HttpClientHandler ClientHandler;
 
-
         public TokenDataObject TokenData = new();
         public RiotUserDataObject RiotUserData;
         public RiotRegionEnum RiotRegion;
         public RiotUrlObject RiotUrl = new();
+        
+        public PlayerStore PlayerStore = new();
+        public StoreOffers StoreOffers = new();
+
+        public PlayerRankInfo PlayerRankInfo = new();
+        public PlayerRankUpdates PlayerRankUpdates = new();
+        public PlayerMatchHistory PlayerMatchHistory = new();
+        public List<MatchData> PlayerMatchHistoryData = new ();
 
         public UserData()
         {
@@ -133,14 +143,18 @@ namespace Radiant.Models
 
         public UserData Clear()
         {
-            this.TokenData = new();
-            this.RiotUserData = null;
-            this.RiotUrl = new();
             this.ClientHandler = new()
             {
                 UseCookies = true,
                 CookieContainer = new CookieContainer()
             };
+            
+            this.TokenData = new();
+            this.RiotUserData = null;
+            this.RiotUrl = new();
+
+            this.PlayerStore = new();
+            this.StoreOffers = new();
 
             this.Client = new HttpClient
             {

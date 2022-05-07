@@ -153,8 +153,8 @@ namespace Radiant.ViewModels
 
             try
             {
-                _playerStore = await _storeService.GetPlayerStore(CancellationTokenSource.Token);
-                _storeOffers = await _storeService.GetStoreOffers(CancellationTokenSource.Token);
+                _playerStore = UserData.PlayerStore ?? await _storeService.GetPlayerStore(CancellationTokenSource.Token);
+                _storeOffers = UserData.StoreOffers ?? await _storeService.GetStoreOffers(CancellationTokenSource.Token);
             }
             catch (TaskCanceledException) { }
 

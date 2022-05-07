@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using LiveCharts;
+using LiveCharts.Defaults;
 using Radiant.Constants;
 using Radiant.Interfaces;
 using Radiant.Models;
@@ -64,8 +66,8 @@ namespace Radiant.ViewModels
             }
         }
 
-        private ChartValues<double> _rankChartValues = new();
-        public ChartValues<double> RankChartValues
+        private ChartValues<ObservableValue> _rankChartValues = new();
+        public ChartValues<ObservableValue> RankChartValues
         {
             get => _rankChartValues;
             set
@@ -126,29 +128,31 @@ namespace Radiant.ViewModels
                 CancellationTokenSource = new();
             }
 
-            var rankInfoTask = _careerService.GetPlayerRankInfo(CancellationTokenSource.Token);
-            var playerRankUpdatesTask = _careerService.GetPlayerRankUpdates(CancellationTokenSource.Token, 10, "competitive");
-            var playerMatchHistoryTask = _careerService.GetPlayerMatchHistory(CancellationTokenSource.Token, 10);
-
             PlayerRankInfo rankInfo = null;
             PlayerRankUpdates playerRankUpdates = null;
-            PlayerMatchHistory playerMatchHistory = null;
+            List<MatchData> playerMatchHistoryData = null;
             try
             {
-                await Task.WhenAll(rankInfoTask, playerRankUpdatesTask, playerMatchHistoryTask);
+                rankInfo = UserData.PlayerRankInfo ?? await _careerService.GetPlayerRankInfo(CancellationTokenSource.Token);
+                playerRankUpdates = UserData.PlayerRankUpdates ?? await _careerService.GetPlayerRankUpdates(CancellationTokenSource.Token, 10, "competitive");
+                playerMatchHistoryData = UserData.PlayerMatchHistoryData;
 
-                rankInfo = await rankInfoTask;
-                playerRankUpdates = await playerRankUpdatesTask;
-                playerMatchHistory = await playerMatchHistoryTask;
+                if (playerMatchHistoryData is null)
+                {
+                    var playerMatchHistory = UserData.PlayerMatchHistory ?? await _careerService.GetPlayerMatchHistory(CancellationTokenSource.Token, 10);
+                    if (playerMatchHistory is null)
+                        return;
+                    playerMatchHistoryData = (await Task.WhenAll(playerMatchHistory.Matches.Select(match => _careerService.GetMatchData(CancellationTokenSource.Token, match.MatchID)))).ToList();
+                }
             }
             catch (TaskCanceledException) { }
 
-            if (rankInfo == null || playerRankUpdates == null || playerMatchHistory == null)
+            if (rankInfo is null || playerRankUpdates is null || playerMatchHistoryData is null)
                 return;
 
             SetRankHistoryIcons(rankInfo);
             PopulateGraph(playerRankUpdates);
-            await PopulateMatchHistory(playerMatchHistory, playerRankUpdates);
+            PopulateMatchHistory(playerRankUpdates, playerMatchHistoryData);
         }
 
         private void SetRankHistoryIcons(PlayerRankInfo rankInfo)
@@ -208,43 +212,17 @@ namespace Radiant.ViewModels
             RankChartValues.Clear();
             RankChartLabels.Clear();
             var recentMatches = playerRankUpdates.Matches.Take(5).OrderBy(x => x.MatchStartTime).ToList();
-            for (var i = 0; i < recentMatches.Count; i++)
-            {
-                var rankUpdate = recentMatches[i];
-                RankChartValues.Add(rankUpdate.RankedRatingAfterUpdate);
-                RankChartLabels.Add($"Game {i + 1}");
-                if (rankUpdate.TierBeforeUpdate > rankUpdate.TierAfterUpdate)
-                {
-                    // Rank tier decrease
-                    RankupChartLabels.Add("[De-Rank]");
-                }
-                else if (rankUpdate.TierBeforeUpdate < rankUpdate.TierAfterUpdate)
-                {
-                    // Rank tier increase
-                    RankupChartLabels.Add("[Rank-Up]");
-                }
-                else
-                {
-                    // Rank tier didn't change
-                    RankupChartLabels.Add("");
-                }
-            }
+            RankChartValues.AddRange(recentMatches.Select(match => new ObservableValue(match.RankedRatingAfterUpdate)));
+            RankChartLabels.AddRange(recentMatches.Select((_, index) => $"Game {index + 1}"));
+            RankupChartLabels.AddRange(recentMatches.Select(match =>
+                match.TierBeforeUpdate > match.TierAfterUpdate ? "[De-Rank]" :
+                match.TierBeforeUpdate < match.TierAfterUpdate ? "[Rank-Up]" :
+                ""));
         }
 
-        private async Task PopulateMatchHistory(PlayerMatchHistory playerMatchHistory, PlayerRankUpdates playerRankUpdates)
+        private void PopulateMatchHistory(PlayerRankUpdates playerRankUpdates, List<MatchData> playerMatchHistoryData)
         {
-            var matchDataTasks = playerMatchHistory.Matches.Select(match => _careerService.GetMatchData(CancellationTokenSource.Token, match.MatchID)).ToList();
-            MatchData[] matchDataResults = null;
-            try
-            {
-                matchDataResults = await Task.WhenAll(matchDataTasks);
-            }
-            catch (TaskCanceledException) { }
-
-            if (matchDataResults is null)
-                return;
-
-            foreach (var matchData in matchDataResults)
+            foreach (var matchData in playerMatchHistoryData)
             {
                 var matchingRankUpdate = playerRankUpdates.Matches.FirstOrDefault(x => x.MatchID.Equals(matchData.MatchInfo.MatchId));
                 var matchHistoryItem = new MatchHistoryItem(matchData, matchingRankUpdate, UserData);
